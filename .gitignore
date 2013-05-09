@@ -44,6 +44,8 @@ local.properties
 Package.appxmanifest
 Package.StoreAssociation.xml
 
+AppPackages/
+
 # Build results
 [Dd]ebug/
 [Rr]elease/

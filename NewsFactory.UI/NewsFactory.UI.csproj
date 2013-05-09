@@ -12,7 +12,9 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>NewsFactory.UI_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>NewsFactory.UI_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>4983FCAD5AB0A897DC090907AF214F28780346D9</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -174,6 +176,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="NewsFactory.UI_StoreKey.pfx" />
     <None Include="NewsFactory.UI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +193,7 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Pages\ImportGoogleReaderFeeds\TestCreds.txt" />
     <Content Include="Pages\ImportGoogleReaderFeeds\TextFile1.txt" />
     <Content Include="Pages\PickFeeds\Feeds.xml" />

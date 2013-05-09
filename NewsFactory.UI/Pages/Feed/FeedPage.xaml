@@ -324,8 +324,8 @@
             </ScrollViewer>            
         </Grid>
 
-        <RepeatButton Style="{StaticResource ShowPrevButtonStyle}" Command="{Binding GoToPrevItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="60" />
-        <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="60" />
+        <RepeatButton Style="{StaticResource ShowPrevButtonStyle}" Command="{Binding GoToPrevItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="140" />
+        <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="140" />
         
         <VisualStateManager.VisualStateGroups>
 
