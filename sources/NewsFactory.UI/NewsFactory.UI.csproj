@@ -110,9 +110,64 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\BooleanNegationConverter.cs" />
+    <Compile Include="Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\LayoutAwarePage.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Pages\AddFeed\AddFeedPage.xaml.cs">
+      <DependentUpon>AddFeedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddFeed\AddFeedPageModel.cs" />
+    <Compile Include="Pages\AppBarStylePage.xaml.cs">
+      <DependentUpon>AppBarStylePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AppBarStylePageModel.cs" />
+    <Compile Include="Pages\AppSettings\AppSettingsPage.xaml.cs">
+      <DependentUpon>AppSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AppSettings\AppSettingsPageModel.cs" />
+    <Compile Include="Pages\AppSettings\DayCaptionConverter.cs" />
+    <Compile Include="Pages\AppSettings\DayValueConverter.cs" />
+    <Compile Include="Pages\AppSettings\RefreshIntervalCaptionConverter.cs" />
+    <Compile Include="Pages\AppSettings\RefreshIntervalValueConverter.cs" />
+    <Compile Include="Pages\AppSettings\SliderOption.cs" />
+    <Compile Include="Pages\FeedSettings\FeedSettingsPage.xaml.cs">
+      <DependentUpon>FeedSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FeedSettings\FeedSettingsPageModel.cs" />
+    <Compile Include="Pages\Feed\FeedItemFontWeightConverter.cs" />
+    <Compile Include="Pages\Feed\FeedPage.xaml.cs">
+      <DependentUpon>FeedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Feed\FeedPageModel.cs" />
+    <Compile Include="Pages\Feed\LastUpdatedConverter.cs" />
+    <Compile Include="Pages\ImportFeeds\FeedModel.cs" />
+    <Compile Include="Pages\ImportFeeds\ImportFeedsView.xaml.cs">
+      <DependentUpon>ImportFeedsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ImportFeeds\ImportFeedsViewModel.cs" />
+    <Compile Include="Pages\ImportFeeds\ImportResult.cs" />
+    <Compile Include="Pages\ImportGoogleReaderFeeds\ImportGoogleReaderFeedsView.xaml.cs">
+      <DependentUpon>ImportGoogleReaderFeedsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ImportGoogleReaderFeeds\ImportGoogleReaderFeedsViewModel.cs" />
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MainPageModel.cs" />
+    <Compile Include="Pages\MessageContainer\MessageContainerView.xaml.cs">
+      <DependentUpon>MessageContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessageContainer\MessageContainerViewModel.cs" />
+    <Compile Include="Pages\PickFeeds\PickFeedsView.xaml.cs">
+      <DependentUpon>PickFeedsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PickFeeds\PickFeedsViewModel.cs" />
+    <Compile Include="Pages\PrivacyPolicy\PrivacyPolicyView.xaml.cs">
+      <DependentUpon>PrivacyPolicyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PrivacyPolicy\PrivacyPolicyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +177,22 @@
     <None Include="NewsFactory.UI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\back1.jpg" />
+    <Content Include="Assets\Badge.png" />
+    <Content Include="Assets\DarkGray.png" />
+    <Content Include="Assets\feed.png" />
+    <Content Include="Assets\LightGray.png" />
+    <Content Include="Assets\loading.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\MediumGray.png" />
+    <Content Include="Assets\newitems2.png" />
+    <Content Include="Assets\rss.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Pages\ImportGoogleReaderFeeds\TestCreds.txt" />
+    <Content Include="Pages\ImportGoogleReaderFeeds\TextFile1.txt" />
+    <Content Include="Pages\PickFeeds\Feeds.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -136,7 +203,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Pages\AddFeed\AddFeedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AppBarStylePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AppSettings\AppSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\FeedSettings\FeedSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Feed\FeedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ImportFeeds\ImportFeedsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ImportGoogleReaderFeeds\ImportGoogleReaderFeedsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessageContainer\MessageContainerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PickFeeds\PickFeedsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PrivacyPolicy\PrivacyPolicyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,0 +1,379 @@
+﻿<common:LayoutAwarePage
+    x:Name="pageRoot"
+    x:Class="NewsFactory.UI.Pages.MainPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NewsFactory.UI.Pages"
+    xmlns:feed="using:NewsFactory.UI.Pages.Feed"
+    xmlns:common="using:NewsFactory.UI.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:NewsFactory.Foundation.Controls"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <feed:FeedItemFontWeightConverter x:Key="FeedItemFontWeightConverter" />
+        <feed:LastUpdatedConverter x:Key="LastUpdatedConverter" />
+    </Page.Resources>
+
+    <Page.BottomAppBar>
+        <AppBar Background="#60ffffff" x:Name="abBottom">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding RefreshCommand}" Click="OnCloseAppBar"/>
+                    <Button Style="{StaticResource BulletsAppBarButtonStyle}" AutomationProperties.Name="Mark all as Read"  Command="{Binding MarkAllAsReadCommand}" Click="OnCloseAppBar" />
+                    <Button Style="{StaticResource DiscardAppBarButtonStyle}" Command="{Binding DeleteAllNewsItemsCommand}" Click="OnCloseAppBar" AutomationProperties.Name="Delete all news"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MoreAppBarButtonStyle}" AutomationProperties.Name="More..." Click="OnMore"/>
+                    <Button Style="{StaticResource AddAppBarButtonStyle}" AutomationProperties.Name="Add feeds..." Click="Button_Click_1"/>
+                    <Button Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from OPML file" Command="{Binding ImportFeedsCommand}" Click="OnCloseAppBar"/>
+                    <!--<Button Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from Google Reader" Command="{Binding ImportFeedsFromGoogleReaderCommand}" Click="OnCloseAppBar"/>-->
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Style="{StaticResource LayoutRootStyle}" Background="#202020">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="87"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="img" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="Fill" Grid.RowSpan="3">
+            <Image.Source>
+                <BitmapImage UriSource="/Assets/back1.jpg" />
+            </Image.Source>
+        </Image>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="spClockAndStatus">
+            <Grid Visibility="{Binding DataService.NewsStore, Converter={StaticResource NullToVisibilityConverter}}">
+                <Border Background="{StaticResource MainBrush}" Margin="0,10,1,0" Padding="20" Visibility="{Binding DataService.NewsStore.ActiveFeedDownloads, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Updating feeds," FontSize="18" Foreground="{StaticResource MainTextBrush}"/>
+                        <TextBlock Text="{Binding DataService.NewsStore.ActiveFeedDownloads, Mode=TwoWay}" Margin="4,0" FontSize="18" Foreground="{StaticResource MainTextBrush}"/>
+                        <TextBlock Text="to go..." FontSize="18" Foreground="{StaticResource MainTextBrush}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Background="{StaticResource MainBrush}" Margin="0,10,0,0" Padding="20,20,0,20" Width="90">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Now, Converter={StaticResource FormatConverter}, ConverterParameter=HH}" FontSize="18" Foreground="{StaticResource MainTextBrush}" />
+                    <TextBlock Text=":" Margin="3,0" FontSize="18"  Foreground="{StaticResource MainTextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Now, Converter={StaticResource FormatConverter}, ConverterParameter=mm}" FontSize="18" Foreground="{StaticResource MainTextBrush}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Image Width="50" Height="50" VerticalAlignment="Center" Margin="10,0,0,0">
+                <Image.Source>
+                    <BitmapImage UriSource="/Assets/feed.png" />
+                </Image.Source>
+            </Image>
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" FontWeight="Normal" IsHitTestVisible="false" VerticalAlignment="Center" Style="{StaticResource PageHeaderTextStyle}" Margin="18,0,0,12" Padding="0" Foreground="{StaticResource MainBrush}"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GridView
+                x:Name="gvCategories"
+                Grid.Column="0"
+                Margin="116,30,20,0"
+                ItemsSource="{Binding Categories, Mode=TwoWay}"
+                SelectionMode="None"
+                IsSwipeEnabled="True"
+                IsItemClickEnabled="True"
+                SelectionChanged="itemGridView_SelectionChanged_1"
+                TabIndex="-1"
+                ItemClick="OnFeedClick">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
+                            <Grid Width="210" Height="70">
+                                <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding FeedInfo.FavIconUrl}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock VerticalAlignment="Center" Margin="44,0,0,0" Text="{Binding FeedInfo.Title}" Foreground="White" Style="{StaticResource TitleTextStyle}" Height="30"/>
+                                <TextBlock VerticalAlignment="Center" Margin="44,30,0,0" Text="{Binding FeedInfo.Description}" Foreground="White" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" TextTrimming="WordEllipsis" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="25"/>
+
+                                <StackPanel Margin="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+                                    <TextBlock Text="{Binding NewItemsCount}" Foreground="#FFFEBC11" FontFamily="{StaticResource ContentControlThemeFontFamily}" FontSize="12" Margin="0,3,4,0" Padding="0" VerticalAlignment="Top" />
+                                    <Image  Width="24" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="/Assets/newitems2.png" />
+                                        </Image.Source>
+                                    </Image>
+                                </StackPanel>
+
+                                <Image x:Name="img" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="4" Source="/Assets/loading.png" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="rt" />
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <TextBlock Grid.Column="1" x:Name="txtFeeds" Text="Feeds" Style="{StaticResource SubheaderTextStyle}" Foreground="{StaticResource MainBrush}" Margin="4,-3,0,0" Visibility="{Binding NewsFeeds.Count, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}"/>
+
+            <GridView
+                Margin="0,30,0,0"
+                Grid.Column="1"
+                x:Name="itemGridView"
+                AutomationProperties.AutomationId="ItemsGridView"
+                AutomationProperties.Name="Items"
+                TabIndex="1"
+                ItemsSource="{Binding NewsFeeds}"
+                SelectionMode="Multiple"
+                IsSwipeEnabled="True"
+                IsItemClickEnabled="{Binding IsDeleteFeedsMode, Mode=TwoWay, Converter={StaticResource BooleanNegationConverter}}"
+                SelectionChanged="itemGridView_SelectionChanged_1"
+                ItemClick="OnFeedClick">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
+                            <Grid Width="340" Height="70">
+                                <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding FeedInfo.FavIconUrl}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock VerticalAlignment="Center" Margin="44,0,0,0" Text="{Binding FeedInfo.Title}" Foreground="White" Style="{StaticResource TitleTextStyle}" Height="30"/>
+                                <TextBlock VerticalAlignment="Center" Margin="44,30,0,0" Text="{Binding FeedInfo.Description}" Foreground="White" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" TextTrimming="WordEllipsis" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="25"/>
+
+                                <StackPanel Margin="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+                                    <TextBlock Text="{Binding NewItemsCount}" Foreground="#FFFEBC11" FontFamily="{StaticResource ContentControlThemeFontFamily}" FontSize="12" Margin="0,3,4,0" Padding="0" VerticalAlignment="Top" />
+                                    <Image  Width="24" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="/Assets/newitems2.png" />
+                                        </Image.Source>
+                                    </Image>
+                                </StackPanel>
+
+                                <Image x:Name="img" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="4" Source="/Assets/loading.png" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="rt" />
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+
+
+
+        <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="2" Visibility="{Binding IsDeleteFeedsMode, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBlock Text="You selected" VerticalAlignment="Center" Style="{StaticResource TitleTextStyle}" Foreground="{StaticResource MainBrush}"/>
+            <TextBlock Text="{Binding SelectedFeeds.Count}" Margin="4,0"  VerticalAlignment="Center" Style="{StaticResource TitleTextStyle}" Foreground="{StaticResource MainBrush}"/>
+            <TextBlock Text="feeds" VerticalAlignment="Center" Style="{StaticResource TitleTextStyle}" Foreground="{StaticResource MainBrush}"/>
+            <Button Content="Delete" Margin="10,10,0,0" VerticalAlignment="Center" Click="OnDeleteFeeds"/>
+            <Button Content="Cancel" Margin="10,10,0,0"  VerticalAlignment="Center" Click="OnCancelDeleteFeeds"/>
+        </StackPanel>
+
+        <Border Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#72000000" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="{StaticResource MainBrushDark}" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,60">
+                    <TextBlock Text="{Binding Status}"  Style="{StaticResource PageHeaderTextStyle}" FontFamily="28" Foreground="White"/>
+                    <ProgressRing Margin="0,20,0,0" HorizontalAlignment="Center" Width="50" Height="50" IsActive="{Binding IsBusy}" Foreground="White"/>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <!-- Vertical scrolling list only used when snapped -->
+        <Grid x:Name="gSnap" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ListView
+                AutomationProperties.AutomationId="ItemsListView"
+                AutomationProperties.Name="Items"
+                TabIndex="1"
+                Grid.Row="0"
+                Margin="0,-10,0,0"
+                Padding="10,0,0,60"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                ItemClick="OnSnappedItemClick"
+                ItemsSource="{Binding Categories}"
+                IsSwipeEnabled="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
+                            <Grid Width="280" Height="30">
+                                <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding FeedInfo.FavIconUrl}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock VerticalAlignment="Center" Margin="44,0,0,0" Text="{Binding FeedInfo.Title}" Foreground="White" Style="{StaticResource TitleTextStyle}" Height="30"/>
+
+                                <StackPanel Margin="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+                                    <TextBlock Text="{Binding NewItemsCount}" Foreground="#FFFEBC11" FontFamily="{StaticResource ContentControlThemeFontFamily}" FontSize="12" Margin="0,3,4,0" Padding="0" VerticalAlignment="Top" />
+                                    <Image  Width="24" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="/Assets/newitems2.png" />
+                                        </Image.Source>
+                                    </Image>
+                                </StackPanel>
+
+                                <Image x:Name="img" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="4" Source="/Assets/loading.png" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="rt" />
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView
+                Grid.Row="1"
+                x:Name="itemListView"
+                AutomationProperties.AutomationId="ItemsListView"
+                AutomationProperties.Name="Items"
+                TabIndex="1"
+                Margin="0,00,0,50"
+                Padding="10,0,0,0"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                ItemClick="OnSnappedItemClick"
+                ItemsSource="{Binding NewsFeeds}"
+                IsSwipeEnabled="false">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
+                            <Grid Width="280" Height="70">
+                                <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding FeedInfo.FavIconUrl}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <TextBlock VerticalAlignment="Center" Margin="44,0,0,0" Text="{Binding FeedInfo.Title}" Foreground="White" Style="{StaticResource TitleTextStyle}" Height="30"/>
+                                <TextBlock VerticalAlignment="Center" Margin="44,30,0,0" Text="{Binding FeedInfo.Description}" Foreground="White" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" TextTrimming="WordEllipsis" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="25"/>
+
+                                <StackPanel Margin="3,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+                                    <TextBlock Text="{Binding NewItemsCount}" Foreground="#FFFEBC11" FontFamily="{StaticResource ContentControlThemeFontFamily}" FontSize="12" Margin="0,3,4,0" Padding="0" VerticalAlignment="Top" />
+                                    <Image  Width="24" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="/Assets/newitems2.png" />
+                                        </Image.Source>
+                                    </Image>
+                                </StackPanel>
+
+                                <Image x:Name="img" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="4" Source="/Assets/loading.png" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                                    <Image.RenderTransform>
+                                        <RotateTransform x:Name="rt" />
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="img" Storyboard.TargetProperty="Stretch">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Fill"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gvCategories" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="spClockAndStatus" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtFeeds" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="96,136,86,56"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!--
+                    The back button and title have different styles when snapped, and the list representation is substituted
+                    for the grid displayed in all other view states
+                -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="img" Storyboard.TargetProperty="Stretch">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="UniformToFill"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gvCategories" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="spClockAndStatus" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtFeeds" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gSnap" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="abBottom" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</common:LayoutAwarePage>

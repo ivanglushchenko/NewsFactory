@@ -1,0 +1,47 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NewsFactory.Foundation.Controls"
+    xmlns:class="NewsFactory.Foundation.Themes.Generic.xaml.cs">
+
+    <Style TargetType="local:Hyperlink">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Hyperlink">
+                    <Canvas x:Name="c">
+                        <ContentPresenter Foreground="DarkViolet">
+                            <ContentPresenter.RenderTransform>
+                                <TranslateTransform Y="1" />
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+                        <!--<TextBlock Text="{TemplateBinding Text}" FontSize="{TemplateBinding FontSize}" Foreground="BlueViolet">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform Y="1" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>-->
+
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:OptionSlider">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:OptionSlider">
+                    <Border BorderBrush="Red" BorderThickness="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="{TemplateBinding Caption}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
+                                <TextBlock Text="{TemplateBinding TargetCaption}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal" Margin="4,0,0,0"/>
+                            </StackPanel>
+                            <Slider x:Name="slider" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="10" IsThumbToolTipEnabled="False" HorizontalAlignment="Stretch" Value="{Binding Value, Mode=TwoWay, Converter={Binding ValueConverter}}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

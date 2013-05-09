@@ -2,7 +2,9 @@
     x:Class="NewsFactory.UI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NewsFactory.UI">
+    xmlns:local="using:NewsFactory.UI"
+    xmlns:f="using:NewsFactory.Foundation.Converters"
+    RequestedTheme="Light">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -15,6 +17,64 @@
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- Application-specific resources -->
+
+            <f:CP2Visibility x:Key="CP2Visibility" />
+            <f:NotCP2Visibility x:Key="NotCP2Visibility" />
+            <f:FormatConverter x:Key="FormatConverter" />
+            <f:TrueToVisibilityConverter x:Key="TrueToVisibilityConverter" />
+            <f:FalseToVisibilityConverter x:Key="FalseToVisibilityConverter" />
+            <f:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <f:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+            <f:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+
+            <SolidColorBrush Color="#FB7213" x:Key="MainBrush"/>
+            <SolidColorBrush Color="#FB7213" x:Key="MainBrushDark"/>
+
+            <LinearGradientBrush x:Key="HeaderBackground" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#909090" Offset="0"/>
+                <GradientStop Color="#d0d0d0" Offset="0.5"/>
+                <GradientStop Color="#e0e0e0" Offset="1"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="HeaderBackgroundTransparent" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#33909090" Offset="0"/>
+                <GradientStop Color="#33d0d0d0" Offset="0.5"/>
+                <GradientStop Color="#33e0e0e0" Offset="1"/>
+            </LinearGradientBrush>
+
+            <SolidColorBrush Color="White" x:Key="MainTextBrush"/>
+
+            <LinearGradientBrush x:Key="FooterBackground" StartPoint="0,1" EndPoint="0,0">
+                <GradientStop Color="#909090" Offset="0"/>
+                <GradientStop Color="#d0d0d0" Offset="0.5"/>
+                <GradientStop Color="#e0e0e0" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!--<LinearGradientBrush x:Key="TileBackground" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#707070" Offset="0"/>
+                <GradientStop Color="#707070" Offset="0.5"/>
+                <GradientStop Color="#909090" Offset="1"/>
+            </LinearGradientBrush>-->
+
+            <LinearGradientBrush x:Key="TileBorder" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#585858" Offset="0"/>
+                <GradientStop Color="#666666" Offset="1"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="TileBackground" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#454545" Offset="0"/>
+                <GradientStop Color="#555555" Offset="1"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="AlmostWhiteBackground" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#c6c6c6" Offset="0"/>
+                <GradientStop Color="#e4e4e4" Offset="0.25"/>
+                <GradientStop Color="#e4e4e4" Offset="0.75"/>
+                <GradientStop Color="#c9c9c9" Offset="1"/>
+            </LinearGradientBrush>
+
+            <x:String x:Key="AppName">news factory</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -116,6 +116,14 @@
     <Compile Include="Controls\Option.cs" />
     <Compile Include="Controls\OptionConverter.cs" />
     <Compile Include="Controls\OptionSlider.cs" />
+    <Compile Include="Converters\BooleanNegationConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\CP2Visibility.cs" />
+    <Compile Include="Converters\FalseToVisiblityConverter.cs" />
+    <Compile Include="Converters\FormatConverter.cs" />
+    <Compile Include="Converters\NotCP2Visibility.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\TrueToVisibilityConverter.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\FeedInfo.cs" />
     <Compile Include="Model\FeedsStore.cs" />
@@ -153,6 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
