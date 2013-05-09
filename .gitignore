@@ -41,6 +41,8 @@ local.properties
 *.user
 *.sln.docstates
 *.pfx
+Package.appxmanifest
+Package.StoreAssociation.xml
 
 # Build results
 [Dd]ebug/
