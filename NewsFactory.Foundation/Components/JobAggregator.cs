@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace NewsFactory.Foundation.Components
 {
-    public class JobAggregator<T>
+    public partial class JobAggregator<T>
     {
         #region .ctors
 
@@ -20,22 +20,57 @@ namespace NewsFactory.Foundation.Components
 
         public JobAggregator(Func<List<T>, Task> processor, TimeSpan delay)
         {
+            AllowBatching = true;
+            AllowDuplicates = true;
             _processor = processor;
             _delay = delay;
         }
 
         #endregion .ctors
 
+        #region Events
+
+        public event Action<JobAggregator<T>> Empty;
+
+        #endregion Events
+
         #region Fields
 
         private object _syncObject = new object();
         private bool _isJobRunning = false;
-        private List<T> _jobData = new List<T>();
+        private Queue<T> _jobData = new Queue<T>();
         private Func<List<T>, Task> _processor;
         private ThreadPoolTimer _timer;
         private TimeSpan _delay;
+        private HashSet<T> _hashSet;
 
         #endregion Fields
+
+        #region Properties
+
+        public bool AllowBatching { get; set; }
+
+        /// <summary>
+        /// Gets/sets AllowDuplicates.
+        /// </summary>
+        public bool AllowDuplicates
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_AllowDuplicates; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_AllowDuplicates != value)
+                {
+                    p_AllowDuplicates = value;
+                    OnAllowDuplicatesChanged();
+                }
+            }
+        }
+        private bool p_AllowDuplicates;
+        partial void OnAllowDuplicatesChanged();
+
+        #endregion Properties
 
         #region Methods
 
@@ -43,7 +78,11 @@ namespace NewsFactory.Foundation.Components
         {
             lock (_syncObject)
             {
-                _jobData.Add(data);
+                if (AllowDuplicates || !_hashSet.Contains(data))
+                {
+                    _jobData.Enqueue(data);
+                    if (_hashSet != null) _hashSet.Add(data);
+                }
             }
 
             StartJobIfNeeded();
@@ -53,7 +92,14 @@ namespace NewsFactory.Foundation.Components
         {
             lock (_syncObject)
             {
-                _jobData.AddRange(data);
+                foreach (var item in data)
+                {
+                    if (AllowDuplicates || !_hashSet.Contains(item))
+                    {
+                        _jobData.Enqueue(item);
+                        if (_hashSet != null) _hashSet.Add(item);
+                    }
+                }
             }
 
             StartJobIfNeeded();
@@ -70,6 +116,8 @@ namespace NewsFactory.Foundation.Components
                     else
                         _timer = ThreadPoolTimer.CreateTimer(OnTimerElapsed, _delay);
                 }
+                if (_jobData.Count == 0 && Empty != null)
+                    Empty(this);
             }
         }
 
@@ -79,12 +127,20 @@ namespace NewsFactory.Foundation.Components
             {
                 _isJobRunning = true;
 
-                var t = _jobData;
-                _jobData = new List<T>();
+                var batchItems = AllowBatching ? _jobData.ToList() : new List<T>() { _jobData.Dequeue() };
+                if (AllowBatching)
+                    _jobData.Clear();
+                if (!AllowDuplicates)
+                {
+                    foreach (var item in batchItems)
+                    {
+                        _hashSet.Remove(item);
+                    }
+                }
 
                 Task.Run(async () =>
                 {
-                    await _processor(t);
+                    await _processor(batchItems);
                     lock (_syncObject)
                     {
                         _isJobRunning = false;
@@ -101,6 +157,17 @@ namespace NewsFactory.Foundation.Components
             {
                 _timer = null;
                 StartJob();
+            }
+        }
+
+        partial void OnAllowDuplicatesChanged()
+        {
+            lock (_syncObject)
+            {
+                if (AllowDuplicates)
+                    _hashSet = null;
+                else
+                    _hashSet = new HashSet<T>(_jobData);
             }
         }
 

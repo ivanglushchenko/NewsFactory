@@ -110,7 +110,7 @@
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Components\JobDispatcher.cs" />
-    <Compile Include="Components\JobQueue.cs" />
+    <Compile Include="Components\JobAggregator.cs" />
     <Compile Include="Controls\BetterToggleButton.cs" />
     <Compile Include="Controls\Hyperlink.cs" />
     <Compile Include="Controls\Option.cs" />

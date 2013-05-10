@@ -209,7 +209,7 @@ namespace NewsFactory.Foundation.Utils
                     return AddAsBlock(node, p => p.Margin = new Thickness(25, 0, 0, 0));
 
                 case "img":
-                    return new List<Inline>() { new InlineUIContainer() { Child = GetImage(node) } };
+                    return new List<Inline>() { new InlineUIContainer() { Child = GetImage(node) }, new LineBreak() };
 
                 case "a":
                     {

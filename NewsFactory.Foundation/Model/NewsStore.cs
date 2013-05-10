@@ -32,6 +32,8 @@ namespace NewsFactory.Foundation.Model
             _dislikesFile = dislikes;
             _dislikesQueue = new JobAggregator(OnSaveDislikes);
             _readItemsQueue = new JobAggregator<string>(OnSaveReadItems, TimeSpan.FromSeconds(1));
+            _favIconsQueue = new JobAggregator<NewsFeed>(OnGetFavIcon) { AllowBatching = false, AllowDuplicates = false };
+            _favIconsQueue.Empty += OnFavIconsQueueEmpty;
 
             Items = new ObservableCollection<NewsItem>();
             ItemsMap = new Dictionary<string, NewsItem>();
@@ -61,6 +63,7 @@ namespace NewsFactory.Foundation.Model
         private JobAggregator _dislikesQueue;
         private StorageFile _readItemsFile;
         private JobAggregator<string> _readItemsQueue;
+        private JobAggregator<NewsFeed> _favIconsQueue;
 
         #endregion Fields
 
@@ -249,20 +252,25 @@ namespace NewsFactory.Foundation.Model
 
                 await _feedsStore.Save();
 
-                var feedsWithoutIcon = _feedsStore.NewsFeeds.Where(f => f.FeedInfo.HasDefaultFavIcon).ToList();
-                await new JobDispatcher<NewsFeed>(1, async (feed) =>
-                    {
-                        var favIconUri = await feed.GetFavIcon(null);
-                        await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                            {
-                                feed.FeedInfo.HasDefaultFavIcon = true;
-                                if (favIconUri != null)
-                                    feed.FeedInfo.FavIconUrl = favIconUri;
-
-                            });
-                    }).Start(feedsWithoutIcon);
-                await _feedsStore.Save();
+                _favIconsQueue.AddRange(_feedsStore.NewsFeeds.Where(f => f.FeedInfo.HasDefaultFavIcon).ToList());
             });
+        }
+
+        private async Task OnGetFavIcon(List<NewsFeed> feeds)
+        {
+            var feed = feeds.Single();
+            var favIconUri = await feed.GetFavIcon(null);
+            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                feed.FeedInfo.HasDefaultFavIcon = true;
+                if (favIconUri != null)
+                    feed.FeedInfo.FavIconUrl = favIconUri;
+            });
+        }
+
+        private async void OnFavIconsQueueEmpty(JobAggregator<NewsFeed> sender)
+        {
+            await _feedsStore.Save();
         }
 
         public async Task UpdateOne(FeedInfo feedInfo, bool saveChangesIfNeeded = true, DateTime? receiveDate = null)

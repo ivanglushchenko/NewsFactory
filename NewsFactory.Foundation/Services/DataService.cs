@@ -140,7 +140,7 @@ namespace NewsFactory.Foundation.Services
 
             if ((DateTime.Now - (Settings.LastUpdated ?? DateTime.MinValue)).TotalMinutes >= Settings.UpdateInterval)
             {
-                GeneralHelper.Run(async () =>
+                var t = GeneralHelper.Run(async () =>
                 {
                     Settings.LastUpdated = DateTime.Now;
                     await SaveSettings();
