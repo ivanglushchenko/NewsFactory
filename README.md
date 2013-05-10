@@ -14,3 +14,11 @@ It really is, sometimes. In this particular case I wanted to play with Windows S
 3) Becasue Opera sucks!
 
 Here I need to provide an explanation for an explanation I guess. For many years I've been using Opera web browser. Not becasue it was a good browser (it wasn't) or very fast one (it was, actually). The feature I used the most was rss feeds syndycator - it was very simple and yet powerfull enough so that I could skim over thoughands of news items a day. And then one day Opera changed its UI - and it became clunky. Unfriendly. Almost unusable - or at least not compatible anymore with the way I prefered browsing the news. I tried using existing news readers - but they didn't seem much better. So I decided to write my own reader which will fit perfectly my reading style. 
+
+
+What it is
+------------
+
+The reader is actually a published Windows Store app, here is a link to it: http://apps.microsoft.com/windows/en-us/app/news-factory-free/38c48aa3-e2a2-4b10-91d8-90fb132d86b0
+
+I didn't commit two files which contained private information about me, but other than that it should be perfectly usable. 
