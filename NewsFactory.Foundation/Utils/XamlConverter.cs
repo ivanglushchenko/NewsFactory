@@ -123,17 +123,12 @@ namespace NewsFactory.Foundation.Utils
                 if (_imagesToLoad.Count == 0)
                 {
                     var newXaml = new XamlConverter(_imageSizes).BuildXaml(_newsItem.Description);
-                    var isInUse = Interlocked.Exchange(ref _newsItem.InUse, 1);
-                    if (isInUse == 0)
-                    {
-                        _newsItem.DescriptionXamlUpdated = newXaml;
-                        if (XamlUpdated != null)
-                        {
-                            XamlUpdated(_newsItem, newXaml);
-                        }
-                        Interlocked.Exchange(ref _newsItem.InUse, 0);
-                    }
 
+                    _newsItem.DescriptionXamlUpdated = newXaml;
+                     if (XamlUpdated != null)
+                     {
+                         XamlUpdated(_newsItem, newXaml);
+                     }
                 }
             }
         }
@@ -227,6 +222,7 @@ namespace NewsFactory.Foundation.Utils
                             link.Width = image.Width;
                             link.Height = image.Height;
                             link.UpdateSize = false;
+                            return new List<Inline>() { new InlineUIContainer() { Child = link }, new LineBreak() };
                         }
 
                         return new List<Inline>() { new InlineUIContainer() { Child = link } };

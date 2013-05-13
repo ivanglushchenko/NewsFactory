@@ -392,9 +392,6 @@ namespace NewsFactory.Foundation.Model
         private List<Paragraph> p_DescriptionXamlUpdated;
         partial void OnDescriptionXamlUpdatedChanged();
 
-        [IgnoreDataMember]
-        public int InUse;
-
         #endregion Properties
 
         #region Methods
