@@ -21,6 +21,8 @@ namespace NewsFactory.Foundation.Utils
             sbc.Replace("&quot;", "\"");
             sbc.Replace("&amp;", "&");
             sbc.Replace("&#39;", "'");
+            sbc.Replace("&#039;", "'");
+            sbc.Replace("&#0039;", "'");
             sbc.Replace("&hellip;", "...");
             sbc.Replace("&mdash;", "-");
             sbc.Replace("&#8217;", "'");

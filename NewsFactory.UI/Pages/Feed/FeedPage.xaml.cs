@@ -86,10 +86,12 @@ namespace NewsFactory.UI.Pages.Feed
             if (_selectedItemChanged)
             {
                 _selectedItemChanged = false;
-                if (e.NewValue > e.OldValue)
-                    _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset + _scrollViewer.ViewportHeight * 0.6);
-                else
-                    _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - _scrollViewer.ViewportHeight * 0.6);
+                var newValue = 
+                    e.NewValue > e.OldValue
+                    ? _scrollViewer.VerticalOffset + _scrollViewer.ViewportHeight * 0.6
+                    : _scrollViewer.VerticalOffset - _scrollViewer.ViewportHeight * 0.6;
+                newValue = Math.Floor(newValue);
+                _scrollViewer.ScrollToVerticalOffset(newValue);
             }
         }
 
