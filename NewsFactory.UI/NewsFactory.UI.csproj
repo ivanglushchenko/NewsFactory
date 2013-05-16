@@ -196,7 +196,7 @@
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Pages\ImportGoogleReaderFeeds\TestCreds.txt" />
     <Content Include="Pages\ImportGoogleReaderFeeds\TextFile1.txt" />
-    <Content Include="Pages\PickFeeds\Feeds.xml" />
+    <EmbeddedResource Include="Pages\PickFeeds\Feeds.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

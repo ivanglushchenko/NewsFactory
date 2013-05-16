@@ -28,6 +28,7 @@ namespace NewsFactory.Foundation.Utils
             sbc.Replace("&#8217;", "'");
             sbc.Replace("&#8220;", "\"");
             sbc.Replace("&#8221;", "\"");
+            sbc.Replace("&rsquo;", "'");
             return sbc.ToString();
         }
 
