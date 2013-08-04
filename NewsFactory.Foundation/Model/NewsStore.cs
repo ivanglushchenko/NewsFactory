@@ -262,7 +262,7 @@ namespace NewsFactory.Foundation.Model
             var favIconUri = await feed.GetFavIcon(null);
             await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                feed.FeedInfo.HasDefaultFavIcon = true;
+                feed.FeedInfo.HasDefaultFavIcon = false;
                 if (favIconUri != null)
                     feed.FeedInfo.FavIconUrl = favIconUri;
             });
