@@ -209,7 +209,10 @@ namespace NewsFactory.Foundation.Model
                     feedInfo.IsNew = true;
                     feedInfo.IsActive = true;
                     feedInfo.HasDefaultFavIcon = true;
-                    feedInfo.FavIconUrl = string.Format("{0}://{1}/favicon.ico", feedInfo.Url.Scheme, feedInfo.Url.Host).ToUri();
+                    feedInfo.FavIconUrl =
+                        feedInfo.FavIconUrl != null
+                        ? feedInfo.FavIconUrl
+                        : string.Format("{0}://{1}/favicon.ico", feedInfo.Url.Scheme, feedInfo.Url.Host).ToUri();
 
                     var feed = new NewsFeed(feedInfo, this, _folder, (s, i) => i.FeedUrl == feedInfo.Url);
                     NewsFeedsMap[feedInfo.Url] = feed;

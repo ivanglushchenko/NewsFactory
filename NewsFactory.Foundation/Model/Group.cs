@@ -35,6 +35,27 @@ namespace NewsFactory.Foundation.Model
         partial void OnKeyChanged();
 
         /// <summary>
+        /// Gets/sets Category.
+        /// </summary>
+        public Category Category
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_Category; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_Category != value)
+                {
+                    p_Category = value;
+                    OnPropertyChanged("Category");
+                    OnCategoryChanged();
+                }
+            }
+        }
+        private Category p_Category;
+        partial void OnCategoryChanged();
+
+        /// <summary>
         /// Gets/sets NewsFeeds.
         /// </summary>
         public ObservableCollection<NewsFeed> NewsFeeds

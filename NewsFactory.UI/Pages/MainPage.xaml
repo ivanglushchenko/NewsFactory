@@ -10,11 +10,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:NewsFactory.Foundation.Controls"
+    xmlns:conv="using:NewsFactory.Foundation.Converters"
     mc:Ignorable="d">
 
     <Page.Resources>
         <feed:FeedItemFontWeightConverter x:Key="FeedItemFontWeightConverter" />
         <feed:LastUpdatedConverter x:Key="LastUpdatedConverter" />
+        <conv:CategoryColorConverter x:Key="CategoryColorConverter" />
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -30,7 +32,6 @@
                     <Button Style="{StaticResource MoreAppBarButtonStyle}" AutomationProperties.Name="More..." Click="OnMore"/>
                     <Button Style="{StaticResource AddAppBarButtonStyle}" AutomationProperties.Name="Add feeds..." Click="Button_Click_1"/>
                     <Button Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from OPML file" Command="{Binding ImportFeedsCommand}" Click="OnCloseAppBar"/>
-                    <!--<Button Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from Google Reader" Command="{Binding ImportFeedsFromGoogleReaderCommand}" Click="OnCloseAppBar"/>-->
                 </StackPanel>
             </Grid>
         </AppBar>
@@ -83,7 +84,6 @@
             </Image>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" FontWeight="Normal" IsHitTestVisible="false" VerticalAlignment="Center" Style="{StaticResource PageHeaderTextStyle}" Margin="18,0,0,12" Padding="0" Foreground="{StaticResource MainBrush}"/>
         </StackPanel>
-
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -154,6 +154,9 @@
                     <DataTemplate>
                         <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
                             <Grid Width="340" Height="70">
+
+                                <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="10" Background="{Binding FeedInfo.Category, Converter={StaticResource CategoryColorConverter}}"/>-->
+
                                 <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding FeedInfo.FavIconUrl}" />

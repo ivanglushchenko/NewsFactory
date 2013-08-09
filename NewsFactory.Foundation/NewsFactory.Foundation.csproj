@@ -118,6 +118,7 @@
     <Compile Include="Controls\OptionSlider.cs" />
     <Compile Include="Converters\BooleanNegationConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\CategoryColorConverter.cs" />
     <Compile Include="Converters\CP2Visibility.cs" />
     <Compile Include="Converters\FalseToVisiblityConverter.cs" />
     <Compile Include="Converters\FormatConverter.cs" />

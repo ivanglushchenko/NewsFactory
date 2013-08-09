@@ -11,14 +11,6 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-
-        <!-- Collection of items displayed by this page -->
-        <CollectionViewSource
-            x:Name="itemsViewSource"
-            Source="{Binding Items}"/>
-
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">News Reader</x:String>
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -73,27 +65,12 @@
 
                     <TextBlock Text="Delete the feed" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
                     <Button Content="Delete" Margin="0,0,0,0" Command="{Binding DeleteFeedCommand}" />
+
+                    <!--<TextBlock Text="Category" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
+                    <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding Feed.FeedInfo.Category, Mode=TwoWay}" Margin="0,5,0,0" />-->
                 </StackPanel>
             </Grid>
             
-            <!--<StackPanel Grid.Row="1" Margin="36">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Feed URL:" Style="{StaticResource ItemTextStyle}"/>
-                    <TextBox Width="200" Margin="8,0,0,0" />
-                </StackPanel>
-
-                <TextBlock Text="Refresh feed's icon" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
-                <Button Content="Refresh" Margin="0,0,0,0" Command="{Binding RefreshFeedIconCommand}" />
-
-                <TextBlock Text="Reset feed's last-update date" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
-                <Button Content="Reset" Margin="0,0,0,0" Command="{Binding ResetLastUpdateDateCommand}" />
-                
-                <TextBlock Text="Delete the feed" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
-                <Button Content="Delete" Margin="0,0,0,0" Command="{Binding DeleteFeedCommand}" />
-            </StackPanel>-->
-
-            <ItemsControl ItemsSource="{Binding Statuses}" Grid.Row="2" />
-
             <VisualStateManager.VisualStateGroups>
 
                 <!-- Visual states reflect the application's view state -->

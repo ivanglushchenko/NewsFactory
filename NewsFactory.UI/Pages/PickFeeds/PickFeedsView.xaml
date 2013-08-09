@@ -7,10 +7,13 @@
     xmlns:common="using:NewsFactory.UI.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:NewsFactory.Foundation.Converters"
     mc:Ignorable="d">
 
     <Page.Resources>
 
+        <conv:CategoryColorConverter x:Key="CategoryColorConverter" />
+        
         <!-- Collection of items displayed by this page -->
         <CollectionViewSource
             x:Name="itemsViewSource"
@@ -193,10 +196,12 @@
                     <GroupStyle HidesIfEmpty="True">
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Width="300">
-                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource SubheaderCheckBoxStyle}" Margin="4,0,0,10" Padding="10,0,0,0" >
-                                        <TextBlock Text="{Binding Title}" />
-                                    </CheckBox>
+                                <Border BorderBrush="{Binding Category, Converter={StaticResource CategoryColorConverter}}" BorderThickness="0,0,0,6">
+                                    <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Width="300">
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource SubheaderCheckBoxStyle}" Margin="4,0,0,10" Padding="10,0,0,0" >
+                                            <TextBlock Text="{Binding Title}" />
+                                        </CheckBox>
+                                    </Border>
                                 </Border>
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>

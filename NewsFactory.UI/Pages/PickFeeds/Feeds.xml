@@ -1,55 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <groups>
-  <group name="Animals">
-    <feed title = "BabyAnimalz"  url = "http://feeds.feedburner.com/babyanimalz/GxsS"                                                       favIconUrl = "http://babyanimalz.com/blog/wp-content/themes/atahualpa/images/favicon/1-favicon.ico"/>
-    <feed title = "Cute Overload"  url = "http://cuteoverload.com/feed/"                                                                    favIconUrl = "http://cuteoverload.com/favicon.ico"/>
-    <feed title = "Discovery News"  url = "http://feeds.feedburner.com/DiscoveryNews-Top-Stories"                                           favIconUrl = "http://news.discovery.com/favicon.ico"/>
-    <feed title = "Dogshaming"  url = "http://www.dogshaming.com/feed/"                                                                     favIconUrl = "http://www.dogshaming.com/wp-content/themes/radiostation/assets/images/favicon.ico"/>
-    <feed title = "Sundays at the shelter"  url = "http://www.shelter-cats.com/feed/"                                                       favIconUrl = "ms-appx:///Assets/rss.png"/>
-    <feed title = "The Animal Blog"  url = "http://theanimalblog.tumblr.com/rss"                                                            favIconUrl = "http://24.media.tumblr.com/avatar_93beaee3e079_16.png"/>
-    <feed title = "The Daily Kitten"  url = "http://www.dailykitten.com/feed/"                                                              favIconUrl = "ms-appx:///Assets/rss.png"/>
-    <feed title = "The Itty Bitty Kitty Committe"  url = "http://www.theittybittykittycommittee.com/feeds/posts/default?alt=rss"            favIconUrl = "http://www.theittybittykittycommittee.com/favicon.ico"/>
-    <feed title = "Zooborns"  url = "http://feeds.feedburner.com/Zooborns"                                                                  favIconUrl = "http://www.zooborns.com/favicon.ico"/>
+  <group name="Animals" category="Animals">
+    <feed title = "BabyAnimalz"                    url = "http://feeds.feedburner.com/babyanimalz/GxsS"                          favIconUrl = "http://babyanimalz.com/blog/wp-content/themes/atahualpa/images/favicon/1-favicon.ico"/>
+    <feed title = "Cute Overload"                  url = "http://cuteoverload.com/feed/"                                         favIconUrl = "http://cuteoverload.com/favicon.ico"/>
+    <feed title = "Discovery News"                 url = "http://feeds.feedburner.com/DiscoveryNews-Top-Stories"                 favIconUrl = "http://news.discovery.com/favicon.ico"/>
+    <feed title = "Dogshaming"                     url = "http://www.dogshaming.com/feed/"                                       favIconUrl = "http://www.dogshaming.com/wp-content/themes/radiostation/assets/images/favicon.ico"/>
+    <feed title = "Sundays at the shelter"         url = "http://www.shelter-cats.com/feed/"                                     favIconUrl = "ms-appx:///Assets/rss.png"/>
+    <feed title = "The Animal Blog"                url = "http://theanimalblog.tumblr.com/rss"                                   favIconUrl = "http://24.media.tumblr.com/avatar_93beaee3e079_16.png"/>
+    <feed title = "The Daily Kitten"               url = "http://www.dailykitten.com/feed/"                                      favIconUrl = "ms-appx:///Assets/rss.png"/>
+    <feed title = "The Itty Bitty Kitty Committe"  url = "http://www.theittybittykittycommittee.com/feeds/posts/default?alt=rss" favIconUrl = "http://www.theittybittykittycommittee.com/favicon.ico"/>
+    <feed title = "Zooborns"                       url = "http://feeds.feedburner.com/Zooborns"                                  favIconUrl = "http://www.zooborns.com/favicon.ico"/>
   </group>
   <group name="Art &amp; Photography" category="ArtAndPhotography">
-    <feed title = "BOOOOOOOM!" url = "http://www.booooooom.com/feed/"                                                                       favIconUrl = "http://www.booooooom.com/favicon.ico"/>
-    <feed title = "deviantART" url = "http://backend.deviantart.com/rss.xml?q=boost%3Apopular+meta%3Aall+max_age%3A8h&amp;type=deviation"       favIconUrl = "http://i.deviantart.net/icons/favicon.png"/>
-    <feed title = "Digital Photography School" url = "http://feedproxy.google.com/DigitalPhotographySchool"                                 favIconUrl = "http://digital-photography-school.com/favicon.ico"/>
-    <feed title = "DIYPhotography.net" url = "http://feeds.feedburner.com/Diyphotographynet"                                                favIconUrl = "http://www.diyphotography.net/favicon.ico"/>
-    <feed title = "Drawn!" url = "http://feeds.feedburner.com/drawn"                                                                        favIconUrl = "http://25.media.tumblr.com/avatar_f38aab81a492_16.png"/>
-    <feed title = "FFFFOUND!" url = "http://feeds.feedburner.com/ffffound/everyone"                                                         favIconUrl = "http://ffffound.com/favicon.ico"/>
-    <!--<feed title = "Illustration Friday" url = "http://illustrationfriday.com/feed/"                                                         favIconUrl = "http://illustrationfriday.com/wp-content/themes/illustration-friday/images/fav-icon.ico"/>-->
-    <feed title = "Photojojo" url = "http://www.photojojo.com/content/feed"                                                                 favIconUrl = "http://photojojo.com/favicon.ico"/>
-    <feed title = "Strobist" url = "http://feeds.feedburner.com/blogspot/WOBq"                                                              favIconUrl = "http://strobist.blogspot.com/favicon.ico"/>
+    <feed title = "BOOOOOOOM!"                 url = "http://www.booooooom.com/feed/"                                                                     favIconUrl = "http://www.booooooom.com/favicon.ico"/>
+    <feed title = "deviantART"                 url = "http://backend.deviantart.com/rss.xml?q=boost%3Apopular+meta%3Aall+max_age%3A8h&amp;type=deviation" favIconUrl = "http://i.deviantart.net/icons/favicon.png"/>
+    <feed title = "Digital Photography School" url = "http://feedproxy.google.com/DigitalPhotographySchool"                                               favIconUrl = "http://digital-photography-school.com/favicon.ico"/>
+    <feed title = "DIYPhotography.net"         url = "http://feeds.feedburner.com/Diyphotographynet"                                                      favIconUrl = "http://www.diyphotography.net/favicon.ico"/>
+    <feed title = "Drawn!"                     url = "http://feeds.feedburner.com/drawn"                                                                  favIconUrl = "http://25.media.tumblr.com/avatar_f38aab81a492_16.png"/>
+    <feed title = "FFFFOUND!"                  url = "http://feeds.feedburner.com/ffffound/everyone"                                                      favIconUrl = "http://ffffound.com/favicon.ico"/>
+    <feed title = "Photojojo"                  url = "http://www.photojojo.com/content/feed"                                                              favIconUrl = "http://photojojo.com/favicon.ico"/>
+    <feed title = "Strobist"                   url = "http://feeds.feedburner.com/blogspot/WOBq"                                                          favIconUrl = "http://strobist.blogspot.com/favicon.ico"/>
   </group>
   <group name="Best of YouTube" category="BestOfYouTube">
     
   </group>
-  <group name="Books">
-    <feed title = "A Journey Round My Skull" url = "http://feeds.feedburner.com/AJourneyRoundMySkull-Archives"                                     favIconUrl = "http://ajourneyroundmyskull.blogspot.com/favicon.ico"/>
-    <feed title="Brandon Sanderson Recent Updates" url="http://feeds.feedburner.com/BrandonSandersonRecentUpdates" favIconUrl = "ms-appx:///Assets/rss.png"/>
-    <feed title = "London Review of Books" url = "http://cdn.lrb.co.uk/feeds/lrb"                                                                  favIconUrl = "http://cdn.lrb.co.uk/favicon.ico"/>
-    <feed title = "Omnivoracious" url = "http://www.omnivoracious.com/atom.xml"                                                                    favIconUrl = "http://nozama.typepad.com/favicon.ico"/>
-    <feed title = "Paulo Coelho's Blog" url = "http://feeds.feedburner.com/PauloCoelhosBlog"                                                       favIconUrl = "http://paulocoelhoblog.com/wp-content/uploads/2011/10/the-symbol6.png"/>
-    <feed title = "The Barns &amp; Noble Review" url = "http://bnreview.barnesandnoble.com/bnreview/plugins/custom/barnesandnoble/bnreview/rss_full"   favIconUrl = "ms-appx:///Assets/rss.png"/>
+  <group name="Books" category="Books">
+    <feed title = "A Journey Round My Skull"       url = "http://feeds.feedburner.com/AJourneyRoundMySkull-Archives"                                     favIconUrl = "http://ajourneyroundmyskull.blogspot.com/favicon.ico"/>
+    <feed title="Brandon Sanderson Recent Updates" url = "http://feeds.feedburner.com/BrandonSandersonRecentUpdates"                                     favIconUrl = "ms-appx:///Assets/rss.png"/>
+    <feed title = "London Review of Books"         url = "http://cdn.lrb.co.uk/feeds/lrb"                                                                favIconUrl = "http://cdn.lrb.co.uk/favicon.ico"/>
+    <feed title = "Omnivoracious"                  url = "http://www.omnivoracious.com/atom.xml"                                                         favIconUrl = "http://nozama.typepad.com/favicon.ico"/>
+    <feed title = "Paulo Coelho's Blog"            url = "http://feeds.feedburner.com/PauloCoelhosBlog"                                                  favIconUrl = "http://paulocoelhoblog.com/wp-content/uploads/2011/10/the-symbol6.png"/>
+    <feed title = "The Barns &amp; Noble Review"   url = "http://bnreview.barnesandnoble.com/bnreview/plugins/custom/barnesandnoble/bnreview/rss_full"   favIconUrl = "ms-appx:///Assets/rss.png"/>
   </group>
-  <group name="Business">
-    <feed title = "Business Insider" url = "http://feeds2.feedburner.com/businessinsider"        favIconUrl = "http://www.businessinsider.com/favicon.ico"/>
-    <feed title = "Fast Company" url = "http://feeds.fastcompany.com/fastcompany/headlines"      favIconUrl = "http://www.fastcodesign.com/favicon.ico"/>
-    <feed title = "Forbes" url = "http://www.forbes.com/business/feed/"                        favIconUrl = "http://www.forbes.com/favicon.ico"/>
-    <feed title = "Inc.com" url = "http://feeds.inc.com/home/updates"                            favIconUrl = "http://www.inc.com/favicon.ico"/>
-    <feed title = "Reuters" url = "http://feeds.reuters.com/reuters/MostRead"                    favIconUrl = "http://www.reuters.com/resources/images/favicon.ico"/>
-    <feed title = "The Big Picture" url = "http://feeds.feedburner.com/TheBigPicture"            favIconUrl = "http://www.ritholtz.com/favicon.ico"/>
-    <feed title = "The Guardian" url = "http://www.guardian.co.uk/business/us-edition/rss"       favIconUrl = "http://static.guim.co.uk/favicon.ico"/>
-    <feed title = "The Telegraph" url = "http://www.telegraph.co.uk/news/rss"                    favIconUrl = "http://www.telegraph.co.uk/favicon.ico?v=1.2"/>
-    <feed title = "The Wall Street Journal" url = "http://online.wsj.com/xml/rss/3_7014.xml"     favIconUrl = "http://online.wsj.com/favicon.ico"/>
+  <group name="Business" category="Business">
+    <feed title = "Business Insider"        url = "http://feeds2.feedburner.com/businessinsider"       favIconUrl = "http://www.businessinsider.com/favicon.ico"/>
+    <feed title = "Fast Company"            url = "http://feeds.fastcompany.com/fastcompany/headlines" favIconUrl = "http://www.fastcodesign.com/favicon.ico"/>
+    <feed title = "Forbes"                  url = "http://www.forbes.com/business/feed/"               favIconUrl = "http://www.forbes.com/favicon.ico"/>
+    <feed title = "Inc.com"                 url = "http://feeds.inc.com/home/updates"                  favIconUrl = "http://www.inc.com/favicon.ico"/>
+    <feed title = "Reuters"                 url = "http://feeds.reuters.com/reuters/MostRead"          favIconUrl = "http://www.reuters.com/resources/images/favicon.ico"/>
+    <feed title = "The Big Picture"         url = "http://feeds.feedburner.com/TheBigPicture"          favIconUrl = "http://www.ritholtz.com/favicon.ico"/>
+    <feed title = "The Guardian"            url = "http://www.guardian.co.uk/business/us-edition/rss"  favIconUrl = "http://static.guim.co.uk/favicon.ico"/>
+    <feed title = "The Telegraph"           url = "http://www.telegraph.co.uk/news/rss"                favIconUrl = "http://www.telegraph.co.uk/favicon.ico?v=1.2"/>
+    <feed title = "The Wall Street Journal" url = "http://online.wsj.com/xml/rss/3_7014.xml"           favIconUrl = "http://online.wsj.com/favicon.ico"/>
   </group>
-  <group name = "Cars">
+  <group name = "Cars" category="Cars">
     <feed title = "Car and Driver"                 url = "http://feeds.feedburner.com/caranddriver/blog"                          favIconUrl = "http://www.caranddriver.com/favicon.ico" />
   </group>
   <group name = "Celebrity Gossip" category="CelebrityGossip">
-    <feed title = "Hollywood Life"                 url = "http://hollywoodlife.com/feed/"                        favIconUrl = "http://1.gravatar.com/blavatar/3c5ec865edcc4be7f928771dc4e57839?s=16" />
+    <feed title = "Hollywood Life"                 url = "http://hollywoodlife.com/feed/"                                         favIconUrl = "http://1.gravatar.com/blavatar/3c5ec865edcc4be7f928771dc4e57839?s=16" />
     <feed title = "PopSugar"                       url = "http://www.popsugar.com/feed"                                           favIconUrl = "http://www.popsugar.com/favicon.ico" />
     <feed title = "Radar Online"                   url = "http://www.radaronline.com/rss"                                         favIconUrl = "http://www.radaronline.com/sites/default/files/radaronline_favicon.gif" />
     <feed title = "The Superficial"                url = "http://feeds.feedburner.com/thesuperficial/SNxk"                        favIconUrl = "http://www.thesuperficial.com/wp-content/themes/superficial/images/favicon.ico" />
@@ -57,7 +56,7 @@
     <feed title = "What Would Tyler Durden Do"     url = "http://www.wwtdd.com/feed/"                                             favIconUrl = "http://www.wwtdd.com/favicon.ico" />
     <feed title = "X17 Online"                     url = "http://www.x17online.com/atom.xml"                                      favIconUrl = "http://www.x17online.com/favicon.ico" />
   </group>
-  <group name = "College">
+  <group name = "College" category="College">
     <feed title = "CampusGrotto"                   url = "http://feeds.feedburner.com/CampusGrotto"                               favIconUrl = "http://www.campusgrotto.com/images/favicon.ico" />
     <feed title = "Dorm Delicious"                 url = "http://feeds.feedburner.com/dormdelicious-dormdecoratingideas"          favIconUrl = "http://www.dormdelicious.com/favicon.ico" />
     <feed title = "HackCollege"                    url = "http://feeds2.feedburner.com/Hackcollege"                               favIconUrl = "http://www.hackcollege.com/favicon.ico" />
@@ -67,20 +66,20 @@
     <feed title = "ACB"                            url = "http://feeds.feedburner.com/comicbookblog"                              favIconUrl = "http://acomicbookblog.com/wp-content/uploads/2012/03/acb-favicon.png" />
     <feed title = "Bleeding Cool"                  url = "http://www.bleedingcool.com/feed/"                                      favIconUrl = "" />
     <feed title = "Comic Book Resources"           url = "http://www.comicbookresources.com/feed.php?feed=all"                    favIconUrl = "http://www.comicbookresources.com/favicon.ico" />
-    <feed title = "Comic Book Therapy"             url = "http://feeds.feedburner.com/ComicBookTherapy"                                           favIconUrl = "http://www.comicbooktherapy.com/favicon.ico" />
-    <feed title = "Comic Booked"                   url = "http://www.comicbooked.com/feed/"                                                favIconUrl = "http://comicbooked.comicbookedllc.netdna-cdn.com/favicon.ico" />
-    <feed title = "IGN"                            url = "http://feeds.ign.com/ign/all"                                                        favIconUrl = "http://www.ign.com/favicon.ico" />
-    <feed title = "Mindless Ones"                  url = "http://mindlessones.com/feed/"                                                   favIconUrl = "http://mindlessones.com/favicon.ico" />
+    <feed title = "Comic Book Therapy"             url = "http://feeds.feedburner.com/ComicBookTherapy"                           favIconUrl = "http://www.comicbooktherapy.com/favicon.ico" />
+    <feed title = "Comic Booked"                   url = "http://www.comicbooked.com/feed/"                                       favIconUrl = "http://comicbooked.comicbookedllc.netdna-cdn.com/favicon.ico" />
+    <feed title = "IGN"                            url = "http://feeds.ign.com/ign/all"                                           favIconUrl = "http://www.ign.com/favicon.ico" />
+    <feed title = "Mindless Ones"                  url = "http://mindlessones.com/feed/"                                          favIconUrl = "http://mindlessones.com/favicon.ico" />
     <feed title = "MTV Geek"                       url = "http://geek-news.mtv.com/feed"                                          favIconUrl = "http://www.mtv.com/favicon.ico" />
-    <feed title = "Multiversity Comics"            url = "http://feeds.feedburner.com/multiversitycomics/dzxU"                                             favIconUrl = "http://multiversitycomics.com/wp-content/themes/zillionlabs/favicon.png" />
-    <feed title = "Newsarama"                      url = "http://feeds.newsarama.com/Newsaramasite?format=xml"                                                  favIconUrl = "http://www.newsarama.com/favicon.ico" />
+    <feed title = "Multiversity Comics"            url = "http://feeds.feedburner.com/multiversitycomics/dzxU"                    favIconUrl = "http://multiversitycomics.com/wp-content/themes/zillionlabs/favicon.png" />
+    <feed title = "Newsarama"                      url = "http://feeds.newsarama.com/Newsaramasite?format=xml"                    favIconUrl = "http://www.newsarama.com/favicon.ico" />
   </group>
-  <group name = "Dating">
-    <feed title = "DontDateHimGirl.com"            url = "http://www.dontdatehimgirl.com/feeds/todayonddhg.php"                                                favIconUrl = "http://www.dontdatehimgirl.com/favicon.ico" />
-    <feed title = "GirlsAskGuys"                   url = "http://www.girlsaskguys.com/rss.html"                                               favIconUrl = "http://www.girlsaskguys.com/favicon.ico" />
-    <feed title = "Single-ish"                     url = "http://feeds.glamour.com/glamour/glamoursingle-ish"                      favIconUrl = "http://www.glamour.com/favicon.ico" />
+  <group name = "Dating" category="Dating">
+    <feed title = "DontDateHimGirl.com"            url = "http://www.dontdatehimgirl.com/feeds/todayonddhg.php"                   favIconUrl = "http://www.dontdatehimgirl.com/favicon.ico" />
+    <feed title = "GirlsAskGuys"                   url = "http://www.girlsaskguys.com/rss.html"                                   favIconUrl = "http://www.girlsaskguys.com/favicon.ico" />
+    <feed title = "Single-ish"                     url = "http://feeds.glamour.com/glamour/glamoursingle-ish"                     favIconUrl = "http://www.glamour.com/favicon.ico" />
   </group>
-  <group name = "Deals">
+  <group name = "Deals" category="Deals">
     <feed title = "Amazon's Gold Box"              url = "http://rssfeeds.s3.amazonaws.com/goldbox"                               favIconUrl = "http://www.amazon.com/favicon.ico" />
     <feed title = "DealCatcher"                    url = "http://rss.dealcatcher.com/rss.xml"                                     favIconUrl = "http://www.dealcatcher.com/favicon.ico" />
     <feed title = "dealspl.us"                     url = "http://feeds.feedburner.com/dealsplus"                                  favIconUrl = "http://dealspl.us/favicon.ico?v=32" />
@@ -88,14 +87,14 @@
     <feed title = "Slickdeals"                     url = "http://feeds.feedburner.com/SlickdealsnetFP"                            favIconUrl = "http://slickdeals.net/favicon.ico" />
     <feed title = "Techbargains"                   url = "http://www.techbargains.com/rss.xml"                                    favIconUrl = "http://www.techbargains.com/favicon.ico" />
   </group>
-  <group name = "Design">
+  <group name = "Design" category="Design">
     <feed title = "Communication Arts"             url = "http://feeds.commarts.com/commarts/index"                               favIconUrl = "http://www.commarts.com/favicon.ico" />
     <feed title = "Core77"                         url = "http://feeds.feedburner.com/core77/blog"                                favIconUrl = "http://www.core77.com/favicon.ico" />
     <feed title = "DesignAddict"                   url = "http://feeds.feedburner.com/DesignAddict_TheBlog"                       favIconUrl = "http://www.designaddict.com/favicon.ico" />
     <feed title = "Designboom"                     url = "http://www.designboom.com/feed/"                                        favIconUrl = "http://www.designboom.com/favicon.ico" />
     <feed title = "Uncrate"                        url = "http://feeds.feedburner.com/uncrate"                                    favIconUrl = "http://uncrate.com/favicon.ico" />
   </group>
-  <group name = "Fashion">
+  <group name = "Fashion" category="Fashion">
     <feed title = "College Fashion"                url = "http://feeds.feedburner.com/collegefashion"                             favIconUrl = "http://www.collegefashion.net/favicon.ico" />
     <feed title = "Style.com"                      url = "http://www.style.com/fashionshows/rss"                                  favIconUrl = "http://www.style.com/favicon.ico" />
     <feed title = "The Budget Fashionista"         url = "http://feeds.feedburner.com/TheBudgetFashionista"                       favIconUrl = "http://www.thebudgetfashionista.com/favicon.ico" />
@@ -103,38 +102,38 @@
     <feed title = "WhoWhatWear"                    url = "http://feeds.whowhatwear.com/whowhatwear"                               favIconUrl = "http://www.whowhatwear.com/favicon.ico" />
   </group>
   <group name = "Food &amp; Wine" category="FoodAndWine">
-    <feed title = "Chow"                           url = "http://www.chow.com/feed/stories-and-recipes"                           favIconUrl = "http://www.chow.com/static/20121220203500/images/favicon.ico" />
+    <feed title = "Chow"                           url = "http://www.chow.com/feed/stories-and-recipes"                              favIconUrl = "http://www.chow.com/static/20121220203500/images/favicon.ico" />
     <feed title = "Cooking Channel"                url = "http://feeds.feedburner.com/DevourTheBlogCookingChannelsRecipeAndFoodBlog" favIconUrl = "http://cooktv.sndimg.com/webcook/imgs/le/favicon.png" />
-    <feed title = "Daily Dish"                     url = "http://www.latimes.com/features/food/dailydish/rss2.0.xml"              favIconUrl = "http://www.latimes.com/favicon.ico" />
-    <feed title = "Dr. Vino"                       url = "http://feeds.feedburner.com/blogspot/GuSC"                              favIconUrl = "http://www.drvino.com/favicon.ico" />
-    <feed title = "Eater National"                 url = "http://feeds.feedburner.com/EaterNational"                              favIconUrl = "http://eater.com/favicon.ico" />
-    <feed title = "Food Network"                   url = "http://blog.foodnetwork.com/fn-dish/feed/"                              favIconUrl = "http://images.foodnetwork.com/webfood/fn20/imgs/favicon.png" />
-    <feed title = "Food Republic"                  url = "http://feeds.feedburner.com/foodrepublic"                               favIconUrl = "http://www.foodrepublic.com/sites/all/themes/foodrepublic/favicon.ico" />
-    <feed title = "Liquor.com"                     url = "http://liquor.com/feed/"                                                favIconUrl = "http://cdn.liquor.com/wp-content/themes/liquor/images/favicon.ico" />
-    <feed title = "Saveur"                         url = "http://feeds.feedburner.com/SaveurDailyFare"                            favIconUrl = "http://www.saveur.com/images/saveur_favicon.ico" />
-    <feed title = "Serious Eats"                   url = "http://feeds.seriouseats.com/seriouseatsfeaturesvideos"                 favIconUrl = "http://www.seriouseats.com/favicon.ico" />
-    <feed title = "Simply Recipes"                 url = "http://feeds.feedburner.com/elise/simplyrecipes"                        favIconUrl = "http://www.simplyrecipes.com/simply-recipes.ico?ea6e46" />
-    <feed title = "Tasting Table"                  url = "http://www.tastingtable.com/rss/feed_pulse.xml"                         favIconUrl = "http://staticcdn11.tastingtable.com/images_v2/favicon.ico" />
-    <feed title = "The Feiring Line"               url = "http://feeds.feedburner.com/TheFeiringLine"                             favIconUrl = "http://6a.typepad.com/favicon.ico" />
-    <feed title = "The Wednesday Chef"             url = "http://www.thewednesdaychef.com/the_wednesday_chef/rss.xml"             favIconUrl = "http://6a.typepad.com/favicon.ico" />
-    <feed title = "Vinography"                     url = "http://www.vinography.com/index.xml"                                    favIconUrl = "http://www.vinography.com/favicon.ico" />
-    <feed title = "Yummly"                         url = "http://www.yummly.com/blog/feed/"                                       favIconUrl = "http://www.yummly.com/favicon.ico" />
-    <feed title = "Zagat"                          url = "http://feeds.feedburner.com/zagat"                                      favIconUrl = "http://www.zagat.com/favicon.ico" />
+    <feed title = "Daily Dish"                     url = "http://www.latimes.com/features/food/dailydish/rss2.0.xml"                 favIconUrl = "http://www.latimes.com/favicon.ico" />
+    <feed title = "Dr. Vino"                       url = "http://feeds.feedburner.com/blogspot/GuSC"                                 favIconUrl = "http://www.drvino.com/favicon.ico" />
+    <feed title = "Eater National"                 url = "http://feeds.feedburner.com/EaterNational"                                 favIconUrl = "http://eater.com/favicon.ico" />
+    <feed title = "Food Network"                   url = "http://blog.foodnetwork.com/fn-dish/feed/"                                 favIconUrl = "http://images.foodnetwork.com/webfood/fn20/imgs/favicon.png" />
+    <feed title = "Food Republic"                  url = "http://feeds.feedburner.com/foodrepublic"                                  favIconUrl = "http://www.foodrepublic.com/sites/all/themes/foodrepublic/favicon.ico" />
+    <feed title = "Liquor.com"                     url = "http://liquor.com/feed/"                                                   favIconUrl = "http://cdn.liquor.com/wp-content/themes/liquor/images/favicon.ico" />
+    <feed title = "Saveur"                         url = "http://feeds.feedburner.com/SaveurDailyFare"                               favIconUrl = "http://www.saveur.com/images/saveur_favicon.ico" />
+    <feed title = "Serious Eats"                   url = "http://feeds.seriouseats.com/seriouseatsfeaturesvideos"                    favIconUrl = "http://www.seriouseats.com/favicon.ico" />
+    <feed title = "Simply Recipes"                 url = "http://feeds.feedburner.com/elise/simplyrecipes"                           favIconUrl = "http://www.simplyrecipes.com/simply-recipes.ico?ea6e46" />
+    <feed title = "Tasting Table"                  url = "http://www.tastingtable.com/rss/feed_pulse.xml"                            favIconUrl = "http://staticcdn11.tastingtable.com/images_v2/favicon.ico" />
+    <feed title = "The Feiring Line"               url = "http://feeds.feedburner.com/TheFeiringLine"                                favIconUrl = "http://6a.typepad.com/favicon.ico" />
+    <feed title = "The Wednesday Chef"             url = "http://www.thewednesdaychef.com/the_wednesday_chef/rss.xml"                favIconUrl = "http://6a.typepad.com/favicon.ico" />
+    <feed title = "Vinography"                     url = "http://www.vinography.com/index.xml"                                       favIconUrl = "http://www.vinography.com/favicon.ico" />
+    <feed title = "Yummly"                         url = "http://www.yummly.com/blog/feed/"                                          favIconUrl = "http://www.yummly.com/favicon.ico" />
+    <feed title = "Zagat"                          url = "http://feeds.feedburner.com/zagat"                                         favIconUrl = "http://www.zagat.com/favicon.ico" />
   </group>
-  <group name = "Gaming">
+  <group name = "Gaming" category="Gaming">
     <!--<feed title = "1UP"                            url = "?? www.1up.com/"                                                        favIconUrl = "" />
     <feed title = "Destructoid"                    url = "?? www.destructoid.com/"                                                favIconUrl = "" />
     <feed title = "??"                             url = ""                                                                       favIconUrl = "" />-->
   </group>
-  <group name = "Gardening">
+  <group name = "Gardening" category="Gardening">
     <feed title = "Backyard Gardening Blog"        url = "http://feeds.feedburner.com/BackyardGardeningBlog"                      favIconUrl = "http://www.gardeningblog.net/favicon.ico" />
     <feed title = "Danielles Garden Blog"          url = "http://feeds.feedburner.com/DaniellesGardenBlog"                        favIconUrl = "http://www.daniellecopeland.com/favicon.ico" />
     <feed title = "Fine Gardening"                 url = "http://www.finegardening.com/feeds/rss/blogs.xml"                       favIconUrl = "http://www.finegardening.com/favicon.ico" />
   </group>
-  <group name = "Health">
+  <group name = "Health" category="Health">
     <feed title = "KevinMD"                        url = "http://feeds.feedburner.com/KevinMd-MedicalWeblog"                      favIconUrl = "http://www.kevinmd.com/blog/wp-content/themes/KevinMD/lib/images/icon-swatch.png" />
   </group>
-  <group name="Humor">
+  <group name="Humor" category="Humor">
     <feed title = "Bad Machinery"                  url = "http://www.badmachinery.com/index.xml"                                  favIconUrl = "" />
     <feed title = "BREAK.com"                      url = "http://rss.break.com/channel/homepage"                                  favIconUrl = "http://www.break.com/favicon.ico" />
     <feed title = "Brickd"                         url = "http://www.brickd.com/rss"                                              favIconUrl = "http://24.media.tumblr.com/avatar_f5b64aebfefa_16.png" />
@@ -142,18 +141,18 @@
     <feed title = "Cracked.com"                    url = "http://feeds.feedburner.com/CrackedRSS"                                 favIconUrl = "http://i.crackedcdn.com/favicon.ico" />
     <feed title = "diesel sweeties"                url = "http://www.dieselsweeties.com/ds-unifeed.xml"                           favIconUrl = "http://www.dieselsweeties.com/favicon.ico" />
     <feed title = "Dilbert Daily Strip"            url = "http://feed.dilbert.com/dilbert/daily_strip"                            favIconUrl = "http://dilbert.com/favicon.ico" />
-    <feed title = "FAIL Blog"                      url = "http://feeds.feedburner.com/failblog"                        favIconUrl = "http://failblog.cheezburger.com/favicon.ico"/>
+    <feed title = "FAIL Blog"                      url = "http://feeds.feedburner.com/failblog"                                   favIconUrl = "http://failblog.cheezburger.com/favicon.ico"/>
     <feed title = "Funny or Die"                   url = "http://www.funnyordie.com/?format=rss"                                  favIconUrl = "http://www.funnyordie.com/favicon.ico" />
     <feed title = "Gawker"                         url = "http://feeds.gawker.com/gawker/full"                                    favIconUrl = "http://gawker.com/assets/base/img/favicon/gawker.ico" />
-    <feed title = "Mighty Optical Illusions"       url = "http://feeds.feedburner.com/OpticalIllusions" favIconUrl = "http://www.moillusions.com/favicon.ico"/>
+    <feed title = "Mighty Optical Illusions"       url = "http://feeds.feedburner.com/OpticalIllusions"                           favIconUrl = "http://www.moillusions.com/favicon.ico"/>
     <feed title = "Photoshop Disasters"            url = "http://feeds.feedburner.com/psdisasters/dqgx/"                          favIconUrl = "http://www.psdisasters.com/favicon.ico" />
-    <feed title = "Rage Comics"                    url = "http://feeds.feedburner.com/ragecomics"                    favIconUrl = "http://ragecomics.blogspot.com/favicon.ico"/>
+    <feed title = "Rage Comics"                    url = "http://feeds.feedburner.com/ragecomics"                                 favIconUrl = "http://ragecomics.blogspot.com/favicon.ico"/>
     <feed title = "Someecards"                     url = "http://www.someecards.com/combined-rss"                                 favIconUrl = "http://cdn.someecards.com/favicon.ico" />
-    <feed title = "The Onion"                      url = "http://feeds.feedburner.com/theonion/daily"                  favIconUrl = "http://www.theonion.com/favicon.ico"/>
+    <feed title = "The Onion"                      url = "http://feeds.feedburner.com/theonion/daily"                             favIconUrl = "http://www.theonion.com/favicon.ico"/>
     <feed title = "theCHIVE"                       url = "http://feeds.feedburner.com/feedburner/ZdSV"                            favIconUrl = "http://s0.wp.com/wp-content/themes/vip/chivecommon/assets/thechive/img/favicon.ico?m=1309320317g&amp;v4" />
-    <feed title = "xkcd"                           url = "http://xkcd.com/rss.xml"                                          favIconUrl = "http://xkcd.com/favicon.ico"/>
+    <feed title = "xkcd"                           url = "http://xkcd.com/rss.xml"                                                favIconUrl = "http://xkcd.com/favicon.ico"/>
   </group>
-  <group name = "Movies">
+  <group name = "Movies" category="Movies">
     <feed title = "Film School Rejects"            url = "http://feeds.feedburner.com/FilmSchoolRejects"                          favIconUrl = "http://www.filmschoolrejects.com/fav.png" />
     <feed title = "FilmDrunk"                      url = "http://filmdrunk.uproxx.com/feed"                                       favIconUrl = "http://filmdrunk.uproxx.com/favicon.ico" />
     <feed title = "HitFix"                         url = "http://www.hitfix.com/channels/movies.rss"                              favIconUrl = "http://www.hitfix.com/images2/favicon.ico" />
@@ -168,12 +167,12 @@
     <feed title = "Very Aware"                     url = "http://veryaware.com/feed/"                                             favIconUrl = "http://veryaware.com/favicon.ico" />
     <feed title = "Wired | Underwire"              url = "http://www.wired.com/underwire/feed/"                                   favIconUrl = "http://www.wired.com/favicon.ico" />
   </group>
-  <group name = "Music">
-    <feed title = "PopMatters"                     url = "http://www.popmatters.com/pm/feeds/"                               favIconUrl = "http://www.popmatters.com/favicon.ico" />
+  <group name = "Music" category="Music">
+    <feed title = "PopMatters"                     url = "http://www.popmatters.com/pm/feeds/"                                    favIconUrl = "http://www.popmatters.com/favicon.ico" />
     <feed title = "Stereogum"                      url = "http://feeds.feedburner.com/stereogum/cBYa"                             favIconUrl = "http://cdn.stereogum.com/wp-content/themes/stereogum/images/sg_favicon.png" />
     <feed title = "The Hype Machine"               url = "http://hypem.com/feed/time/today/1/feed.xml"                            favIconUrl = "http://static-ak.hypem.net/favicon.ico" />
   </group>
-  <group name = "Politics">
+  <group name = "Politics" category="Politics">
     <feed title = "Breitbart"                      url = "http://feeds.feedburner.com/BreitbartFeed"                              favIconUrl = "http://cdn.breitbart.com/_res/img/icons/favicon.ico" />
     <feed title = "BuzzFeed"                       url = "http://www.buzzfeed.com/index.xml"                                      favIconUrl = "http://s3-ak.buzzfed.com/static/favicon.ico?v=1356549170" />
     <feed title = "CNN.com"                        url = "http://rss.cnn.com/rss/cnn_allpolitics.rss"                             favIconUrl = "http://www.cnn.com/favicon.ico" />
@@ -190,9 +189,8 @@
     <feed title = "The Foundry"                    url = "http://feeds.feedburner.com/FoundryConservativePolicyNews"              favIconUrl = "http://blog.heritage.org/favicon.ico" />
     <feed title = "The New Yorker"                 url = "http://www.newyorker.com/online/blogs/newsdesk/rss.xml"                 favIconUrl = "http://www.newyorker.com/favicon.ico" />
   </group>
-
-  <group name="Programming">
-    <feed title = "Channel 9"                      url = "http://channel9.msdn.com/Feeds/RSS"                                     favIconUrl = "http://channel9.msdn.com/styles/images/favicon.ico" />
+  <group name="Programming" category="Programming">
+    <feed title = "Channel 9"      url="http://channel9.msdn.com/Feeds/RSS"                  favIconUrl = "http://channel9.msdn.com/styles/images/favicon.ico" />
     <feed title="Coding Horror"    url="http://feeds.feedburner.com/codinghorror"            favIconUrl = "http://www.codinghorror.com/favicon.ico"              />
     <feed title="Coding4Fun"       url="http://channel9.msdn.com/coding4fun/rss"             favIconUrl = "http://channel9.msdn.com/styles/images/favicon.ico"   />
     <feed title="Riagenic"         url="http://www.riagenic.com/feed"                        favIconUrl = "ms-appx:///Assets/rss.png"                            />
@@ -201,23 +199,22 @@
     <feed title="Signal vs. Noise" url="http://feeds.feedburner.com/37signals/beMH"          favIconUrl = "http://37signals.com/favicon.ico"                     />
     <feed title="The Daily WTF"    url="http://syndication.thedailywtf.com/thedailywtf"      favIconUrl = "http://thedailywtf.com/favicon.ico"                   />
   </group>
-  <group name="Science">
-    <feed title = "Astronomy.com"                  url = "http://www.astronomy.com/rss/news"                                      favIconUrl = "http://www.astronomy.com/sitefiles/images/favicon.ico" />
-    <!--<feed title = "Bad Astronomy"    url = "http://feeds.feedburner.com/BadAstronomyBlog"   favIconUrl = "http://blogs.discovermagazine.com/wp-content/themes/discoverblog/images/favicon.ico" />-->
-    <feed title = "Bad Astronomy"    url = "http://www.slate.com/blogs/bad_astronomy.fulltext.all.10.rss"   favIconUrl = "http://www.slate.com/content/dam/slate/favicon.ico" />
-    <feed title = "DISCOVERY magazine" url = "http://feeds.feedburner.com/AllDiscovermagazinecomContent" favIconUrl = "http://blogs.discovermagazine.com/wp-content/themes/discoverblog/images/favicon.ico"/>
-    <feed title = "EarthTechling"                  url = "http://feeds.feedburner.com/Earthtechling"                              favIconUrl = "" />
-    <feed title = "io9"                            url = "http://feeds.gawker.com/io9/full"                                       favIconUrl = "http://io9.com/favicon.ico" />
-    <feed title = "KQED Quest"       url = "http://science.kqed.org/quest/feed/"            favIconUrl = "http://science.kqed.org/favicon.ico"                                                 />
-    <feed title = "NASA Watch"                     url = "http://feeds.feedburner.com/nasawatch/Aekt"                             favIconUrl = "" />
-    <feed title = "NBCNews.com"                    url = "http://www.msnbc.msn.com/id/3032117/device/rss/rss.xml"                 favIconUrl = "http://www.msnbc.msn.com/favicon.ico" />
-    <feed title = "Popuplar Science" url = "http://popsci.com/rss.xml"                      favIconUrl = "http://www.popsci.com/favicon.ico"                                                   />
-    <feed title = "Scientific American"            url = "http://rss.sciam.com/ScientificAmerican-Global"                         favIconUrl = "http://www.scientificamerican.com/favicon.ico" />
-    <feed title = "Smithsonian Science"            url = "http://smithsonianscience.org/feed/"                                    favIconUrl = "" />
-    <feed title = "Universe Today"   url = "http://feeds.feedburner.com/universetoday/pYdq" favIconUrl = "http://www.universetoday.com/favicon.ico"                                            />
-    <feed title = "Wired Science"    url = "http://feeds.feedburner.com/wiredscience"       favIconUrl = "http://www.wired.com/favicon.ico"                                                    />
+  <group name="Science" category="Science">
+    <feed title = "Astronomy.com"       url = "http://www.astronomy.com/rss/news"                            favIconUrl = "http://www.astronomy.com/sitefiles/images/favicon.ico" />
+    <feed title = "Bad Astronomy"       url = "http://www.slate.com/blogs/bad_astronomy.fulltext.all.10.rss" favIconUrl = "http://www.slate.com/content/dam/slate/favicon.ico" />
+    <feed title = "DISCOVERY magazine"  url = "http://feeds.feedburner.com/AllDiscovermagazinecomContent"    favIconUrl = "http://blogs.discovermagazine.com/wp-content/themes/discoverblog/images/favicon.ico"/>
+    <feed title = "EarthTechling"       url = "http://feeds.feedburner.com/Earthtechling"                    favIconUrl = "" />
+    <feed title = "io9"                 url = "http://feeds.gawker.com/io9/full"                             favIconUrl = "http://io9.com/favicon.ico" />
+    <feed title = "KQED Quest"          url = "http://science.kqed.org/quest/feed/"                          favIconUrl = "http://science.kqed.org/favicon.ico"                                                 />
+    <feed title = "NASA Watch"          url = "http://feeds.feedburner.com/nasawatch/Aekt"                   favIconUrl = "" />
+    <feed title = "NBCNews.com"         url = "http://www.msnbc.msn.com/id/3032117/device/rss/rss.xml"       favIconUrl = "http://www.msnbc.msn.com/favicon.ico" />
+    <feed title = "Popuplar Science"    url = "http://popsci.com/rss.xml"                                    favIconUrl = "http://www.popsci.com/favicon.ico"                                                   />
+    <feed title = "Scientific American" url = "http://rss.sciam.com/ScientificAmerican-Global"               favIconUrl = "http://www.scientificamerican.com/favicon.ico" />
+    <feed title = "Smithsonian Science" url = "http://smithsonianscience.org/feed/"                          favIconUrl = "" />
+    <feed title = "Universe Today"      url = "http://feeds.feedburner.com/universetoday/pYdq"               favIconUrl = "http://www.universetoday.com/favicon.ico"                                            />
+    <feed title = "Wired Science"       url = "http://feeds.feedburner.com/wiredscience"                     favIconUrl = "http://www.wired.com/favicon.ico"                                                    />
   </group>
-  <group name = "Sports">
+  <group name = "Sports" category="Sports">
     <feed title = "Bleacher Report"                url = "http://bleacherreport.com/articles/feed"                                favIconUrl = "http://static.bleacherreport.net/favicon.ico" />
     <feed title = "Deadspin"                       url = "http://feeds.gawker.com/deadspin/full"                                  favIconUrl = "http://deadspin.com/favicon.ico" />
     <feed title = "ESPN"                           url = "http://sports-ak.espn.go.com/espn/rss/news"                             favIconUrl = "http://espn.go.com/favicon.ico" />
@@ -226,43 +223,43 @@
     <feed title = "The Guardian"                   url = "http://feeds.guardian.co.uk/theguardian/sport/rss"                      favIconUrl = "http://static.guim.co.uk/favicon.ico" />
     <feed title = "Yahoo! Sports"                  url = "http://sports.yahoo.com/top/rss.xml"                                    favIconUrl = "http://sports.yahoo.com/favicon.ico" />
   </group>
-  <group name="Technology">
-    <feed title = "All Things Digital"  url = "http://allthingsd.com/category/news/feed"           favIconUrl = "http://allthingsd.com/favicon.ico"                         />
-    <feed title = "AnandTech"                      url = "http://www.anandtech.com/rss/"                                          favIconUrl = "http://www.anandtech.com/favicon.ico" />
-    <feed title = "Ars Technica"        url = "http://feeds.arstechnica.com/arstechnica/index/"    favIconUrl = "http://arstechnica.com/favicon.ico"                        />
-    <feed title = "BetaNews"                       url = "http://feeds.betanews.com/bn"                                           favIconUrl = "http://betanews.com/favicon.ico" />
-    <feed title = "Boing Boing"                    url = "http://feeds.boingboing.net/boingboing/iBag"                            favIconUrl = "http://boingboing.net/favicon.ico" />
-    <feed title = "Boy Genius Report"              url = "http://feeds.feedburner.com/TheBoyGeniusReport"                         favIconUrl = "http://bgr.com/favicon.ico" />
-    <feed title = "CenterNetworks"                 url = "http://feeds.feedburner.com/Centernetworks-"                            favIconUrl = "http://www.centernetworks.com/favicon.ico" />
-    <feed title = "CNET"                           url = "http://feeds.feedburner.com/cnet/NnTv?tag=contentBody.1"                favIconUrl = "http://www.cnet.com/favicon.ico" />
-    <feed title = "Engadget"            url = "http://www.engadget.com/rss.xml"                    favIconUrl = "http://www.engadget.com/favicon.ico"                       />
-    <feed title = "geek.com"                       url = "http://www.geek.com/feed/"                                              favIconUrl = "http://www.geek.com/wp-content/themes/geek6/favicon.ico" />
-    <feed title = "GigaOM"                         url = "http://feeds.feedburner.com/ommalik"                                    favIconUrl = "http://s1.wp.com/wp-content/themes/vip/gigaom/img/favicon.ico?m=1304368871g" />
-    <feed title = "Gizmondo"            url = "http://feeds.gawker.com/Gizmodo/full"               favIconUrl = "http://gizmodo.com/favicon.ico"                            />
-    <feed title = "Lifehacker"          url = "http://feeds.gawker.com/Lifehacker/full"            favIconUrl = "http://lifehacker.com/favicon.ico"                         />
-    <feed title = "Mashable"                       url = "http://feeds.mashable.com/mashable"                                     favIconUrl = "http://mashable.com/favicon.ico" />
-    <feed title = "Pocketnow"           url = "http://feeds.feedburner.com/pocketnow"              favIconUrl = "http://pocketnow.com/favicon.ico"                          />
-    <feed title = "ReadWrite"                      url = "http://readwrite.com/main/feed/articles.xml"                            favIconUrl = "http://readwrite.com/static/f4109d1f6a202d336064651d8454899aaa61e581/site/icons/icon-32.png" />
-    <feed title = "SAI"                            url = "http://feeds.feedburner.com/typepad/alleyinsider/silicon_alley_insider" favIconUrl = "http://static5.businessinsider.com/assets/images/faviconBI.ico" />
-    <feed title = "SlashGear"                      url = "http://feeds.slashgear.com/slashgear"                                   favIconUrl = "http://www.slashgear.com/favicon.ico" />
-    <feed title = "TechCrunch"                     url = "http://feeds.feedburner.com/TechCrunch/"                                favIconUrl = "http://s2.wp.com/wp-content/themes/vip/tctechcrunch2/images/favicon.ico?m=1310283185g" />
-    <feed title = "TechCrunch » Gadgets"                     url = "http://feeds.feedburner.com/CrunchGear"                                 favIconUrl = "http://s2.wp.com/wp-content/themes/vip/tctechcrunch2/images/favicon.ico?m=1310283185g" />
-    <feed title = "TechnoBuffalo"                  url = "http://feeds.feedburner.com/technobuffalo/rss"                          favIconUrl = "http://www.technobuffalo.com/favicon.ico" />
-    <feed title = "The Next Web"        url = "http://feeds2.feedburner.com/thenextweb"            favIconUrl = "http://thenextweb.com/favicon.ico"                         />
-    <feed title = "The Verge"           url = "http://www.theverge.com/rss/index.xml"              favIconUrl = "http://cdn2.sbnation.com/images/verge/favicon.vc44a54f.ico"/>
-    <feed title = "VentureBeat"                    url = "http://feeds.venturebeat.com/Venturebeat"                               favIconUrl = "http://venturebeat.com/favicon.ico" />
-    <feed title = "VR-Zone"             url = "http://feeds.feedburner.com/vr-zone"                favIconUrl = "http://vr-zone.com/favicon.ico"                            />
-    <feed title = "ZDNet"               url = "http://www.zdnet.com/rss.xml"                       favIconUrl = "http://www.zdnet.com/favicon.ico"                          />
-    <feed title = "WIRED | GadgetLab"              url = "http://www.wired.com/gadgetlab/feed/"                                   favIconUrl = "http://www.wired.com/favicon.ico" />
+  <group name="Technology" category="Technology">
+    <feed title = "All Things Digital"   url = "http://allthingsd.com/category/news/feed"                               favIconUrl = "http://allthingsd.com/favicon.ico"                         />
+    <feed title = "AnandTech"            url = "http://www.anandtech.com/rss/"                                          favIconUrl = "http://www.anandtech.com/favicon.ico" />
+    <feed title = "Ars Technica"         url = "http://feeds.arstechnica.com/arstechnica/index/"                        favIconUrl = "http://arstechnica.com/favicon.ico"                        />
+    <feed title = "BetaNews"             url = "http://feeds.betanews.com/bn"                                           favIconUrl = "http://betanews.com/favicon.ico" />
+    <feed title = "Boing Boing"          url = "http://feeds.boingboing.net/boingboing/iBag"                            favIconUrl = "http://boingboing.net/favicon.ico" />
+    <feed title = "Boy Genius Report"    url = "http://feeds.feedburner.com/TheBoyGeniusReport"                         favIconUrl = "http://bgr.com/favicon.ico" />
+    <feed title = "CenterNetworks"       url = "http://feeds.feedburner.com/Centernetworks-"                            favIconUrl = "http://www.centernetworks.com/favicon.ico" />
+    <feed title = "CNET"                 url = "http://feeds.feedburner.com/cnet/NnTv?tag=contentBody.1"                favIconUrl = "http://www.cnet.com/favicon.ico" />
+    <feed title = "Engadget"             url = "http://www.engadget.com/rss.xml"                                        favIconUrl = "http://www.engadget.com/favicon.ico"                       />
+    <feed title = "geek.com"             url = "http://www.geek.com/feed/"                                              favIconUrl = "http://www.geek.com/wp-content/themes/geek6/favicon.ico" />
+    <feed title = "GigaOM"               url = "http://feeds.feedburner.com/ommalik"                                    favIconUrl = "http://s1.wp.com/wp-content/themes/vip/gigaom/img/favicon.ico?m=1304368871g" />
+    <feed title = "Gizmondo"             url = "http://feeds.gawker.com/Gizmodo/full"                                   favIconUrl = "http://gizmodo.com/favicon.ico"                            />
+    <feed title = "Lifehacker"           url = "http://feeds.gawker.com/Lifehacker/full"                                favIconUrl = "http://lifehacker.com/favicon.ico"                         />
+    <feed title = "Mashable"             url = "http://feeds.mashable.com/mashable"                                     favIconUrl = "http://mashable.com/favicon.ico" />
+    <feed title = "Pocketnow"            url = "http://feeds.feedburner.com/pocketnow"                                  favIconUrl = "http://pocketnow.com/favicon.ico"                          />
+    <feed title = "ReadWrite"            url = "http://readwrite.com/main/feed/articles.xml"                            favIconUrl = "http://readwrite.com/static/f4109d1f6a202d336064651d8454899aaa61e581/site/icons/icon-32.png" />
+    <feed title = "SAI"                  url = "http://feeds.feedburner.com/typepad/alleyinsider/silicon_alley_insider" favIconUrl = "http://static5.businessinsider.com/assets/images/faviconBI.ico" />
+    <feed title = "SlashGear"            url = "http://feeds.slashgear.com/slashgear"                                   favIconUrl = "http://www.slashgear.com/favicon.ico" />
+    <feed title = "TechCrunch"           url = "http://feeds.feedburner.com/TechCrunch/"                                favIconUrl = "http://s2.wp.com/wp-content/themes/vip/tctechcrunch2/images/favicon.ico?m=1310283185g" />
+    <feed title = "TechCrunch » Gadgets" url = "http://feeds.feedburner.com/CrunchGear"                                 favIconUrl = "http://s2.wp.com/wp-content/themes/vip/tctechcrunch2/images/favicon.ico?m=1310283185g" />
+    <feed title = "TechnoBuffalo"        url = "http://feeds.feedburner.com/technobuffalo/rss"                          favIconUrl = "http://www.technobuffalo.com/favicon.ico" />
+    <feed title = "The Next Web"         url = "http://feeds2.feedburner.com/thenextweb"                                favIconUrl = "http://thenextweb.com/favicon.ico"                         />
+    <feed title = "The Verge"            url = "http://www.theverge.com/rss/index.xml"                                  favIconUrl = "http://cdn2.sbnation.com/images/verge/favicon.vc44a54f.ico"/>
+    <feed title = "VentureBeat"          url = "http://feeds.venturebeat.com/Venturebeat"                               favIconUrl = "http://venturebeat.com/favicon.ico" />
+    <feed title = "VR-Zone"              url = "http://feeds.feedburner.com/vr-zone"                                    favIconUrl = "http://vr-zone.com/favicon.ico"                            />
+    <feed title = "ZDNet"                url = "http://www.zdnet.com/rss.xml"                                           favIconUrl = "http://www.zdnet.com/favicon.ico"                          />
+    <feed title = "WIRED | GadgetLab"    url = "http://www.wired.com/gadgetlab/feed/"                                   favIconUrl = "http://www.wired.com/favicon.ico" />
   </group>
-  <group name = "Travel">
+  <group name = "Travel" category="Travel">
     <feed title = "almost fearless"                url = "http://almostfearless.com/feed/"                                        favIconUrl = "http://almostfearless.com/wp-content/uploads/favicon.png" />
     <feed title = "Everything Everywhere"          url = "http://feeds2.feedburner.com/EverythingEverywhere/"                     favIconUrl = "" />
     <feed title = "Gadling"                        url = "http://feeds.feedburner.com/weblogsinc/gadling"                         favIconUrl = "http://www.blogsmithmedia.com/www.gadling.com/media/favicon.gif" />
     <feed title = "Intelligent Travel"             url = "http://intelligenttravel.nationalgeographic.com/feed/"                  favIconUrl = "http://intelligenttravel.nationalgeographic.com/wp-content/themes/ngs-energy/ngs-base/img/favicon.ico" />
     <feed title = "Nomadic Matt's Travel Site"     url = "http://feeds.feedburner.com/MattsTravelSite"                            favIconUrl = "http://www.nomadicmatt.com/wp-content/themes/NomadicMattV2/favicon.ico" />
   </group>
-  <group name = "TV">
+  <group name = "TV" category="TV">
     <feed title = "Entertainment Weekly"           url = "http://feeds.ew.com/entertainmentweekly/latest"                         favIconUrl = "http://img2-1.timeinc.net/ew/static/favicon.ico" />
     <feed title = "HitFix"                         url = "http://www.hitfix.com/channels/tv.rss"                                  favIconUrl = "http://www.hitfix.com/images2/favicon.ico" />
     <feed title = "Ken Tucker's TV"                url = "http://feeds.ew.com/entertainmentweekly/watching-tv"                    favIconUrl = "http://img2.timeinc.net/ew/static/favicon.ico" />
@@ -280,7 +277,7 @@
     <feed title = "L.A. Times"                     url = "http://feeds.latimes.com/latimes/news/nationworld/nation"               favIconUrl = "http://www.latimes.com/favicon.ico" />
     <feed title = "NBCNews.com"                    url = "http://www.msnbc.msn.com/id/3032524/device/rss/rss.xml"                 favIconUrl = "http://www.msnbc.msn.com/favicon.ico" />
     <feed title = "The Atlantic Wire"              url = "http://feeds.feedburner.com/TheAtlanticWire"                            favIconUrl = "http://www.theatlanticwire.com/favicon.ico" />
-    <feed title = "US News &amp; World Report"         url = "http://www.usnews.com/rss/"                                             favIconUrl = "http://www.usnews.com/usnews/favicon.ico" />
+    <feed title = "US News &amp; World Report"     url = "http://www.usnews.com/rss/"                                             favIconUrl = "http://www.usnews.com/usnews/favicon.ico" />
     <feed title = "United Press International"     url = "http://pheed.upi.com/news/news_rss"                                     favIconUrl = "http://www.upi.com/favicon.ico" />
     <feed title = "USA TODAY"                      url = "http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories"              favIconUrl = "http://www.usatoday.com/favicon.ico" />
   </group>
@@ -294,7 +291,7 @@
     <feed title = "The Telegraph"                  url = "http://www.telegraph.co.uk/news/worldnews/rss"                          favIconUrl = "http://www.telegraph.co.uk/template/ver1-0/i/icons/newsBadge.ico?v=1.0" />
     <feed title = "Worldcrunch"                    url = "http://www.worldcrunch.com/rss/rss.php"                                 favIconUrl = "http://www.worldcrunch.com/favicon.ico" />
   </group>
-  <group name = "Yoga">
+  <group name = "Yoga" category="Yoga">
     <feed title = "Daily Cup of Yoga"              url = "http://feeds.feedburner.com/dailycupofyoga/rss"                         favIconUrl = "http://www.dailycupofyoga.com/wp-content/themes/news/images/favicon.ico" />
     <feed title = "The Everything Yoga Blog"       url = "http://feeds2.feedburner.com/EverythingYoga"                            favIconUrl = "http://www.itsallaboutyoga.com/favicon.ico" />
     <feed title = "Yoga Buzz"                      url = "http://feeds.feedburner.com/YogaBuzz"                                   favIconUrl = "http://blogs.yogajournal.com/favicon.ico" />

@@ -23,13 +23,34 @@ namespace NewsFactory.UI.Pages.FeedSettings
             RefreshFeedIconCommand = new DelegateCommand(RefreshFeedIcon);
             ResetLastUpdateDateCommand = new DelegateCommand(ResetLastUpdateDate);
             DeleteFeedCommand = new DelegateCommand(DeleteFeed);
+            Categories = Enum.GetValues(typeof(Category)).OfType<Category>().ToList();
         }
 
         #endregion .ctors
 
         #region Properties
 
-        public NewsFeed Feed { get; private set; }
+        /// <summary>
+        /// Gets/sets Feed.
+        /// </summary>
+        public NewsFeed Feed
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_Feed; }
+            [System.Diagnostics.DebuggerStepThrough]
+            private set
+            {
+                if (p_Feed != value)
+                {
+                    p_Feed = value;
+                    OnPropertyChanged("Feed");
+                    OnFeedChanged();
+                }
+            }
+        }
+        private NewsFeed p_Feed;
+        partial void OnFeedChanged();
+
 
         /// <summary>
         /// Gets/sets RefreshFeedIconCommand.
@@ -114,6 +135,27 @@ namespace NewsFactory.UI.Pages.FeedSettings
         }
         private string p_Url;
         partial void OnUrlChanged();
+
+        /// <summary>
+        /// Gets/sets Categories.
+        /// </summary>
+        public List<Category> Categories
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_Categories; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_Categories != value)
+                {
+                    p_Categories = value;
+                    OnPropertyChanged("Categories");
+                    OnCategoriesChanged();
+                }
+            }
+        }
+        private List<Category> p_Categories;
+        partial void OnCategoriesChanged();
 
         #endregion Properties
 

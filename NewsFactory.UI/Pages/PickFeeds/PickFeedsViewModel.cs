@@ -30,6 +30,7 @@ namespace NewsFactory.UI.Pages.PickFeeds
             Groups = new ObservableCollection<Group>(doc.Document.Root.Elements().Select(el => new Group()
                 {
                     Title = el.Attribute("name").Value,
+                    Category = (Category)Enum.Parse(typeof(Category), el.Attribute("category") != null ? el.Attribute("category").Value : el.Attribute("name").Value),
                     NewsFeeds = new ObservableCollection<NewsFeed>(el.Elements().Select(f => new NewsFeed(new FeedInfo()
                         {
                             Title = f.Attribute("title").Value,
@@ -45,7 +46,7 @@ namespace NewsFactory.UI.Pages.PickFeeds
                 {
                     item.IsSelectedChanged += item_IsSelectedChanged;
                 }
-                //group.IsSelected = true;
+                group.IsSelected = true;
             }
         }
 
