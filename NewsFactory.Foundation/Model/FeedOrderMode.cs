@@ -8,5 +8,7 @@ namespace NewsFactory.Foundation.Model
 {
     public enum FeedOrderMode
     {
+        SortedAlphabetically = 0,
+        Manual
     }
 }

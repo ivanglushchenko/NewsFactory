@@ -2,6 +2,7 @@
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -159,7 +160,8 @@ namespace NewsFactory.Foundation.Model
                     LogService.Info("Loaded feeds from {0}", file.Name);
 
                 var data = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-                var feeds = new ObservableCollection<FeedInfo>(SerializerHelper.Deserialize<ObservableCollection<FeedInfo>>(data).OrderBy(t => t.Title));
+                var feedsInfo = (IEnumerable<FeedInfo>)SerializerHelper.Deserialize<ObservableCollection<FeedInfo>>(data);
+                var feeds = new ObservableCollection<FeedInfo>(settings.FeedOrderMode == FeedOrderMode.SortedAlphabetically ? feedsInfo.OrderBy(t => t.Title) : feedsInfo);
 
                 return new FeedsStore(settings, feeds, subfolder);
             }
@@ -185,6 +187,11 @@ namespace NewsFactory.Foundation.Model
             NewsFeeds.Clear();
             NewsFeedsMap.Clear();
             await Save();
+        }
+
+        public void SwapFeeds(int from, int to)
+        {
+            _feeds.Move(from, to);
         }
 
         public async Task Save()
@@ -224,7 +231,16 @@ namespace NewsFactory.Foundation.Model
                 newFeeds = newFeeds.OrderBy(f => f.FeedInfo.Title).ToList();
                 await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    Merge(newFeeds, NewsFeeds);
+                    if (Settings.FeedOrderMode == FeedOrderMode.SortedAlphabetically)
+                        Merge(newFeeds, NewsFeeds);
+                    else
+                    {
+                        foreach (var item in newFeeds)
+                        {
+                            NewsFeeds.Add(item);
+                            _feeds.Add(item.FeedInfo);
+                        }
+                    }
                 });
 
                 await Save();

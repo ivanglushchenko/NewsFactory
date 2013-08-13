@@ -4,6 +4,7 @@ using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
 using NewsFactory.UI.Pages.AppSettings;
+using NewsFactory.UI.Pages.ArrangeFeeds;
 using NewsFactory.UI.Pages.Feed;
 using NewsFactory.UI.Pages.ImportFeeds;
 using NewsFactory.UI.Pages.ImportGoogleReaderFeeds;
@@ -35,7 +36,6 @@ namespace NewsFactory.UI.Pages
 
         public MainPageModel()
         {
-            Compress("aaabbbaabbccd");
             InitializeCommand = new DelegateCommand(Initialize);
             AddFeedCommand = new DelegateCommand(AddFeed);
             ImportFeedsCommand = new DelegateCommand(ImportFeeds);
@@ -52,6 +52,7 @@ namespace NewsFactory.UI.Pages
             DeleteAllNewsItemsCommand = new DelegateCommand(DeleteAllNewsItems);
 
             AddSettingsPane<AppSettingsPage>("Settings");
+            AddSettingsPane<ArrangeFeedsView>("Arrange feeds");
             AddSettingsPane<PrivacyPolicyView>("Privacy policy");
 
             Now = DateTime.Now;
@@ -639,23 +640,6 @@ namespace NewsFactory.UI.Pages
             await DataService.NewsStore.DeleteAllNewsItems();
 
             Status = null;
-        }
-
-        private void Compress(string s)
-        {
-            var sb = new StringBuilder();
-            var seqLength = 1;
-            for (int i = 0; i < s.Length - 1; i++)
-            {
-                if (s[i] == s[i + 1])
-                    seqLength++;
-                else
-                {
-                    sb.AppendFormat("{0}{1}", s[i], seqLength);
-                    seqLength = 1;
-                }
-            }
-            sb.AppendFormat("{0}{1}", s[s.Length - 1], seqLength);
         }
 
         #endregion Methods

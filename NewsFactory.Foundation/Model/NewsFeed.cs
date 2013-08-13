@@ -215,8 +215,6 @@ namespace NewsFactory.Foundation.Model
                 receiveDate = DateTime.Now;
 
             var favIconUri = default(Uri);
-            //if (FeedInfo.IsNew)
-            //    favIconUri = await GetFavIcon(sf.Links != null && sf.Links.Count > 0 ? sf.Links.First().Uri : null);
 
             var items = sf.Items
                 .Select(t => new NewsItem()
@@ -238,7 +236,7 @@ namespace NewsFactory.Foundation.Model
             {
                 FeedInfo.IsNew = false;
 
-                if (sf.Title != null)
+                if (sf.Title != null && !string.IsNullOrWhiteSpace(sf.Title.Text.Beautify()))
                     FeedInfo.Title = sf.Title.Text.Beautify();
                 if (sf.Subtitle != null)
                     FeedInfo.Description = sf.Subtitle.Text.Beautify();

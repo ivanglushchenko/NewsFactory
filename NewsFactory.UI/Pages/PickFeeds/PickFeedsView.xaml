@@ -196,13 +196,13 @@
                     <GroupStyle HidesIfEmpty="True">
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="{Binding Category, Converter={StaticResource CategoryColorConverter}}" BorderThickness="0,0,0,6">
+                                <!--<Border BorderBrush="{Binding Category, Converter={StaticResource CategoryColorConverter}}" BorderThickness="0,0,0,6">-->
                                     <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Width="300">
                                         <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource SubheaderCheckBoxStyle}" Margin="4,0,0,10" Padding="10,0,0,0" >
                                             <TextBlock Text="{Binding Title}" />
                                         </CheckBox>
                                     </Border>
-                                </Border>
+                                <!--</Border>-->
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>
                         <GroupStyle.Panel>

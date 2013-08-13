@@ -134,6 +134,10 @@
     <Compile Include="Pages\AppSettings\RefreshIntervalCaptionConverter.cs" />
     <Compile Include="Pages\AppSettings\RefreshIntervalValueConverter.cs" />
     <Compile Include="Pages\AppSettings\SliderOption.cs" />
+    <Compile Include="Pages\ArrangeFeeds\ArrangeFeedsView.xaml.cs">
+      <DependentUpon>ArrangeFeedsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ArrangeFeeds\ArrangeFeedsViewModel.cs" />
     <Compile Include="Pages\FeedSettings\FeedSettingsPage.xaml.cs">
       <DependentUpon>FeedSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -218,6 +222,10 @@
     <Page Include="Pages\AppSettings\AppSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ArrangeFeeds\ArrangeFeedsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FeedSettings\FeedSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

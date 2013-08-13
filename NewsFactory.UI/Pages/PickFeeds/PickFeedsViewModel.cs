@@ -46,7 +46,7 @@ namespace NewsFactory.UI.Pages.PickFeeds
                 {
                     item.IsSelectedChanged += item_IsSelectedChanged;
                 }
-                group.IsSelected = true;
+                //group.IsSelected = true;
             }
         }
 

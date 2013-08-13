@@ -197,6 +197,27 @@ namespace NewsFactory.Foundation.Model
         private int _MaxNumberOfConcurrentTasks = 50;
         partial void OnMaxNumberOfConcurrentTasksChanged();
 
+        /// <summary>
+        /// Gets/sets FeedOrderMode.
+        /// </summary>
+        public FeedOrderMode FeedOrderMode
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_FeedOrderMode; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_FeedOrderMode != value)
+                {
+                    p_FeedOrderMode = value;
+                    OnPropertyChanged("FeedOrderMode");
+                    OnFeedOrderModeChanged();
+                }
+            }
+        }
+        private FeedOrderMode p_FeedOrderMode;
+        partial void OnFeedOrderModeChanged();
+
         public static Settings Instance { get; set; }
 
         #endregion Properties

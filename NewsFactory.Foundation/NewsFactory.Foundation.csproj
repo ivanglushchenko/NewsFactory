@@ -127,6 +127,7 @@
     <Compile Include="Converters\TrueToVisibilityConverter.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\FeedInfo.cs" />
+    <Compile Include="Model\FeedOrderMode.cs" />
     <Compile Include="Model\FeedsStore.cs" />
     <Compile Include="Model\FeedStatus.cs" />
     <Compile Include="Model\Group.cs" />
