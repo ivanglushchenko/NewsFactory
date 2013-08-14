@@ -22,3 +22,6 @@ What it is
 The reader is actually a published Windows Store app, here is a link to it: http://apps.microsoft.com/windows/en-us/app/news-factory-free/38c48aa3-e2a2-4b10-91d8-90fb132d86b0
 
 I didn't commit two files which contained private information about me, but other than that it should be perfectly usable. 
+
+And here is a screenshot:
+![](http://wscont2.apps.microsoft.com/winstore/1x/9dbef71c-dc50-4f61-8175-2356a3f3ef23/Screenshot.132810.1000000.jpg)
