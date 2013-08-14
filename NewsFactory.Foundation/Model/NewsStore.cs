@@ -259,7 +259,7 @@ namespace NewsFactory.Foundation.Model
         private async Task OnGetFavIcon(List<NewsFeed> feeds)
         {
             var feed = feeds.Single();
-            var favIconUri = await feed.GetFavIcon(null);
+            var favIconUri = await feed.GetFavIcon(feed.FeedInfo.FavIconUrl);
             await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 feed.FeedInfo.HasDefaultFavIcon = false;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -280,51 +281,44 @@ namespace NewsFactory.Foundation.Model
             return content;
         }
 
-        public async Task<Uri> GetFavIcon(Uri siteUrl = null)
+        public async Task<Uri> GetFavIcon(Uri currentValue = null)
         {
             var candidates = new Dictionary<string, int>();
             var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(15) };
             
             try
             {
+                var siteUrl = default(Uri);
                 var siteUrlValue = default(string);
-
-                if (siteUrl != null)
+                var s = await httpClient.GetStringAsync(FeedInfo.Url);
+                if (!string.IsNullOrWhiteSpace(s))
                 {
-                    siteUrlValue = siteUrl.ToString();
-                }
-                else
-                {
-                    var s = await httpClient.GetStringAsync(FeedInfo.Url);
-                    if (!string.IsNullOrWhiteSpace(s))
+                    var doc = default(XDocument);
+                    try
                     {
-                        var doc = default(XDocument);
-                        try
-                        {
-                            doc = XDocument.Load(new StringReader(s));
-                        }
-                        catch
-                        {
-                            s = ApplyCorrections(s);
-                            doc = XDocument.Load(new StringReader(s));
-                        }
-
-                        var link = doc.Descendants("channel").Elements("link").FirstOrDefault();
-                        if (link != null)
-                            siteUrlValue = link.Value;
-                        else
-                        {
-                            link = doc.Descendants().Where(e => e.Name.LocalName == "feed").FirstOrDefault();
-                            if (link != null)
-                            {
-                                link = link.Elements().Where(t => t.Name.LocalName == "link").OrderBy(t => t.Attribute("rel") != null ? t.Attribute("rel").Value : "z").FirstOrDefault();
-                                if (link != null && link.Attribute("href") != null)
-                                    siteUrlValue = link.Attribute("href").Value;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(siteUrlValue))
-                            siteUrl = new Uri(siteUrlValue, UriKind.Absolute);
+                        doc = XDocument.Load(new StringReader(s));
                     }
+                    catch
+                    {
+                        s = ApplyCorrections(s);
+                        doc = XDocument.Load(new StringReader(s));
+                    }
+
+                    var link = doc.Descendants("channel").Elements("link").FirstOrDefault();
+                    if (link != null)
+                        siteUrlValue = link.Value;
+                    else
+                    {
+                        link = doc.Descendants().Where(e => e.Name.LocalName == "feed").FirstOrDefault();
+                        if (link != null)
+                        {
+                            link = link.Elements().Where(t => t.Name.LocalName == "link").OrderBy(t => t.Attribute("rel") != null ? t.Attribute("rel").Value : "z").FirstOrDefault();
+                            if (link != null && link.Attribute("href") != null)
+                                siteUrlValue = link.Attribute("href").Value;
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(siteUrlValue))
+                        siteUrl = new Uri(siteUrlValue, UriKind.Absolute);
                 }
                 if (siteUrl != null)
                 {
@@ -334,7 +328,7 @@ namespace NewsFactory.Foundation.Model
                     try
                     {
                         var response = await httpClient.GetAsync(siteUrl);
-                        var content = await response.Content.ReadAsStringAsync();
+                        var content = await ExtractContent(response);
 
                         var favIconString = XamlConverter.GetTagAttributeBySpecificAttribute(content, "link", "rel", "shortcut icon", "href").FirstOrDefault();
                         if (favIconString == null)
@@ -382,6 +376,9 @@ namespace NewsFactory.Foundation.Model
             }
 
             AddCandidate(candidates, string.Format("{0}://{1}/favicon.ico", FeedInfo.Url.Scheme, FeedInfo.Url.Host), 500);
+
+            if (currentValue != null)
+                AddCandidate(candidates, currentValue.ToString(), 501);
 
             // Some sites send favicons as "text/html" (for instance, businessinsider), so we need to return "text" icon if there are no better choices
             // By better choices I mean everything which has type "image" and doesn't come from feed aggregator sites like feedburner.com
@@ -435,6 +432,17 @@ namespace NewsFactory.Foundation.Model
                 return lesserEvilUrl ?? genericAggrUrl;
 
             return new Uri("ms-appx:///Assets/rss.png", UriKind.Absolute);
+        }
+
+        private async Task<string> ExtractContent(HttpResponseMessage response)
+        {
+            if (response.Content.Headers.ContentEncoding.Contains("gzip"))
+            {
+                var rsp = await response.Content.ReadAsStreamAsync();
+                var gzip = new GZipStream(rsp, CompressionMode.Decompress, false);
+                return new StreamReader(gzip).ReadToEnd();
+            }
+            return await response.Content.ReadAsStringAsync();
         }
 
         private void AddCandidate(Dictionary<string, int> candidates, string url, int priority)
