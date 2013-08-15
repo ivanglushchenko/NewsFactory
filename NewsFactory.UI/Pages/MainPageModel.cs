@@ -3,6 +3,7 @@ using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
+using NewsFactory.UI.Pages.About;
 using NewsFactory.UI.Pages.AppSettings;
 using NewsFactory.UI.Pages.ArrangeFeeds;
 using NewsFactory.UI.Pages.Feed;
@@ -54,6 +55,7 @@ namespace NewsFactory.UI.Pages
             AddSettingsPane<AppSettingsPage>("Settings");
             AddSettingsPane<ArrangeFeedsView>("Arrange feeds");
             AddSettingsPane<PrivacyPolicyView>("Privacy policy");
+            AddSettingsPane<AboutPage>("About");
 
             Now = DateTime.Now;
             _timer = new DispatcherTimer();

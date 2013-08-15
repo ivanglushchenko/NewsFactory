@@ -408,6 +408,7 @@ namespace NewsFactory.Foundation.Model
                                 var ext = response.Content.Headers.ContentType.MediaType == "image/png" ? "png" : (response.Content.Headers.ContentType.MediaType == "image/gif" ? "gif" : "ico");
                                 var image = await response.Content.ReadAsByteArrayAsync();
                                 var fileName = string.Format("{0}.{1}", StringHelper.Encode(item), ext);
+                                LogService.Info("Feed {0}: fav icon = {1}", FeedInfo.Title, item);
                                 if (await IOHelper.GetFileOrDefault(_folder, fileName) == null)
                                 {
                                     var imageFile = await _folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
