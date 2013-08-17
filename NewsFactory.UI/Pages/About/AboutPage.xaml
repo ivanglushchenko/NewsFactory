@@ -39,7 +39,10 @@
                 </Grid.RowDefinitions>
                 
                 <StackPanel>
-                    <TextBlock Text="Version 1.2:" Style="{StaticResource SubheaderTextStyle}" />
+                    <TextBlock Text="Version 1.2.1:" Style="{StaticResource SubheaderTextStyle}" />
+                    <TextBlock Text="Minor stability fixes based of usage data from Windows Store" Style="{StaticResource SubheaderTextStyle}" FontSize="18"/>
+
+                    <TextBlock Text="Version 1.2:" Style="{StaticResource SubheaderTextStyle}" Margin="0,25,0,0" />
                     <TextBlock Text="Added support for arranging feeds. This feature is available via Settings charm (Settings charm -> Arrange feeds)" Style="{StaticResource SubheaderTextStyle}" FontSize="18"/>
 
                     <TextBlock Text="Version 1.1:" Style="{StaticResource SubheaderTextStyle}" Margin="0,25,0,0" />

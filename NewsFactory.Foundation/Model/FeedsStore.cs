@@ -197,10 +197,17 @@ namespace NewsFactory.Foundation.Model
         public async Task Save()
         {
             LogService.Info("Saving FeedsStore");
-            await ApplicationData.Current.LocalFolder.Copy(FILE_NAME, FILE_NAME_PREV);
-            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists);
-            await FileIO.WriteTextAsync(file, SerializerHelper.Serialize(_feeds));
-            LogService.Info("Saved FeedsStore");
+            try
+            {
+                await ApplicationData.Current.LocalFolder.Copy(FILE_NAME, FILE_NAME_PREV);
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(FILE_NAME, CreationCollisionOption.OpenIfExists);
+                await FileIO.WriteTextAsync(file, SerializerHelper.Serialize(_feeds));
+                LogService.Info("Saved FeedsStore");
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
         }
 
         public async Task<List<NewsFeed>> RegisterMany(List<FeedInfo> feedsToAdd)

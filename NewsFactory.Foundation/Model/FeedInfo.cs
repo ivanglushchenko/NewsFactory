@@ -258,6 +258,7 @@ namespace NewsFactory.Foundation.Model
 
         public string GetFileName()
         {
+            if (Url == null) return "NULL_URL";
             return StringHelper.Encode(Url.ToString());
         }
 

@@ -10,16 +10,24 @@ namespace NewsFactory.Foundation.Utils
 {
     public static class SerializerHelper
     {
-        public static T Deserialize<T>(string json)
+        public static T Deserialize<T>(string json) where T : new()
         {
             if (string.IsNullOrEmpty(json)) return default(T);
 
-            var _Bytes = Encoding.Unicode.GetBytes(json);
-            using (var _Stream = new MemoryStream(_Bytes))
+            try
             {
-                var _Serializer = new DataContractJsonSerializer(typeof(T));
-                return (T)_Serializer.ReadObject(_Stream);
+                var _Bytes = Encoding.Unicode.GetBytes(json);
+                using (var _Stream = new MemoryStream(_Bytes))
+                {
+                    var _Serializer = new DataContractJsonSerializer(typeof(T));
+                    return (T)_Serializer.ReadObject(_Stream);
+                }
             }
+            catch
+            {
+            }
+
+            return new T();
         }
 
         public static string Serialize(object instance)
@@ -30,7 +38,9 @@ namespace NewsFactory.Foundation.Utils
                 _Serializer.WriteObject(_Stream, instance);
                 _Stream.Position = 0;
                 using (StreamReader _Reader = new StreamReader(_Stream))
-                { return _Reader.ReadToEnd(); }
+                {
+                    return _Reader.ReadToEnd();
+                }
             }
         }
     }

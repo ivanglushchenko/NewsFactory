@@ -307,9 +307,16 @@ namespace NewsFactory.Foundation.Model
         {
             if (feed.FeedInfo.Url == null) return;
 
-            var file = await _feedsFolder.CreateFileAsync(feed.FeedInfo.GetFileName(), CreationCollisionOption.ReplaceExisting);
-            var newsFilter = Settings.GetNewsFilter();
-            await FileIO.WriteTextAsync(file, SerializerHelper.Serialize(GetItems(feed).Where(newsFilter).ToList()));
+            try
+            {
+                var file = await _feedsFolder.CreateFileAsync(feed.FeedInfo.GetFileName(), CreationCollisionOption.ReplaceExisting);
+                var newsFilter = Settings.GetNewsFilter();
+                await FileIO.WriteTextAsync(file, SerializerHelper.Serialize(GetItems(feed).Where(newsFilter).ToList()));
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
         }
 
         public void MarkAsRead(NewsItem item)

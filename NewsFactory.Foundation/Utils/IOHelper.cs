@@ -14,8 +14,19 @@ namespace NewsFactory.Foundation.Utils
 
         public async static Task<StorageFile> GetFileOrDefault(this StorageFolder folder, string fileName)
         {
-            var files = await folder.GetFilesAsync();
-            return files.FirstOrDefault(f => f.Name == fileName);
+            var tries = 0;
+            while (tries++ < 3)
+            {
+                try
+                {
+                    var files = await folder.GetFilesAsync();
+                    return files.FirstOrDefault(f => f.Name == fileName);
+                }
+                catch
+                {
+                }
+            }
+            return null;
         }
 
         public async static Task Move(this StorageFolder folder, string from, string to)

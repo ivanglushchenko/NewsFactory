@@ -151,7 +151,14 @@ namespace NewsFactory.Foundation.Services
 
         public async Task SaveSettings()
         {
-            await SaveTo("settings", SerializerHelper.Serialize(_settings));
+            try
+            {
+                await SaveTo("settings", SerializerHelper.Serialize(_settings));
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
         }
 
         private async Task SaveTo(string fileName, string obj)
@@ -199,11 +206,20 @@ namespace NewsFactory.Foundation.Services
 
         public async Task<List<Tuple<string, string>>> GetFeedsToImport(StorageFile file)
         {
-            var content = await FileIO.ReadTextAsync(file);
-            var doc = XDocument.Parse(content, LoadOptions.None);
-            var list = doc.DescendantNodes().OfType<XElement>().Where(t => t.Name == "outline").Select(t => new { Title = t.Attribute("title").Value, Url = t.Attribute("xmlUrl").Value }).ToList();
+            try
+            {
+                var content = await FileIO.ReadTextAsync(file);
+                var doc = XDocument.Parse(content, LoadOptions.None);
+                var list = doc.DescendantNodes().OfType<XElement>().Where(t => t.Name == "outline").Select(t => new { Title = t.Attribute("title").Value, Url = t.Attribute("xmlUrl").Value }).ToList();
 
-            return list.Select(t => new Tuple<string, string>(t.Url, t.Title)).ToList();
+                return list.Select(t => new Tuple<string, string>(t.Url, t.Title)).ToList();
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
+
+            return new List<Tuple<string, string>>();
         }
 
         public async void ExportFeeds()

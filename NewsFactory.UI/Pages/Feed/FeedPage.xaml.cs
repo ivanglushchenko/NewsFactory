@@ -204,44 +204,51 @@ namespace NewsFactory.UI.Pages.Feed
             var isInUse = Interlocked.Exchange(ref _isReadingPaneInUse, 1);
             if (isInUse == 0)
             {
-                if (Model.SelectedItem != null)
+                try
                 {
-                    if (rtbView.Visibility == Windows.UI.Xaml.Visibility.Visible)
+                    if (Model.SelectedItem != null)
                     {
-                        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(rtbView); i++)
+                        if (rtbView.Visibility == Windows.UI.Xaml.Visibility.Visible)
                         {
-                            var t = VisualTreeHelper.GetChild(rtbView, i);
-                        }
-
-                        rtbView.Blocks.Clear();
-
-                        if (Model.SelectedItem.DescriptionXamlUpdated != null)
-                        {
-                            foreach (var item in Model.SelectedItem.DescriptionXamlUpdated)
+                            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(rtbView); i++)
                             {
-                                rtbView.Blocks.Add(item);
+                                var t = VisualTreeHelper.GetChild(rtbView, i);
+                            }
+
+                            rtbView.Blocks.Clear();
+
+                            if (Model.SelectedItem.DescriptionXamlUpdated != null)
+                            {
+                                foreach (var item in Model.SelectedItem.DescriptionXamlUpdated)
+                                {
+                                    rtbView.Blocks.Add(item);
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in Model.SelectedItem.DescriptionXaml)
+                                {
+                                    rtbView.Blocks.Add(item);
+                                }
                             }
                         }
-                        else
+                        if (webView.Visibility == Windows.UI.Xaml.Visibility.Visible)
                         {
-                            foreach (var item in Model.SelectedItem.DescriptionXaml)
+                            try
                             {
-                                rtbView.Blocks.Add(item);
+                                Model.IsBusy = true;
+                                webView.Navigate(Model.SelectedItem.Url);
+                            }
+                            catch
+                            {
+                                Model.IsBusy = false;
                             }
                         }
                     }
-                    if (webView.Visibility == Windows.UI.Xaml.Visibility.Visible)
-                    {
-                        try
-                        {
-                            Model.IsBusy = true;
-                            webView.Navigate(Model.SelectedItem.Url);
-                        }
-                        catch
-                        {
-                            Model.IsBusy = false;
-                        }
-                    }
+                }
+                catch (Exception exc)
+                {
+                    LogService.Error(exc);
                 }
                 Interlocked.Exchange(ref _isReadingPaneInUse, 0);
             }
