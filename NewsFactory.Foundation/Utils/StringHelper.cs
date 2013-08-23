@@ -19,15 +19,18 @@ namespace NewsFactory.Foundation.Utils
             sbc.Replace("&gt;", ">");
             sbc.Replace("&lt;", "<");
             sbc.Replace("&quot;", "\"");
+            sbc.Replace("&nbsp;", " ");
             sbc.Replace("&amp;", "&");
             sbc.Replace("&#39;", "'");
             sbc.Replace("&#039;", "'");
             sbc.Replace("&#0039;", "'");
             sbc.Replace("&hellip;", "...");
             sbc.Replace("&mdash;", "-");
+            sbc.Replace("&#8211;", "-");
             sbc.Replace("&#8217;", "'");
             sbc.Replace("&#8220;", "\"");
             sbc.Replace("&#8221;", "\"");
+            sbc.Replace("&#8230;", "...");
             sbc.Replace("&rsquo;", "'");
             return sbc.ToString();
         }
