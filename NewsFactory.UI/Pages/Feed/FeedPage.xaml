@@ -154,6 +154,8 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource PinAppBarButtonStyle}" Click="OnPin" Visibility="{Binding IsPinned, Converter={StaticResource FalseToVisibilityConverter}}"/>
+                    <Button Style="{StaticResource UnpinAppBarButtonStyle}" Click="OnUnpin" Visibility="{Binding IsPinned, Converter={StaticResource TrueToVisibilityConverter}}"/>
                     <Button Style="{StaticResource MoreAppBarButtonStyle}" AutomationProperties.Name="More..." Click="OnMore"/>
                     <Button Style="{StaticResource LikeAppBarButtonStyle}" Command="{Binding LikeCommand}" Click="CloseAppBar" Visibility="{Binding Settings.SupportsClassification, Converter={StaticResource TrueToVisibilityConverter}}" />
                     <Button Style="{StaticResource DislikeAppBarButtonStyle}" Command="{Binding DislikeCommand}" Click="CloseAppBar" Visibility="{Binding Settings.SupportsClassification, Converter={StaticResource TrueToVisibilityConverter}}" />

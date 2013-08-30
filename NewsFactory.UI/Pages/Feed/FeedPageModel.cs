@@ -12,8 +12,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.System;
+using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
@@ -40,6 +44,8 @@ namespace NewsFactory.UI.Pages.Feed
             GoToNextItemCommand = new DelegateCommand(GoToNextItem);
             CopyNewsItemUrlToClipboardCommand = new DelegateCommand(CopyNewsItemUrlToClipboard);
             CopyNewsFeedUrlToClipboardCommand = new DelegateCommand(CopyNewsFeedUrlToClipboard);
+            PinCommand = new DelegateCommand<Rect>(Pin);
+            UnpinCommand = new DelegateCommand<Rect>(Unpin);
 
             AddSettingsPane<AppSettingsPage>("Settings");
             AddSettingsPane("Edit current feed", () =>
@@ -497,6 +503,69 @@ namespace NewsFactory.UI.Pages.Feed
         private DelegateCommand p_UnmarkAsFavoriteCommand;
         partial void OnUnmarkAsFavoriteCommandChanged();
 
+        /// <summary>
+        /// Gets/sets IsPinned.
+        /// </summary>
+        public bool IsPinned
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_IsPinned; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_IsPinned != value)
+                {
+                    p_IsPinned = value;
+                    OnPropertyChanged("IsPinned");
+                    OnIsPinnedChanged();
+                }
+            }
+        }
+        private bool p_IsPinned;
+        partial void OnIsPinnedChanged();
+
+        /// <summary>
+        /// Gets/sets PinCommand.
+        /// </summary>
+        public DelegateCommand<Rect> PinCommand
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_PinCommand; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_PinCommand != value)
+                {
+                    p_PinCommand = value;
+                    OnPropertyChanged("PinCommand");
+                    OnPinCommandChanged();
+                }
+            }
+        }
+        private DelegateCommand<Rect> p_PinCommand;
+        partial void OnPinCommandChanged();
+
+        /// <summary>
+        /// Gets/sets UnpinCommand.
+        /// </summary>
+        public DelegateCommand<Rect> UnpinCommand
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_UnpinCommand; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_UnpinCommand != value)
+                {
+                    p_UnpinCommand = value;
+                    OnPropertyChanged("UnpinCommand");
+                    OnUnpinCommandChanged();
+                }
+            }
+        }
+        private DelegateCommand<Rect> p_UnpinCommand;
+        partial void OnUnpinCommandChanged();
+
         #endregion Properties
 
         #region Methods
@@ -523,6 +592,15 @@ namespace NewsFactory.UI.Pages.Feed
 
             Items = DataService.NewsStore.GetItems(feed);
             SelectedItem = Items.FirstOrDefault();
+
+            try
+            {
+                IsPinned = SecondaryTile.Exists(feed.Id);
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
         }
 
         public async override void SaveState()
@@ -688,6 +766,47 @@ namespace NewsFactory.UI.Pages.Feed
                 {
                     Items.Insert(0, item);
                 }
+            }
+        }
+
+        private async void Pin(Rect rect)
+        {
+            var tileActivationArguments = Feed.Id + " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
+            var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, Feed.FeedInfo.FavIconUrl);
+            var isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect);
+
+            if (isPinned)
+            {
+                try
+                {
+                    IsPinned = SecondaryTile.Exists(Feed.Id);
+                }
+                catch (Exception exc)
+                {
+                    LogService.Error(exc);
+                }
+
+                var squareTileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWideSmallImageAndText01);
+                var squareTileTextAttributes = squareTileXml.GetElementsByTagName("text");
+                squareTileTextAttributes[0].AppendChild(squareTileXml.CreateTextNode("This text was delivered through a notification"));
+                var tileNotification = new TileNotification(squareTileXml);
+                var secondaryTileUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id);
+                secondaryTileUpdater.Update(tileNotification);
+            }
+        }
+
+        private async void Unpin(Rect rect)
+        {
+            var secondaryTile = new SecondaryTile(Feed.Id);
+            await secondaryTile.RequestDeleteForSelectionAsync(rect);
+
+            try
+            {
+                IsPinned = SecondaryTile.Exists(Feed.Id);
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
             }
         }
 

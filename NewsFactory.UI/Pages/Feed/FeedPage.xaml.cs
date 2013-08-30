@@ -340,6 +340,26 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
+        private void OnPin(object sender, RoutedEventArgs e)
+        {
+            var btn = (FrameworkElement)sender;
+            var buttonTransform = btn.TransformToVisual(null);
+            var point = buttonTransform.TransformPoint(new Point());
+            var rect = new Rect(point, new Size(100, 100));
+
+            ((FeedPageModel)DataContext).PinCommand.Execute(rect);
+        }
+
+        private void OnUnpin(object sender, RoutedEventArgs e)
+        {
+            var btn = (FrameworkElement)sender;
+            var buttonTransform = btn.TransformToVisual(null);
+            var point = buttonTransform.TransformPoint(new Point());
+            var rect = new Rect(point, new Size(100, 100));
+
+            ((FeedPageModel)DataContext).UnpinCommand.Execute(rect);
+        }
+
         #endregion Methods
     }
 }

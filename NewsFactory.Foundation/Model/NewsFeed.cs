@@ -57,6 +57,18 @@ namespace NewsFactory.Foundation.Model
         public Func<Settings, NewsItem, bool> Filter { get; private set; }
         public FeedsStore Store { get; private set; }
 
+        public string Id
+        {
+            get
+            {
+                var s = "";
+                if (FeedInfo.Url == null)
+                    s = FeedInfo.Title ?? "";
+                s = FeedInfo.Url.ToString();
+                return new string(s.OfType<char>().Where(char.IsLetterOrDigit).ToArray());
+            }
+        }
+
         /// <summary>
         /// Gets/sets NewItemsCount.
         /// </summary>
