@@ -3,6 +3,7 @@ using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
+using NewsFactory.UI.Notifications;
 using NewsFactory.UI.Pages.AppSettings;
 using NewsFactory.UI.Pages.FeedSettings;
 using NewsFactory.UI.Pages.PrivacyPolicy;
@@ -786,12 +787,27 @@ namespace NewsFactory.UI.Pages.Feed
                     LogService.Error(exc);
                 }
 
-                var squareTileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWideSmallImageAndText01);
-                var squareTileTextAttributes = squareTileXml.GetElementsByTagName("text");
-                squareTileTextAttributes[0].AppendChild(squareTileXml.CreateTextNode("This text was delivered through a notification"));
-                var tileNotification = new TileNotification(squareTileXml);
-                var secondaryTileUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id);
-                secondaryTileUpdater.Update(tileNotification);
+                //var badgeContent = new BadgeNumericNotificationContent(6);
+
+                // Send the notification to the secondary tile
+                //BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(Feed.Id).Update(badgeContent.CreateNotification());
+
+                var tileContent = TileContentFactory.CreateTileWideText04();
+                tileContent.TextBodyWrap.Text = "Sent to a secondary tile from NotificationsExtensions!";
+
+                //var squareContent = TileContentFactory.CreateTileSquarePeekImageAndText01();
+                //squareContent.Branding = Notifications.TileContent.TileBranding.Name;
+                //squareContent.TextBody1.Text = "Sent to a secondary tile from NotificationExtensions!";
+                //squareContent.Image.Src = Feed.FeedInfo.ImageUrl.ToString();
+                //tileContent.SquareContent = squareContent;
+
+                var squareContent = TileContentFactory.CreateTileSquareImage();
+                squareContent.Branding = Notifications.TileContent.TileBranding.Logo;
+                squareContent.Image.Src = Feed.FeedInfo.ImageUrl != null ? Feed.FeedInfo.ImageUrl.ToString() : Feed.FeedInfo.FavIconUrl.ToString();
+                tileContent.SquareContent = squareContent;
+
+                // Send the notification to the secondary tile by creating a secondary tile updater
+                TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id).Update(tileContent.CreateNotification());
             }
         }
 
