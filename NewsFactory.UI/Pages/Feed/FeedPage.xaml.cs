@@ -142,7 +142,10 @@ namespace NewsFactory.UI.Pages.Feed
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            Model.SetFeed((NewsFeed)navigationParameter);
+            if (navigationParameter is NewsFeed)
+                Model.SetFeed((NewsFeed)navigationParameter);
+            else
+                Model.SetFeedUrl((navigationParameter ?? string.Empty).ToString());
         }
 
         /// <summary>

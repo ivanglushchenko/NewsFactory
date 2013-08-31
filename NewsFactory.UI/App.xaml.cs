@@ -3,6 +3,7 @@ using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
 using NewsFactory.UI.Common;
 using NewsFactory.UI.Pages;
+using NewsFactory.UI.Pages.Feed;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,7 +61,9 @@ namespace NewsFactory.UI
             DataService.Instance.Dispatcher = Window.Current.Dispatcher;
             await DataService.Instance.Init();
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
+            var isFreshStart = rootFrame == null;
+            var isSecondaryTileCmd = !string.IsNullOrWhiteSpace(args.Arguments);
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -72,20 +75,6 @@ namespace NewsFactory.UI
                 //Associate the frame with a SuspensionManager key                                
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
 
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // Restore the saved session state only when appropriate
-                    try
-                    {
-                        //SuspensionManager.RestoreAsync();
-                    }
-                    catch (SuspensionManagerException)
-                    {
-                        //Something went wrong restoring state.
-                        //Assume there is no state and continue
-                    }
-                }
-
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
@@ -95,15 +84,21 @@ namespace NewsFactory.UI
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), "AllGroups"))
+                if ((isSecondaryTileCmd && !rootFrame.Navigate(typeof(FeedPage), args.Arguments)) ||
+                    (!isSecondaryTileCmd && !rootFrame.Navigate(typeof(MainPage))))
                 {
                     throw new Exception("Failed to create initial page");
                 }
             }
+
+            if (!isFreshStart && isSecondaryTileCmd)
+                rootFrame.Navigate(typeof(FeedPage), args.Arguments);
+
             // Ensure the current window is active
             Window.Current.Activate();
 
-            RegisterBackgroundTask();
+            if (isFreshStart)
+                RegisterBackgroundTask();
         }
 
         /// <summary>

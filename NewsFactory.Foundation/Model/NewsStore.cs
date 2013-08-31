@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 
 namespace NewsFactory.Foundation.Model
@@ -381,6 +382,19 @@ namespace NewsFactory.Foundation.Model
             await _feedsStore.DeleteFeed(feed);
 
             await DeleteFeedNewsItems(feed);
+
+            try
+            {
+                var tiles = await SecondaryTile.FindAllAsync();
+                var tile = tiles.FirstOrDefault(t => t.TileId == feed.Id);
+                if (tile != null)
+                {
+                    await tile.RequestDeleteAsync();
+                }
+            }
+            catch
+            {
+            }
         }
 
         public async Task DeleteAllFeeds()

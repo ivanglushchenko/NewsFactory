@@ -497,8 +497,6 @@ namespace NewsFactory.UI.Pages
 
         private void Initialize()
         {
-            //await MsgService.Show("Hey, it's your first time using the Reader, congratilations! Please use the bottom app bar to add feeds");
-
             if (NewsFeeds == null)
             {
                 if (DataService.FeedsStore == null || DataService.NewsStore == null)

@@ -57,8 +57,6 @@ namespace NewsFactory.UI.Pages.Feed
             });
             AddSettingsPane<PrivacyPolicyView>("Privacy policy");
 
-            DataService.NewsStore.ItemsReceived += NewsStore_ItemsReceived;
-
             Now = DateTime.Now;
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMinutes(1);
@@ -604,9 +602,63 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
+        public void SetFeedUrl(string urlStr)
+        {
+            Initialize(() =>
+                {
+                    try
+                    {
+                        var url = UriHelper.ToUri(urlStr);
+                        var feed = DataService.FeedsStore.NewsFeedsMap[url];
+                        SetFeed(feed);
+                        RefreshFeed();
+
+                        try
+                        {
+                            var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(feed.Id);
+                            updater.EnableNotificationQueue(true);
+                            updater.Clear();
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        LogService.Error(exc);
+
+                        NavigationService.NavigateTo<MainPage>();
+                    }
+                });
+        }
+
         public async override void SaveState()
         {
             await DataService.NewsStore.SaveFeed(Feed);
+        }
+
+        private void Initialize(Action completed)
+        {
+            if (DataService.FeedsStore == null || DataService.NewsStore == null)
+            {
+                Status = "Loading feeds & news, please wait";
+
+                GeneralHelper.Run(async () =>
+                {
+                    await DataService.LoadStores();
+                    await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        Status = null;
+                        DataService.NewsStore.ItemsReceived += NewsStore_ItemsReceived;
+                        completed();
+                    });
+                });
+            }
+            else
+            {
+                DataService.NewsStore.ItemsReceived += NewsStore_ItemsReceived;
+                completed();
+            }
         }
 
         private async void DeleteFeed()
@@ -787,28 +839,6 @@ namespace NewsFactory.UI.Pages.Feed
                 {
                     LogService.Error(exc);
                 }
-
-                //var badgeContent = new BadgeNumericNotificationContent(6);
-
-                // Send the notification to the secondary tile
-                //BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(Feed.Id).Update(badgeContent.CreateNotification());
-
-                //var tileContent = TileContentFactory.CreateTileWideText04();
-                //tileContent.TextBodyWrap.Text = "Sent to a secondary tile from NotificationsExtensions!";
-
-                //var squareContent = TileContentFactory.CreateTileSquarePeekImageAndText01();
-                //squareContent.Branding = Notifications.TileContent.TileBranding.Name;
-                //squareContent.TextBody1.Text = "Sent to a secondary tile from NotificationExtensions!";
-                //squareContent.Image.Src = Feed.FeedInfo.ImageUrl.ToString();
-                //tileContent.SquareContent = squareContent;
-
-                //var squareContent = TileContentFactory.CreateTileSquareImage();
-                //squareContent.Branding = Notifications.TileContent.TileBranding.Logo;
-                //squareContent.Image.Src = Feed.FeedInfo.ImageUrl != null ? Feed.FeedInfo.ImageUrl.ToString() : Feed.FeedInfo.FavIconUrl.ToString();
-                //tileContent.SquareContent = squareContent;
-
-                //// Send the notification to the secondary tile by creating a secondary tile updater
-                //TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id).Update(tileContent.CreateNotification());
             }
         }
 
