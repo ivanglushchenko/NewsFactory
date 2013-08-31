@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -32,17 +33,6 @@ namespace NewsFactory.UI.Pages
             this.InitializeComponent();
 
             DataContext = new MainPageModel();
-            Model.FeedAdded += Model_FeedAdded;
-        }
-
-        void Model_FeedAdded()
-        {
-            //if (itemsViewSource.View.Count == 1)
-            //{
-            //    var s = itemGridView.ItemsSource;
-            //    itemGridView.ItemsSource = null;
-            //    itemGridView.ItemsSource = s;
-            //}
         }
 
         private MainPageModel Model
@@ -74,11 +64,6 @@ namespace NewsFactory.UI.Pages
         private void OnFeedClick(object sender, ItemClickEventArgs e)
         {
             Model.RaiseCommand(Model.GoToFeedCommand, (NewsFeed)e.ClickedItem);
-        }
-
-        private void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-
         }
 
         private void OnAppBarTapped(object sender, TappedRoutedEventArgs e)
@@ -204,29 +189,9 @@ namespace NewsFactory.UI.Pages
             ClearSelection();
         }
 
-        public override void InvalidateVisualState()
-        {
-            base.InvalidateVisualState();
-
-            //var state = DetermineVisualState(ApplicationView.Value);
-            //if (state == "Snapped")
-            //{
-            //    itemListView.ItemsSource = Model.NewsStore.Items;
-            //}
-            //if (state == "Filled")
-            //{
-            //    itemListView.ItemsSource = null;
-            //}
-        }
-
         private void OnSnappedItemClick(object sender, ItemClickEventArgs e)
         {
             Model.RaiseCommand(Model.GoToFeedCommand, (NewsFeed)e.ClickedItem);
-        }
-
-        private void OnImageOpened(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -62,7 +62,6 @@ namespace NewsFactory.UI.Pages.Feed
         private ScrollBar _scrollBar;
         private bool _selectedItemChanged;
         private DispatcherTimer _timer;
-        private double? _itemDelta;
 
         #endregion Fields
 
@@ -86,10 +85,6 @@ namespace NewsFactory.UI.Pages.Feed
         {
             if (_selectedItemChanged)
             {
-                if (_itemDelta == null && Model.SelectedItem != null)
-                {
-                }
-
                 _selectedItemChanged = false;
                 var newValue = 
                     e.NewValue > e.OldValue

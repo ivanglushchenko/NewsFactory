@@ -107,6 +107,10 @@
       <Project>{a2c3bc0f-d292-4297-9c74-129cd9f4f449}</Project>
       <Name>NewsFactory.Foundation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NewsFactory.Tasks\NewsFactory.Tasks.csproj">
+      <Project>{7311746f-9131-4475-8ff5-f31b064ea083}</Project>
+      <Name>NewsFactory.Tasks</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -195,6 +199,7 @@
   <ItemGroup>
     <Content Include="Assets\back1.jpg" />
     <Content Include="Assets\Badge.png" />
+    <Content Include="Assets\Badge.scale-100.png" />
     <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\feed.png" />
     <Content Include="Assets\LightGray.png" />

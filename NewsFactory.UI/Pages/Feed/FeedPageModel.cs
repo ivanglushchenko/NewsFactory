@@ -773,7 +773,8 @@ namespace NewsFactory.UI.Pages.Feed
         private async void Pin(Rect rect)
         {
             var tileActivationArguments = Feed.Id + " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
-            var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, Feed.FeedInfo.FavIconUrl);
+            var logo = new Uri("ms-appx:///Assets/Logo.png", UriKind.Absolute);
+            var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, logo);
             var isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect);
 
             if (isPinned)
@@ -792,8 +793,8 @@ namespace NewsFactory.UI.Pages.Feed
                 // Send the notification to the secondary tile
                 //BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(Feed.Id).Update(badgeContent.CreateNotification());
 
-                var tileContent = TileContentFactory.CreateTileWideText04();
-                tileContent.TextBodyWrap.Text = "Sent to a secondary tile from NotificationsExtensions!";
+                //var tileContent = TileContentFactory.CreateTileWideText04();
+                //tileContent.TextBodyWrap.Text = "Sent to a secondary tile from NotificationsExtensions!";
 
                 //var squareContent = TileContentFactory.CreateTileSquarePeekImageAndText01();
                 //squareContent.Branding = Notifications.TileContent.TileBranding.Name;
@@ -801,13 +802,13 @@ namespace NewsFactory.UI.Pages.Feed
                 //squareContent.Image.Src = Feed.FeedInfo.ImageUrl.ToString();
                 //tileContent.SquareContent = squareContent;
 
-                var squareContent = TileContentFactory.CreateTileSquareImage();
-                squareContent.Branding = Notifications.TileContent.TileBranding.Logo;
-                squareContent.Image.Src = Feed.FeedInfo.ImageUrl != null ? Feed.FeedInfo.ImageUrl.ToString() : Feed.FeedInfo.FavIconUrl.ToString();
-                tileContent.SquareContent = squareContent;
+                //var squareContent = TileContentFactory.CreateTileSquareImage();
+                //squareContent.Branding = Notifications.TileContent.TileBranding.Logo;
+                //squareContent.Image.Src = Feed.FeedInfo.ImageUrl != null ? Feed.FeedInfo.ImageUrl.ToString() : Feed.FeedInfo.FavIconUrl.ToString();
+                //tileContent.SquareContent = squareContent;
 
-                // Send the notification to the secondary tile by creating a secondary tile updater
-                TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id).Update(tileContent.CreateNotification());
+                //// Send the notification to the secondary tile by creating a secondary tile updater
+                //TileUpdateManager.CreateTileUpdaterForSecondaryTile(Feed.Id).Update(tileContent.CreateNotification());
             }
         }
 

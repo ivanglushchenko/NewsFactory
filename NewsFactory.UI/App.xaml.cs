@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -101,6 +102,8 @@ namespace NewsFactory.UI
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            RegisterBackgroundTask();
         }
 
         /// <summary>
@@ -114,8 +117,33 @@ namespace NewsFactory.UI
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             await DataService.Instance.FeedsStore.Save();
-            //await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+
+        private async void RegisterBackgroundTask()
+        {
+            try
+            {
+                var status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    if (BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task"))
+                        BackgroundTaskRegistration.AllTasks.First(x => x.Value.Name == "Notification task").Value.Unregister(true);
+
+                    var builder = new BackgroundTaskBuilder
+                    {
+                        Name = "Notification task",
+                        TaskEntryPoint = "NewsFactory.Tasks.DownloadFeedTask"
+                    };
+                    builder.SetTrigger(new TimeTrigger(15, false));
+                    builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                    builder.Register();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(ex);
+            }
         }
     }
 }
