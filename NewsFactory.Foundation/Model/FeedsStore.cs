@@ -236,7 +236,7 @@ namespace NewsFactory.Foundation.Model
             if (newFeeds.Count > 0)
             {
                 newFeeds = newFeeds.OrderBy(f => f.FeedInfo.Title).ToList();
-                await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
                     if (Settings.FeedOrderMode == FeedOrderMode.SortedAlphabetically)
                         Merge(newFeeds, NewsFeeds);

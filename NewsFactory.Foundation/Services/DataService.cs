@@ -55,7 +55,7 @@ namespace NewsFactory.Foundation.Services
         }
         private static DataService _instance;
 
-        public CoreDispatcher Dispatcher { get; set; }
+        public CoreDispatcher Dispatcher { private get; set; }
 
         public Settings Settings
         {
@@ -159,6 +159,14 @@ namespace NewsFactory.Foundation.Services
             {
                 LogService.Error(exc);
             }
+        }
+
+        public async Task Invoke(CoreDispatcherPriority priority, DispatchedHandler callback)
+        {
+            if (Dispatcher != null)
+                await Dispatcher.RunAsync(priority, callback);
+            else
+                callback();
         }
 
         private async Task SaveTo(string fileName, string obj)

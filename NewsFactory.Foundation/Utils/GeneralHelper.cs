@@ -45,7 +45,7 @@ namespace NewsFactory.Foundation.Utils
                         LogService.Error(exc, exc.ToString());
                         if (showMessage)
                         {
-                            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
+                            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
                                 {
                                     await new Windows.UI.Popups.MessageDialog(exc.Message).ShowAsync();
                                 });
@@ -72,7 +72,7 @@ namespace NewsFactory.Foundation.Utils
                     LogService.Error(exc, exc.ToString());
                     if (showMessage)
                     {
-                        await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
+                        await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
                         {
                             await new Windows.UI.Popups.MessageDialog(exc.Message).ShowAsync();
                         });
@@ -99,7 +99,7 @@ namespace NewsFactory.Foundation.Utils
                     LogService.Error(exc, exc.ToString());
                     if (showMessage)
                     {
-                        await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
+                        await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.High, async () =>
                         {
                             await new Windows.UI.Popups.MessageDialog(exc.Message).ShowAsync();
                         });

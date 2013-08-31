@@ -170,7 +170,7 @@ namespace NewsFactory.Foundation.Model
         {
             LogService.Info("-> Updating {0}", FeedInfo.Title);
 
-            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => IsLoading = true);
+            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () => IsLoading = true);
 
             var client = new SyndicationClient();
             client.BypassCacheOnRetrieve = true;
@@ -220,7 +220,7 @@ namespace NewsFactory.Foundation.Model
 
             if (sf == null)
             {
-                await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => IsLoading = false);
+                await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () => IsLoading = false);
                 return null;
             }
 
@@ -245,7 +245,7 @@ namespace NewsFactory.Foundation.Model
 
             var newLastPub = items.Count > 0 ? items.Max(i => i.Published) : (DateTime?)null;
 
-            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 FeedInfo.IsNew = false;
 

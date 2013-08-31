@@ -224,7 +224,7 @@ namespace NewsFactory.Foundation.Model
 
             var receiveDate = DateTime.Now;
             Settings.LastUpdated = receiveDate;
-            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => ActiveFeedDownloads = feeds.Count);
+            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () => ActiveFeedDownloads = feeds.Count);
 
             LogService.Info("Start updating many feeds ({0})", feeds.Count);
 
@@ -238,12 +238,12 @@ namespace NewsFactory.Foundation.Model
                             newItems = newItems.Where(i => !ItemsMap.ContainsKey(i.Url.ToString())).OrderBy(t => t.Published).ToList();
                             if (newItems.Count > 0)
                             {
-                                await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => AddItems(feed, newItems));
+                                await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => AddItems(feed, newItems));
                                 await SaveFeed(feed);
                             }
                         }
 
-                        await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                        await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                         {
                             lock (_syncObject)
                                 ActiveFeedDownloads--;
@@ -260,7 +260,7 @@ namespace NewsFactory.Foundation.Model
         {
             var feed = feeds.Single();
             var favIconUri = await feed.GetFavIcon(feed.FeedInfo.FavIconUrl);
-            await DataService.Instance.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 feed.FeedInfo.HasDefaultFavIcon = false;
                 if (favIconUri != null)

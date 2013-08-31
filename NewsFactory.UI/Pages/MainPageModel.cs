@@ -508,7 +508,7 @@ namespace NewsFactory.UI.Pages
                     GeneralHelper.Run(async () =>
                         {
                             await DataService.LoadStores();
-                            await DataService.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                            await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                                 {
                                     SetGroups();
                                     Status = null;
@@ -578,7 +578,7 @@ namespace NewsFactory.UI.Pages
 
         async void t_Tick(object sender, object e)
         {
-            await DataService.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => Now = DateTime.Now);
+            await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => Now = DateTime.Now);
         }
 
         private void PickFeeds()

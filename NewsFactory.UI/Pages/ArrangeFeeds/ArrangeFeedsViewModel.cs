@@ -237,7 +237,7 @@ namespace NewsFactory.UI.Pages.ArrangeFeeds
             SelectedFeed = f;
             DataService.FeedsStore.SwapFeeds(i, i - 1);
 
-            await DataService.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 if (SelectedFeedChanged != null)
                     SelectedFeedChanged(this, null);
@@ -257,7 +257,7 @@ namespace NewsFactory.UI.Pages.ArrangeFeeds
             SelectedFeed = f;
             DataService.FeedsStore.SwapFeeds(i, i + 1);
 
-            await DataService.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 if (SelectedFeedChanged != null)
                     SelectedFeedChanged(this, null);

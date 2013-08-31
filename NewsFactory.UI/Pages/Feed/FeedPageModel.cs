@@ -707,7 +707,7 @@ namespace NewsFactory.UI.Pages.Feed
 
         async void t_Tick(object sender, object e)
         {
-            await DataService.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => Now = DateTime.Now);
+            await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => Now = DateTime.Now);
         }
 
         private void GoToPrevItem()
@@ -772,7 +772,7 @@ namespace NewsFactory.UI.Pages.Feed
 
         private async void Pin(Rect rect)
         {
-            var tileActivationArguments = Feed.Id + " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
+            var tileActivationArguments = Feed.FeedInfo.Url.ToString();
             var logo = new Uri("ms-appx:///Assets/Logo.png", UriKind.Absolute);
             var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, logo);
             var isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect);
