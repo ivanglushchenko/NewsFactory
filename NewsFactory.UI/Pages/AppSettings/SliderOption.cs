@@ -30,6 +30,16 @@ namespace NewsFactory.UI.Pages.AppSettings
                 new SliderOption() { Caption = "every day", Interval = 1440, Value = 8 },
                 new SliderOption() { Caption = "never", Interval = 0, Value = 10 }
             };
+            LiveTileIntervals = new SliderOption[]
+            {
+                new SliderOption() { Caption = "every 15 mminutes", Interval = 15, Value = 0 },
+                new SliderOption() { Caption = "every 30 minutes", Interval = 30, Value = 2 },
+                new SliderOption() { Caption = "every 1 hour", Interval = 60, Value = 4 },
+                new SliderOption() { Caption = "every 3 hours", Interval = 180, Value = 6 },
+                new SliderOption() { Caption = "every 6 hours", Interval = 360, Value = 8 },
+                new SliderOption() { Caption = "every 12 hours", Interval = 720, Value = 10 },
+                new SliderOption() { Caption = "every day", Interval = 1440, Value = 12 }
+            };
         }
 
         #endregion .ctors
@@ -38,6 +48,7 @@ namespace NewsFactory.UI.Pages.AppSettings
 
         public static SliderOption[] Days { get; private set; }
         public static SliderOption[] Intervals { get; private set; }
+        public static SliderOption[] LiveTileIntervals { get; private set; }
 
         public string Caption { get; set; }
         public int Interval { get; set; }

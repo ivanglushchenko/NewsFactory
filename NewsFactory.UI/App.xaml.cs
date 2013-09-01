@@ -1,6 +1,7 @@
 ﻿using NewsFactory.Foundation.Base;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
+using NewsFactory.Tasks;
 using NewsFactory.UI.Common;
 using NewsFactory.UI.Pages;
 using NewsFactory.UI.Pages.Feed;
@@ -98,7 +99,7 @@ namespace NewsFactory.UI
             Window.Current.Activate();
 
             if (isFreshStart)
-                RegisterBackgroundTask();
+                DownloadFeedTask.RegisterBackgroundTask(DataService.Instance.Settings.SecondaryTileUpdateInterval);
         }
 
         /// <summary>
@@ -113,32 +114,6 @@ namespace NewsFactory.UI
             var deferral = e.SuspendingOperation.GetDeferral();
             await DataService.Instance.FeedsStore.Save();
             deferral.Complete();
-        }
-
-        private async void RegisterBackgroundTask()
-        {
-            try
-            {
-                var status = await BackgroundExecutionManager.RequestAccessAsync();
-                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
-                {
-                    if (BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task"))
-                        BackgroundTaskRegistration.AllTasks.First(x => x.Value.Name == "Notification task").Value.Unregister(true);
-
-                    var builder = new BackgroundTaskBuilder
-                    {
-                        Name = "Notification task",
-                        TaskEntryPoint = "NewsFactory.Tasks.DownloadFeedTask"
-                    };
-                    builder.SetTrigger(new TimeTrigger(15, false));
-                    builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-                    builder.Register();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogService.Error(ex);
-            }
         }
     }
 }

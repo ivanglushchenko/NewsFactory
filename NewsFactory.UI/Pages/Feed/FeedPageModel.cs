@@ -616,7 +616,7 @@ namespace NewsFactory.UI.Pages.Feed
                         try
                         {
                             var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(feed.Id);
-                            updater.EnableNotificationQueue(true);
+                            updater.EnableNotificationQueue(false);
                             updater.Clear();
                         }
                         catch

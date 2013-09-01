@@ -15,7 +15,39 @@ namespace NewsFactory.Tasks
 {
     public sealed class DownloadFeedTask : IBackgroundTask
     {
+        #region Fields
+
+        private const string TASK_NAME = "Download Feeds Task";
+
+        #endregion Fields
+
         #region Methods
+
+        public static async void RegisterBackgroundTask(int refreshInterval)
+        {
+            try
+            {
+                var status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    if (BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == TASK_NAME))
+                        BackgroundTaskRegistration.AllTasks.First(x => x.Value.Name == TASK_NAME).Value.Unregister(true);
+
+                    var builder = new BackgroundTaskBuilder
+                    {
+                        Name = TASK_NAME,
+                        TaskEntryPoint = "NewsFactory.Tasks.DownloadFeedTask"
+                    };
+                    builder.SetTrigger(new TimeTrigger((uint)refreshInterval, false));
+                    builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                    builder.Register();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(ex);
+            }
+        }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {

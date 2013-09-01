@@ -144,6 +144,8 @@
     <Compile Include="Pages\AppSettings\AppSettingsPageModel.cs" />
     <Compile Include="Pages\AppSettings\DayCaptionConverter.cs" />
     <Compile Include="Pages\AppSettings\DayValueConverter.cs" />
+    <Compile Include="Pages\AppSettings\LiveTileRefreshIntervalCaptionConverter.cs" />
+    <Compile Include="Pages\AppSettings\LiveTileRefreshIntervalValueConverter.cs" />
     <Compile Include="Pages\AppSettings\RefreshIntervalCaptionConverter.cs" />
     <Compile Include="Pages\AppSettings\RefreshIntervalValueConverter.cs" />
     <Compile Include="Pages\AppSettings\SliderOption.cs" />

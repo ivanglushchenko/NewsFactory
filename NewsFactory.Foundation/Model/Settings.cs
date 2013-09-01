@@ -218,6 +218,27 @@ namespace NewsFactory.Foundation.Model
         private FeedOrderMode p_FeedOrderMode;
         partial void OnFeedOrderModeChanged();
 
+        /// <summary>
+        /// Gets/sets SecondaryTileUpdateInterval.
+        /// </summary>
+        public int SecondaryTileUpdateInterval
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_SecondaryTileUpdateInterval; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_SecondaryTileUpdateInterval != value)
+                {
+                    p_SecondaryTileUpdateInterval = value;
+                    OnPropertyChanged("SecondaryTileUpdateInterval");
+                    OnSecondaryTileUpdateIntervalChanged();
+                }
+            }
+        }
+        private int p_SecondaryTileUpdateInterval = 60;
+        partial void OnSecondaryTileUpdateIntervalChanged();
+
         public static Settings Instance { get; set; }
 
         #endregion Properties

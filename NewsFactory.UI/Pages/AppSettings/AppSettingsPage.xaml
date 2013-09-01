@@ -14,6 +14,8 @@
     <Page.Resources>
         <local:RefreshIntervalValueConverter x:Key="RefreshIntervalConverter" />
         <local:RefreshIntervalCaptionConverter x:Key="RefreshIntervalCaptionConverter" />
+        <local:LiveTileRefreshIntervalValueConverter x:Key="LiveTileRefreshIntervalConverter" />
+        <local:LiveTileRefreshIntervalCaptionConverter x:Key="LiveTileRefreshIntervalCaptionConverter" />
         <local:DayValueConverter x:Key="DayValueConverter" />
         <local:DayCaptionConverter x:Key="DayCaptionConverter" />
     </Page.Resources>
@@ -46,7 +48,7 @@
                 <ToggleSwitch Margin="0,20,0,0" Header="Delete old news" IsOn="{Binding Settings.DeleteOldNews, Mode=TwoWay}" />
                 
                 <StackPanel Orientation="Horizontal" Margin="9,0,0,0">
-                    <TextBlock Text="Delete news older than" Style="{StaticResource TitleTextStyle}" FontWeight="SemiBold"/>
+                    <TextBlock Text="Delete news older than" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                     <TextBlock Text="{Binding Settings.OldNewsDayThreshold, Converter={StaticResource DayCaptionConverter}}" Style="{StaticResource TitleTextStyle}" FontWeight="SemiBold" Margin="4,0,0,0"/>
                 </StackPanel>
                 <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="10" Value="{Binding Settings.OldNewsDayThreshold, Mode=TwoWay, Converter={StaticResource DayValueConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" IsEnabled="{Binding Settings.DeleteOldNews, Mode=TwoWay}"/>
@@ -57,6 +59,12 @@
                     <TextBlock Text="{Binding Settings.UpdateInterval, Converter={StaticResource RefreshIntervalCaptionConverter}}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal" Margin="4,0,0,0"/>
                 </StackPanel>
                 <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="10" Value="{Binding Settings.UpdateInterval, Mode=TwoWay, Converter={StaticResource RefreshIntervalConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" />
+
+                <StackPanel Orientation="Horizontal" Margin="9,20,0,0">
+                    <TextBlock Text="Automatically update feed's live tiles" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
+                    <TextBlock Text="{Binding Settings.SecondaryTileUpdateInterval, Converter={StaticResource LiveTileRefreshIntervalCaptionConverter}}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal" Margin="4,0,0,0"/>
+                </StackPanel>
+                <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="12" Value="{Binding Settings.SecondaryTileUpdateInterval, Mode=TwoWay, Converter={StaticResource LiveTileRefreshIntervalConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" />
 
                 <TextBlock Margin="9,20,0,0" Text="If you deleted all news and would like to see old items again, please reset the feeds" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                 <Button Margin="5,2,0,0" Content="Reset all feeds" Command="{Binding ResetAllFeedsCommand}" />
