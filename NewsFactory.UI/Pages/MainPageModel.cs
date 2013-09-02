@@ -62,6 +62,8 @@ namespace NewsFactory.UI.Pages
             _timer.Interval = TimeSpan.FromMinutes(1);
             _timer.Tick += t_Tick;
             _timer.Start();
+
+            NavigationService.IsMainPageCreated = true;
         }
 
         #endregion .ctors

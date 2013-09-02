@@ -3,7 +3,6 @@ using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
-using NewsFactory.UI.Notifications;
 using NewsFactory.UI.Pages.AppSettings;
 using NewsFactory.UI.Pages.FeedSettings;
 using NewsFactory.UI.Pages.PrivacyPolicy;
@@ -618,6 +617,8 @@ namespace NewsFactory.UI.Pages.Feed
                             var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(feed.Id);
                             updater.EnableNotificationQueue(false);
                             updater.Clear();
+
+                            BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(feed.Id).Clear();
                         }
                         catch
                         {

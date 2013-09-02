@@ -48,7 +48,7 @@ namespace NewsFactory.Foundation.Base
             }
         }
 
-        protected NavigationService NavigationService
+        public NavigationService NavigationService
         {
             get
             {

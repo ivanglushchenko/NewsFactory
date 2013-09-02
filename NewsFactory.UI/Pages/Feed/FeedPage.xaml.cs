@@ -345,7 +345,7 @@ namespace NewsFactory.UI.Pages.Feed
             var point = buttonTransform.TransformPoint(new Point());
             var rect = new Rect(point, new Size(100, 100));
 
-            ((FeedPageModel)DataContext).PinCommand.Execute(rect);
+            Model.PinCommand.Execute(rect);
         }
 
         private void OnUnpin(object sender, RoutedEventArgs e)
@@ -355,7 +355,15 @@ namespace NewsFactory.UI.Pages.Feed
             var point = buttonTransform.TransformPoint(new Point());
             var rect = new Rect(point, new Size(100, 100));
 
-            ((FeedPageModel)DataContext).UnpinCommand.Execute(rect);
+            Model.UnpinCommand.Execute(rect);
+        }
+
+        protected override void GoBack(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.IsMainPageCreated)
+                base.GoBack(sender, e);
+            else
+                Model.NavigationService.NavigateTo<MainPage>();
         }
 
         #endregion Methods

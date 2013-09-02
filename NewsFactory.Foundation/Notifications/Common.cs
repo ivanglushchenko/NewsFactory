@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 
-namespace NewsFactory.UI.Notifications
+namespace NewsFactory.Foundation.Notifications
 {
     internal sealed class NotificationContentText : INotificationContentText
     {

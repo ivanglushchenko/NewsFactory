@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace NewsFactory.UI.Notifications
+namespace NewsFactory.Foundation.Notifications
 {
     /// <summary>
     /// Base notification content interface to retrieve notification Xml as a string.

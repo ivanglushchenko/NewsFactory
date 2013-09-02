@@ -1,4 +1,4 @@
-﻿using NewsFactory.UI.Notifications.ToastContent;
+﻿using NewsFactory.Foundation.Notifications.ToastContent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace NewsFactory.UI.Notifications
+namespace NewsFactory.Foundation.Notifications
 {
     internal sealed class ToastAudio : IToastAudio
     {

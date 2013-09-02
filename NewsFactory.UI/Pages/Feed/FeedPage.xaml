@@ -211,7 +211,7 @@
         <!-- Back button and page title -->
         <Grid x:Name="titlePanel" Grid.ColumnSpan="2" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="48"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button
@@ -220,7 +220,7 @@
                 IsEnabled="{Binding DefaultViewModel.CanGoBack, ElementName=pageRoot}"
                 VerticalAlignment="Center"
                 Margin="40,0,0,0"
-                Style="{StaticResource BackButtonStyle}"/>
+                Style="{StaticResource BackButtonStyle}" />
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <TextBlock x:Name="pageTitle" Text="{Binding Feed.FeedInfo.Title}" Style="{StaticResource PageHeaderTextStyle}" Foreground="{StaticResource MainBrush}" Padding="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
 
@@ -307,9 +307,6 @@
                 <Button Grid.Column="1" Style="{StaticResource GoAppBarButtonStyle}" Click="OnOpen" AutomationProperties.Name="" />
             </Grid>
 
-
-            <ProgressBar Grid.Row="1" Margin="50,0,40,0" IsIndeterminate="True" Height="10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Visibility="{Binding IsBusy, Mode=TwoWay, Converter={StaticResource TrueToVisibilityConverter}}"/>
-
             <!-- Details for selected item -->
             <ScrollViewer
                 Grid.Row="2"
@@ -328,6 +325,8 @@
 
         <RepeatButton Style="{StaticResource ShowPrevButtonStyle}" Command="{Binding GoToPrevItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="220" />
         <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="220" />
+
+        <ProgressBar Margin="0,0,0,0" Grid.ColumnSpan="2" IsIndeterminate="True" Height="10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Visibility="{Binding IsBusy, Mode=TwoWay, Converter={StaticResource TrueToVisibilityConverter}}"/>
         
         <VisualStateManager.VisualStateGroups>
 

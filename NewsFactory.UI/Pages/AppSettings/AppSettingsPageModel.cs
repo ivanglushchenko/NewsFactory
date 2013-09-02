@@ -1,6 +1,7 @@
 ﻿using NewsFactory.Foundation.Base;
 using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Controls;
+using NewsFactory.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,6 +56,8 @@ namespace NewsFactory.UI.Pages.AppSettings
         {
             base.Dispose();
             DataService.SaveSettings();
+
+            DownloadFeedTask.RegisterBackgroundTask(Settings.SecondaryTileUpdateInterval);
         }
 
         private void ResetAllFeeds()

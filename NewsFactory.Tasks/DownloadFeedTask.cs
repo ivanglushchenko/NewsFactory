@@ -1,4 +1,5 @@
 ﻿using NewsFactory.Foundation.Model;
+using NewsFactory.Foundation.Notifications;
 using NewsFactory.Foundation.Services;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,8 @@ namespace NewsFactory.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
-            UpdateStatusAndTime("started");
-
             var tiles = await SecondaryTile.FindAllAsync();
+            var newItemsCount = 0;
             if (tiles.Count > 0)
             {
                 await DataService.Instance.Init();
@@ -66,17 +66,18 @@ namespace NewsFactory.Tasks
                     if (feedsStore.NewsFeedsMap.ContainsKey(feedUrl))
                     {
                         var newItems = await feedsStore.NewsFeedsMap[feedUrl].DownloadFeed();
-                        UpdateStatusAndTime(string.Format("new items: {0}", newItems.Count), feedsStore.NewsFeedsMap[feedUrl].Id);
+                        if (newItems.Count > 0)
+                            UpdateFeedTile(feedsStore.NewsFeedsMap[feedUrl].Id, newItems.Count, newItems.First().Title);
+                        newItemsCount += newItems.Count;
                     }
                 }
             }
-
-            UpdateStatusAndTime(string.Format("done, tiles: {0}", tiles.Count));
+            UpdateAppTile(string.Format("New items: {0}", newItemsCount));
 
             deferral.Complete();
         }
 
-        private void UpdateStatusAndTime(string msg)
+        private void UpdateAppTile(string msg)
         {
             var tileContent = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText03);
             var tileLines = tileContent.SelectNodes("tile/visual/binding/text");
@@ -90,18 +91,15 @@ namespace NewsFactory.Tasks
             TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
         }
 
-        private void UpdateStatusAndTime(string msg, string tileId)
+        private void UpdateFeedTile(string tileId, int newItemsCount, string msg)
         {
-            var tileContent = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText03);
-            var tileLines = tileContent.SelectNodes("tile/visual/binding/text");
-            var networkStatus = NetworkInformation.GetInternetConnectionProfile();
+            var badgeContent = new BadgeNumericNotificationContent((uint)newItemsCount);
+            BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(tileId).Update(badgeContent.CreateNotification());
 
-            tileLines[0].InnerText = msg;
-            tileLines[1].InnerText = DateTime.Now.ToString("MM/dd/yyyy");
-            tileLines[2].InnerText = DateTime.Now.ToString("HH:mm:ss");
+            var tileContent = TileContentFactory.CreateTileSquareText04();
+            tileContent.TextBodyWrap.Text = msg;
 
-            var notification = new TileNotification(tileContent);
-            TileUpdateManager.CreateTileUpdaterForSecondaryTile(tileId).Update(notification);
+            TileUpdateManager.CreateTileUpdaterForSecondaryTile(tileId).Update(tileContent.CreateNotification());
         }
 
         #endregion Methods

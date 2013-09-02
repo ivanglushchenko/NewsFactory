@@ -11,6 +11,12 @@ namespace NewsFactory.Foundation.Services
 {
     public class NavigationService : Service
     {
+        #region Properties
+
+        public static bool IsMainPageCreated { get; set; }
+
+        #endregion Properties
+
         #region Methods
 
         public void NavigateTo<T>()

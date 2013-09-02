@@ -1,4 +1,4 @@
-﻿using NewsFactory.UI.Notifications.BadgeContent;
+﻿using NewsFactory.Foundation.Notifications.BadgeContent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace NewsFactory.UI.Notifications
+namespace NewsFactory.Foundation.Notifications
 {
     /// <summary>
     /// Notification content object to display a glyph on a tile's badge.

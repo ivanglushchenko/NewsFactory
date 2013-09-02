@@ -62,9 +62,10 @@ namespace NewsFactory.UI
             DataService.Instance.Dispatcher = Window.Current.Dispatcher;
             await DataService.Instance.Init();
 
+            var tileArgs = args.Arguments;
             var rootFrame = Window.Current.Content as Frame;
             var isFreshStart = rootFrame == null;
-            var isSecondaryTileCmd = !string.IsNullOrWhiteSpace(args.Arguments);
+            var isSecondaryTileCmd = !string.IsNullOrWhiteSpace(tileArgs);
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -85,7 +86,7 @@ namespace NewsFactory.UI
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if ((isSecondaryTileCmd && !rootFrame.Navigate(typeof(FeedPage), args.Arguments)) ||
+                if ((isSecondaryTileCmd && !rootFrame.Navigate(typeof(FeedPage), tileArgs)) ||
                     (!isSecondaryTileCmd && !rootFrame.Navigate(typeof(MainPage))))
                 {
                     throw new Exception("Failed to create initial page");
@@ -93,7 +94,7 @@ namespace NewsFactory.UI
             }
 
             if (!isFreshStart && isSecondaryTileCmd)
-                rootFrame.Navigate(typeof(FeedPage), args.Arguments);
+                rootFrame.Navigate(typeof(FeedPage), tileArgs);
 
             // Ensure the current window is active
             Window.Current.Activate();
