@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
+using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 
@@ -255,6 +256,24 @@ namespace NewsFactory.Foundation.Model
 
                 _favIconsQueue.AddRange(_feedsStore.NewsFeeds.Where(f => f.FeedInfo.HasDefaultFavIcon).ToList());
             });
+
+            try
+            {
+                var feedTiles = await SecondaryTile.FindAllAsync();
+                var tilesMap = feedTiles.ToDictionary(t => t.TileId);
+                foreach (var item in feeds)
+                {
+                    if (tilesMap.ContainsKey(item.Id))
+                    {
+                        BadgeUpdateManager.CreateBadgeUpdaterForSecondaryTile(item.Id).Clear();
+                        TileUpdateManager.CreateTileUpdaterForSecondaryTile(item.Id).Clear();
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
+            }
         }
 
         private async Task OnGetFavIcon(List<NewsFeed> feeds)

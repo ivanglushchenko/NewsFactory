@@ -32,6 +32,8 @@ namespace NewsFactory.UI
     /// </summary>
     sealed partial class App : Application
     {
+        #region .ctors
+
         /// <summary>
         /// Initializes the singleton Application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -42,6 +44,10 @@ namespace NewsFactory.UI
             this.Suspending += OnSuspending;
             this.UnhandledException += App_UnhandledException;
         }
+
+        #endregion .ctors
+
+        #region Methods
 
         private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
@@ -116,5 +122,7 @@ namespace NewsFactory.UI
             await DataService.Instance.FeedsStore.Save();
             deferral.Complete();
         }
+
+        #endregion Methods
     }
 }

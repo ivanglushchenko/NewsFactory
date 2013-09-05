@@ -72,7 +72,6 @@ namespace NewsFactory.Tasks
                     }
                 }
             }
-            UpdateAppTile(string.Format("New items: {0}", newItemsCount));
 
             deferral.Complete();
         }
