@@ -19,6 +19,7 @@ namespace NewsFactory.Tasks
         #region Fields
 
         private const string TASK_NAME = "Download Feeds Task";
+        private static bool _isRegistered;
 
         #endregion Fields
 
@@ -26,6 +27,8 @@ namespace NewsFactory.Tasks
 
         public static async void RegisterBackgroundTask(int refreshInterval)
         {
+            if (_isRegistered) return;
+
             try
             {
                 var status = await BackgroundExecutionManager.RequestAccessAsync();
@@ -48,6 +51,8 @@ namespace NewsFactory.Tasks
             {
                 LogService.Error(ex);
             }
+
+            _isRegistered = true;
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)

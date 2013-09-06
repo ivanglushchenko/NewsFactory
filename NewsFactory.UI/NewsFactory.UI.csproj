@@ -196,7 +196,6 @@
   <ItemGroup>
     <Content Include="Assets\back1.jpg" />
     <Content Include="Assets\Badge.png" />
-    <Content Include="Assets\Badge.scale-100.png" />
     <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\feed.png" />
     <Content Include="Assets\LightGray.png" />

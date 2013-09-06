@@ -104,9 +104,6 @@ namespace NewsFactory.UI
 
             // Ensure the current window is active
             Window.Current.Activate();
-
-            if (isFreshStart)
-                DownloadFeedTask.RegisterBackgroundTask(DataService.Instance.Settings.SecondaryTileUpdateInterval);
         }
 
         /// <summary>

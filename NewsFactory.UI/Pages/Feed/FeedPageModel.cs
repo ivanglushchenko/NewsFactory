@@ -3,6 +3,7 @@ using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
+using NewsFactory.Tasks;
 using NewsFactory.UI.Pages.AppSettings;
 using NewsFactory.UI.Pages.FeedSettings;
 using NewsFactory.UI.Pages.PrivacyPolicy;
@@ -832,6 +833,8 @@ namespace NewsFactory.UI.Pages.Feed
 
             if (isPinned)
             {
+                DownloadFeedTask.RegisterBackgroundTask(DataService.Instance.Settings.SecondaryTileUpdateInterval);
+
                 try
                 {
                     IsPinned = SecondaryTile.Exists(Feed.Id);
