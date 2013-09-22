@@ -226,7 +226,11 @@ namespace NewsFactory.Foundation.Model
 
             var receiveDate = DateTime.Now;
             Settings.LastUpdated = receiveDate;
-            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () => ActiveFeedDownloads = feeds.Count);
+            await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    lock (_syncObject)
+                        ActiveFeedDownloads += feeds.Count;
+                });
 
             LogService.Info("Start updating many feeds ({0})", feeds.Count);
 
@@ -234,15 +238,22 @@ namespace NewsFactory.Foundation.Model
             {
                 await new JobDispatcher<NewsFeed>(30, async (feed) =>
                     {
-                        var newItems = await feed.DownloadFeed(receiveDate);
-                        if (newItems != null)
+                        try
                         {
-                            newItems = newItems.Where(i => !ItemsMap.ContainsKey(i.Url.ToString())).OrderBy(t => t.Published).ToList();
-                            if (newItems.Count > 0)
+                            var newItems = await feed.DownloadFeed(receiveDate);
+                            if (newItems != null)
                             {
-                                await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => AddItems(feed, newItems));
-                                await SaveFeed(feed);
+                                newItems = newItems.Where(i => !ItemsMap.ContainsKey(i.Url.ToString())).OrderBy(t => t.Published).ToList();
+                                if (newItems.Count > 0)
+                                {
+                                    await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => AddItems(feed, newItems));
+                                    await SaveFeed(feed);
+                                }
                             }
+                        }
+                        catch (Exception exc)
+                        {
+                            LogService.Error(exc);
                         }
 
                         await DataService.Instance.Invoke(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>

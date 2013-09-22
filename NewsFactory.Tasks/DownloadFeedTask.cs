@@ -31,7 +31,16 @@ namespace NewsFactory.Tasks
 
             try
             {
-                var status = await BackgroundExecutionManager.RequestAccessAsync();
+                var status = default(BackgroundAccessStatus);
+                try
+                {
+                    status = await BackgroundExecutionManager.RequestAccessAsync();
+                }
+                catch (Exception)
+                {
+                    //  this is a known issue.  If the user has already accepted the LockScreen access then this exception is thrown.  This should be fixed in newer versions.
+                    status = BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity;
+                }
                 if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
                 {
                     if (BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == TASK_NAME))
@@ -45,6 +54,8 @@ namespace NewsFactory.Tasks
                     builder.SetTrigger(new TimeTrigger((uint)refreshInterval, false));
                     builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
                     builder.Register();
+
+                    //UpdateAppTile("reg'ed");
                 }
             }
             catch (Exception ex)
@@ -59,29 +70,37 @@ namespace NewsFactory.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
-            var tiles = await SecondaryTile.FindAllAsync();
-            var newItemsCount = 0;
-            if (tiles.Count > 0)
+            try
             {
-                await DataService.Instance.Init();
-                var feedsStore = await FeedsStore.Get(DataService.Instance.Settings);
-                foreach (var item in tiles)
+                var tiles = await SecondaryTile.FindAllAsync();
+                var newItemsCount = 0;
+                if (tiles.Count > 0)
                 {
-                    var feedUrl = new Uri(item.Arguments, UriKind.Absolute);
-                    if (feedsStore.NewsFeedsMap.ContainsKey(feedUrl))
+                    await DataService.Instance.Init();
+                    var feedsStore = await FeedsStore.Get(DataService.Instance.Settings);
+                    foreach (var item in tiles)
                     {
-                        var newItems = await feedsStore.NewsFeedsMap[feedUrl].DownloadFeed();
-                        if (newItems.Count > 0)
-                            UpdateFeedTile(feedsStore.NewsFeedsMap[feedUrl].Id, newItems.Count, newItems.First().Title);
-                        newItemsCount += newItems.Count;
+                        var feedUrl = new Uri(item.Arguments, UriKind.Absolute);
+                        if (feedsStore.NewsFeedsMap.ContainsKey(feedUrl))
+                        {
+                            var newItems = await feedsStore.NewsFeedsMap[feedUrl].DownloadFeed();
+                            if (newItems.Count > 0)
+                                UpdateFeedTile(feedsStore.NewsFeedsMap[feedUrl].Id, newItems.Count, newItems.First().Title);
+                            newItemsCount += newItems.Count;
+                        }
                     }
                 }
             }
+            catch
+            {
+            }
+
+            UpdateAppTile("upd'ed");
 
             deferral.Complete();
         }
 
-        private void UpdateAppTile(string msg)
+        private static void UpdateAppTile(string msg)
         {
             var tileContent = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText03);
             var tileLines = tileContent.SelectNodes("tile/visual/binding/text");

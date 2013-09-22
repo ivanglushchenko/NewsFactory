@@ -15,6 +15,7 @@ using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -104,6 +105,19 @@ namespace NewsFactory.UI
 
             // Ensure the current window is active
             Window.Current.Activate();
+
+            if (isFreshStart)
+            {
+                try
+                {
+                    var secodaryTiles = await SecondaryTile.FindAllAsync();
+                    if (secodaryTiles.Count > 0)
+                        DownloadFeedTask.RegisterBackgroundTask(DataService.Instance.Settings.SecondaryTileUpdateInterval);
+                }
+                catch
+                {
+                }
+            }
         }
 
         /// <summary>
