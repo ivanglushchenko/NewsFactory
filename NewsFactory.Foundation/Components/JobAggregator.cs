@@ -105,6 +105,14 @@ namespace NewsFactory.Foundation.Components
             StartJobIfNeeded();
         }
 
+        public void Clear()
+        {
+            lock (_syncObject)
+            {
+                _jobData.Clear();
+            }
+        }
+
         private void StartJobIfNeeded()
         {
             lock (_syncObject)

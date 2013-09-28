@@ -436,6 +436,20 @@ namespace NewsFactory.Foundation.Model
                 ItemsMap.Clear();
                 _feedsStore.All.NewItemsCount = 0;
                 _feedsStore.Unread.NewItemsCount = 0;
+                _readItemsQueue.Clear();
+                _favIconsQueue.Clear();
+            }
+
+            try
+            {
+                var tiles = await SecondaryTile.FindAllAsync();
+                foreach (var tile in tiles)
+                {
+                    await tile.RequestDeleteAsync();
+                }
+            }
+            catch
+            {
             }
         }
 

@@ -95,7 +95,7 @@ namespace NewsFactory.Tasks
             {
             }
 
-            UpdateAppTile("upd'ed");
+            //UpdateAppTile("upd'ed");
 
             deferral.Complete();
         }

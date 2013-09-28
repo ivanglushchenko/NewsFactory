@@ -62,25 +62,29 @@ namespace NewsFactory.Foundation.Utils
         {
             if (string.IsNullOrWhiteSpace(content)) return new List<Paragraph>();
 
-            //var names = typeof(DataService).GetTypeInfo().Assembly.GetManifestResourceNames();
-            //var name = names.First(t => t.EndsWith("TextFile1.txt"));
-            //var stream = typeof(DataService).GetTypeInfo().Assembly.GetManifestResourceStream(name);
-            //content = new StreamReader(stream).ReadToEnd();
-
-            var doc = new HtmlDocument();
-            doc.OptionFixNestedTags = true;
-            doc.OptionAutoCloseOnEnd = true;
-            doc.LoadHtml(content);
-
-            _paragraphs = new List<Paragraph>() { new Paragraph() };
-            _rootLevelInlines = null;
-
-            foreach (var item in Convert(doc.DocumentNode.ChildNodes))
+            try
             {
-                _paragraphs.Last().Inlines.Add(item);
+                var doc = new HtmlDocument();
+                doc.OptionFixNestedTags = true;
+                doc.OptionAutoCloseOnEnd = true;
+                doc.LoadHtml(content);
+
+                _paragraphs = new List<Paragraph>() { new Paragraph() };
+                _rootLevelInlines = null;
+
+                foreach (var item in Convert(doc.DocumentNode.ChildNodes))
+                {
+                    _paragraphs.Last().Inlines.Add(item);
+                }
+
+                return _paragraphs;
+            }
+            catch (Exception exc)
+            {
+                LogService.Error(exc);
             }
 
-            return _paragraphs;
+            return new List<Paragraph>();
         }
 
         public void AssignXamlToItem(NewsItem newsItem)
