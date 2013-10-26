@@ -15,6 +15,8 @@ namespace NewsFactory.Foundation.Utils
             if (string.IsNullOrWhiteSpace(s)) return s;
 
             StringBuilder sbc = new StringBuilder(s);
+            sbc.Replace("&#150;", "-");
+            sbc.Replace("&#151;", "—");
             sbc.Replace("&#160;", " ");
             sbc.Replace("&gt;", ">");
             sbc.Replace("&lt;", "<");
