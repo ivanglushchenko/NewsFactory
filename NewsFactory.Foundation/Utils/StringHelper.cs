@@ -23,6 +23,8 @@ namespace NewsFactory.Foundation.Utils
             sbc.Replace("&quot;", "\"");
             sbc.Replace("&nbsp;", " ");
             sbc.Replace("&amp;", "&");
+            sbc.Replace("&#34;", "\"");
+            sbc.Replace("&#38;", "&");
             sbc.Replace("&#39;", "'");
             sbc.Replace("&#039;", "'");
             sbc.Replace("&#0039;", "'");
@@ -35,7 +37,10 @@ namespace NewsFactory.Foundation.Utils
             sbc.Replace("&#8220;", "\"");
             sbc.Replace("&#8221;", "\"");
             sbc.Replace("&#8230;", "...");
+            sbc.Replace("&#8242;", "'");
             sbc.Replace("&rsquo;", "'");
+            sbc.Replace("&laquo;", "\"");
+            sbc.Replace("&raquo;", "\"");
             return sbc.ToString();
         }
 
