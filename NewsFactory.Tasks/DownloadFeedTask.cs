@@ -102,7 +102,7 @@ namespace NewsFactory.Tasks
 
         private static void UpdateAppTile(string msg)
         {
-            var tileContent = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText03);
+            var tileContent = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150PeekImageAndText03);
             var tileLines = tileContent.SelectNodes("tile/visual/binding/text");
             var networkStatus = NetworkInformation.GetInternetConnectionProfile();
 

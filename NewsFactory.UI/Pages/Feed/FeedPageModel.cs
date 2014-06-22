@@ -828,7 +828,7 @@ namespace NewsFactory.UI.Pages.Feed
         {
             var tileActivationArguments = Feed.FeedInfo.Url.ToString();
             var logo = new Uri("ms-appx:///Assets/Logo.png", UriKind.Absolute);
-            var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, logo);
+            var secondaryTile = new SecondaryTile(Feed.Id, Feed.FeedInfo.Title, Feed.FeedInfo.Title, tileActivationArguments, TileOptions.ShowNameOnLogo, logo, logo);
             var isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect);
 
             if (isPinned)

@@ -47,8 +47,7 @@ namespace NewsFactory.UI.Pages.Feed
             _timer.Interval = TimeSpan.FromMilliseconds(400);
             _timer.Tick += _timer_Tick;
 
-            webView.LoadCompleted += webView_LoadCompleted;
-            webView.NavigationFailed += webView_NavigationFailed;
+            webView.NavigationCompleted += webView_NavigationCompleted;
 
             Loaded += FeedPage_Loaded;
         }
@@ -95,12 +94,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        void webView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
-        {
-            Model.IsBusy = false;
-        }
-
-        void webView_LoadCompleted(object sender, NavigationEventArgs e)
+        void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             Model.IsBusy = false;
         }
@@ -116,8 +110,7 @@ namespace NewsFactory.UI.Pages.Feed
         {
             rtbView.Blocks.Clear();
             XamlConverter.XamlUpdated -= OnImagesDownloaded;
-            webView.LoadCompleted -= webView_LoadCompleted;
-            webView.NavigationFailed -= webView_NavigationFailed;
+            webView.NavigationCompleted -= webView_NavigationCompleted;
             _timer.Tick -= _timer_Tick;
             _timer.Stop();
             _scrollBar.ValueChanged -= _scrollBar_ValueChanged;

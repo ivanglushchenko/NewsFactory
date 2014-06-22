@@ -214,7 +214,7 @@ namespace NewsFactory.Foundation.Utils
                     {
                         var url = node.Attributes["href"] != null ? node.Attributes["href"].Value : null;
                         var url2 = url != null ? new Uri(url, UriKind.RelativeOrAbsolute) : null;
-                        var link = new Hyperlink()
+                        var link = new NewsFactory.Foundation.Controls.Hyperlink()
                         {
                             Content = Clean(node.InnerText),
                             NavigationUrl = url2 != null && url2.IsAbsoluteUri ? url2 : null
