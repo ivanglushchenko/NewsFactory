@@ -150,6 +150,10 @@
                     <ColumnDefinition Width="8" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
                 <StackPanel Margin="2,0,0,0">
                     <Image Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,0">
@@ -168,12 +172,29 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,14,2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <TextBlock Text="{Binding SimiliarNewsItemsCount}"/>
                         <Ellipse Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         <Ellipse Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsClassifiedAsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsClassifiedAsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     </StackPanel>
                 </Grid>
+
+                <ItemsControl Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding SimiliarItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="+" Margin="9,0,10,0" VerticalAlignment="Center"/>
+                                <Image Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
+                                    </Image.Source>
+                                </Image>
+                                <TextBlock Text="{Binding Title}"  FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,0" TextTrimming="WordEllipsis" VerticalAlignment="Center" FontSize="10"/>
+                            </StackPanel>                            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
         </DataTemplate>
 

@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsFactory.UI", "NewsFactory.UI\NewsFactory.UI.csproj", "{40813447-FA67-4A71-8CE5-CE181BB4E298}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsFactory.Foundation", "NewsFactory.Foundation\NewsFactory.Foundation.csproj", "{A2C3BC0F-D292-4297-9C74-129CD9F4F449}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsFactory.Tasks", "NewsFactory.Tasks\NewsFactory.Tasks.csproj", "{7311746F-9131-4475-8FF5-F31B064EA083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsFactory.Tests", "NewsFactory.Tests\NewsFactory.Tests.csproj", "{9DC1D831-AC5B-4E05-9052-42D99944EC0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,30 @@ Global
 		{7311746F-9131-4475-8FF5-F31B064EA083}.Release|x64.Build.0 = Release|x64
 		{7311746F-9131-4475-8FF5-F31B064EA083}.Release|x86.ActiveCfg = Release|x86
 		{7311746F-9131-4475-8FF5-F31B064EA083}.Release|x86.Build.0 = Release|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|ARM.Build.0 = Debug|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|ARM.Deploy.0 = Debug|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x64.ActiveCfg = Debug|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x64.Build.0 = Debug|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x64.Deploy.0 = Debug|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x86.ActiveCfg = Debug|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x86.Build.0 = Debug|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Debug|x86.Deploy.0 = Debug|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|ARM.ActiveCfg = Release|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|ARM.Build.0 = Release|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|ARM.Deploy.0 = Release|ARM
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x64.ActiveCfg = Release|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x64.Build.0 = Release|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x64.Deploy.0 = Release|x64
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x86.ActiveCfg = Release|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x86.Build.0 = Release|x86
+		{9DC1D831-AC5B-4E05-9052-42D99944EC0B}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

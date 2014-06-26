@@ -392,6 +392,66 @@ namespace NewsFactory.Foundation.Model
         private List<Paragraph> p_DescriptionXamlUpdated;
         partial void OnDescriptionXamlUpdatedChanged();
 
+        [IgnoreDataMember]
+        public int SimiliarNewsItemsCount
+        {
+            get { return p_SimiliarNewsItemsCount; }
+            set
+            {
+                if (p_SimiliarNewsItemsCount != value)
+                {
+                    p_SimiliarNewsItemsCount = value;
+                    OnPropertyChanged("SimiliarNewsItemsCount");
+                }
+            }
+        }
+        [IgnoreDataMember]
+        int p_SimiliarNewsItemsCount;
+
+        /// <summary>
+        /// Gets/sets SimiliarItems.
+        /// </summary>
+        [IgnoreDataMember]
+        public ObservableCollection<NewsItem> SimiliarItems
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_SimiliarItems; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_SimiliarItems != value)
+                {
+                    p_SimiliarItems = value;
+                    OnPropertyChanged("SimiliarItems");
+                    OnSimiliarItemsChanged();
+                }
+            }
+        }
+        [IgnoreDataMember]
+        private ObservableCollection<NewsItem> p_SimiliarItems;
+        partial void OnSimiliarItemsChanged();
+
+        /// <summary>
+        /// Gets/sets IsHeadNewsItem.
+        /// </summary>
+        public bool IsHeadNewsItem
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_IsHeadNewsItem; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_IsHeadNewsItem != value)
+                {
+                    p_IsHeadNewsItem = value;
+                    OnPropertyChanged("IsHeadNewsItem");
+                    OnIsHeadNewsItemChanged();
+                }
+            }
+        }
+        private bool p_IsHeadNewsItem;
+        partial void OnIsHeadNewsItemChanged();
+
         #endregion Properties
 
         #region Methods

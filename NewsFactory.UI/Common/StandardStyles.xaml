@@ -26,6 +26,9 @@
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
+    <SolidColorBrush Color="#FB7213" x:Key="MainBrush"/>
+    <SolidColorBrush Color="#FB7213" x:Key="MainBrushDark"/>
+    
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
 
     <!-- RichTextBlock styles -->
@@ -363,7 +366,7 @@
         to simplify the use of glyphs from that font.  AutomationProperties.Name is used for the text below the glyph.
     -->
     <Style x:Key="AppBarButtonStyle" TargetType="ButtonBase">
-        <Setter Property="Foreground" Value="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
         <Setter Property="FontWeight" Value="Normal"/>
@@ -383,7 +386,7 @@
                             <TextBlock
                                 x:Name="TextLabel"
                                 Text="{TemplateBinding AutomationProperties.Name}"
-                                Foreground="{StaticResource AppBarItemForegroundThemeBrush}"
+                                Foreground="{TemplateBinding Foreground}"
                                 Margin="0,0,2,0"
                                 FontSize="12"
                                 TextAlignment="Center"

@@ -28,9 +28,6 @@
             <f:BooleanNegationConverter x:Key="BooleanNegationConverter" />
             <f:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
-            <SolidColorBrush Color="#FB7213" x:Key="MainBrush"/>
-            <SolidColorBrush Color="#FB7213" x:Key="MainBrushDark"/>
-
             <LinearGradientBrush x:Key="HeaderBackground" StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#909090" Offset="0"/>
                 <GradientStop Color="#d0d0d0" Offset="0.5"/>

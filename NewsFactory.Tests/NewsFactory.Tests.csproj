@@ -6,17 +6,19 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A2C3BC0F-D292-4297-9C74-129CD9F4F449}</ProjectGuid>
+    <ProjectGuid>{9DC1D831-AC5B-4E05-9052-42D99944EC0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NewsFactory.Foundation</RootNamespace>
-    <AssemblyName>NewsFactory.Foundation</AssemblyName>
+    <RootNamespace>NewsFactory.Tests</RootNamespace>
+    <AssemblyName>NewsFactory.Tests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
-    <TargetFrameworkVersion />
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>NewsFactory.Tests_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxBundle>Never</AppxBundle>
+    <AllowCrossPlatformRetargeting>False</AllowCrossPlatformRetargeting>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,84 +103,44 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <AppXPackage>True</AppXPackage>
+    <AppxPackageIncludePrivateSymbols>true</AppxPackageIncludePrivateSymbols>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Base\DelegateCommand.cs" />
-    <Compile Include="Base\PageModel.cs" />
-    <Compile Include="Base\Service.cs" />
-    <Compile Include="Base\TrackableObject.cs" />
-    <Compile Include="Common\BindableBase.cs" />
-    <Compile Include="Common\BooleanNegationConverter.cs" />
-    <Compile Include="Common\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Common\LayoutAwarePage.cs" />
-    <Compile Include="Common\RichTextColumns.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Common\WordIndex.cs" />
-    <Compile Include="Components\JobDispatcher.cs" />
-    <Compile Include="Components\JobAggregator.cs" />
-    <Compile Include="Controls\BetterToggleButton.cs" />
-    <Compile Include="Controls\Hyperlink.cs" />
-    <Compile Include="Controls\Option.cs" />
-    <Compile Include="Controls\OptionConverter.cs" />
-    <Compile Include="Controls\OptionSlider.cs" />
-    <Compile Include="Converters\BooleanNegationConverter.cs" />
-    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\CategoryColorConverter.cs" />
-    <Compile Include="Converters\CP2Visibility.cs" />
-    <Compile Include="Converters\FalseToVisiblityConverter.cs" />
-    <Compile Include="Converters\FormatConverter.cs" />
-    <Compile Include="Converters\NotCP2Visibility.cs" />
-    <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Converters\TrueToVisibilityConverter.cs" />
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\FeedInfo.cs" />
-    <Compile Include="Model\FeedOrderMode.cs" />
-    <Compile Include="Model\FeedsStore.cs" />
-    <Compile Include="Model\FeedStatus.cs" />
-    <Compile Include="Model\Group.cs" />
-    <Compile Include="Model\ItemStatus.cs" />
-    <Compile Include="Model\NewsFeed.cs" />
-    <Compile Include="Model\NewsItem.cs" />
-    <Compile Include="Model\NewsStore.cs" />
-    <Compile Include="Model\Settings.cs" />
-    <Compile Include="Notifications\BadgeContent.cs" />
-    <Compile Include="Notifications\Common.cs" />
-    <Compile Include="Notifications\ContentInterfaces.cs" />
-    <Compile Include="Notifications\TileContent.cs" />
-    <Compile Include="Notifications\ToastContent.cs" />
+    <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
+    <SDKReference Include="MSTestFramework, Version=11.0" />
+    <SDKReference Include="TestPlatform, Version=11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ClassifierService.cs" />
-    <Compile Include="Services\DataService.cs" />
-    <Compile Include="Services\LogService.cs" />
-    <Compile Include="Services\MsgService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Utils\GeneralHelper.cs" />
-    <Compile Include="Utils\HttpHelper.cs" />
-    <Compile Include="Utils\IOHelper.cs" />
-    <Compile Include="Utils\SerializerHelper.cs" />
-    <Compile Include="Utils\StringHelper.cs" />
-    <Compile Include="Utils\UriHelper.cs" />
-    <Compile Include="Utils\XamlConverter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\winrt45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Common\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Common\StandardStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    </AppxManifest>
+    <None Include="NewsFactory.Tests_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\UnitTestLogo.scale-100.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestSmallLogo.scale-100.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestSplashScreen.scale-100.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestStoreLogo.scale-100.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsFactory.Foundation\NewsFactory.Foundation.csproj">
+      <Project>{a2c3bc0f-d292-4297-9c74-129cd9f4f449}</Project>
+      <Name>NewsFactory.Foundation</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -187,7 +149,7 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>
+  </Target>  
   <Target Name="AfterBuild">
   </Target>
   -->

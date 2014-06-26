@@ -1,4 +1,5 @@
 ﻿using NewsFactory.Foundation.Base;
+using NewsFactory.Foundation.Common;
 using NewsFactory.Foundation.Components;
 using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
@@ -591,6 +592,15 @@ namespace NewsFactory.UI.Pages.Feed
 
             Items = DataService.NewsStore.GetItems(feed);
             SelectedItem = Items.FirstOrDefault();
+
+            var wordIndex = new WordIndex();
+            wordIndex.AddRange(Items);
+
+            foreach (var item in Items)
+            {
+                wordIndex.DiscoverSimiliarItems(item);
+            }
+
 
             try
             {
