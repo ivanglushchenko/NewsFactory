@@ -593,14 +593,8 @@ namespace NewsFactory.UI.Pages.Feed
             Items = DataService.NewsStore.GetItems(feed);
             SelectedItem = Items.FirstOrDefault();
 
-            var wordIndex = new WordIndex();
-            wordIndex.AddRange(Items);
-
-            foreach (var item in Items)
-            {
-                wordIndex.DiscoverSimiliarItems(item);
-            }
-
+            //var wordIndex = new WordIndex();
+            //wordIndex.AddRange(Items);
 
             try
             {
@@ -778,10 +772,13 @@ namespace NewsFactory.UI.Pages.Feed
         {
             if (SelectedItem == null) return; 
             
-            var i = Items.IndexOf(SelectedItem);
+            var i = Items.IndexOf(SelectedItem) - 1;
+            while (i > 0 && Items[i].IsChildNewsItem)
+                i--;
+
             if (i > 0)
             {
-                SelectedItem = Items[i - 1];
+                SelectedItem = Items[i];
             }
         }
 
@@ -789,10 +786,13 @@ namespace NewsFactory.UI.Pages.Feed
         {
             if (SelectedItem == null) return;
 
-            var i = Items.IndexOf(SelectedItem);
+            var i = Items.IndexOf(SelectedItem) + 1;
+            while (i < Items.Count + 1 && Items[i].IsChildNewsItem)
+                i++;
+
             if (i < Items.Count - 1)
             {
-                SelectedItem = Items[i + 1];
+                SelectedItem = Items[i];
             }
         }
 

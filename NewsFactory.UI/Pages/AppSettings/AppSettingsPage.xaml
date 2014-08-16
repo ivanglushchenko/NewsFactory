@@ -68,6 +68,9 @@
 
                 <TextBlock Margin="9,20,0,0" Text="If you deleted all news and would like to see old items again, please reset the feeds" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                 <Button Margin="5,2,0,0" Content="Reset all feeds" Command="{Binding ResetAllFeedsCommand}" />
+
+                <TextBlock Margin="9,20,0,0" Text="You can refresh all feed's icons in one click" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
+                <Button Margin="5,2,0,0" Content="Refresh all icons" Command="{Binding RefreshAllIconsCommand}"/>
             </StackPanel>
 
             <VisualStateManager.VisualStateGroups>

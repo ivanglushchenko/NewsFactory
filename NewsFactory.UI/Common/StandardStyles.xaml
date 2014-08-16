@@ -673,7 +673,26 @@
                 <ControlTemplate TargetType="ButtonBase">
                     <Grid x:Name="RootGrid" Background="Transparent">
 
-                        <Grid Name="backgroundGrid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{StaticResource NextBckgButtonBrush}" />
+                        <Path Name="backgroundGrid" Stroke="LightGray" StrokeThickness="1" Fill="#60CCCCFF">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigureCollection>
+                                                <PathFigure IsClosed="true" StartPoint="40,0">
+                                                    <PathFigure.Segments>
+                                                        <PathSegmentCollection>
+                                                            <ArcSegment Point="40,400" Size="10,30" />
+                                                        </PathSegmentCollection>
+                                                    </PathFigure.Segments>
+                                                </PathFigure>
+                                            </PathFigureCollection>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+
                         <Path Name="path" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="Gray" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -690,7 +709,7 @@
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="DarkGray"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="Fill">
@@ -700,7 +719,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Gray"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="Fill">
@@ -710,7 +729,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="#ffe6e6e6"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -731,7 +750,29 @@
                 <ControlTemplate TargetType="ButtonBase">
                     <Grid x:Name="RootGrid" Background="Transparent">
 
-                        <Grid Name="backgroundGrid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{StaticResource PrevBckgButtonBrush}" />
+                        <!--<Ellipse Name="backgroundGrid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" />-->
+                        
+                        <Path Name="backgroundGrid" Stroke="Black" StrokeThickness="1" Fill="#CCCCFF">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigureCollection>
+                                                <PathFigure IsClosed="true" StartPoint="-20,300">
+                                                    <PathFigure.Segments>
+                                                        <PathSegmentCollection>
+                                                            <ArcSegment Point="-20,0" Size="10,20" RotationAngle="00" />
+                                                        </PathSegmentCollection>
+                                                    </PathFigure.Segments>
+                                                </PathFigure>
+                                            </PathFigureCollection>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+
+                        <!--<Grid Name="backgroundGrid" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{StaticResource PrevBckgButtonBrush}" />-->
                         <Path  Name="path" Data="F1M646.688,13.5518L646.783,13.4593 646.965,13.639 668.383,35.0583 689.459,35.0583 665.155,10.751 657.503,3.10126 657.323,2.92023 664.876,-4.63837 689.184,-28.9417 668.109,-28.9417 646.688,-7.52637 636.15,3.01398 646.688,13.5518z" Stretch="Uniform" Fill="Gray" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -748,7 +789,7 @@
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="DarkGray"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="Fill">
@@ -758,7 +799,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Gray"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="Fill">
@@ -768,7 +809,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Background">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundGrid" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="#ffe6e6e6"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="Fill">

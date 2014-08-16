@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,12 +39,31 @@ namespace NewsFactory.Foundation.Common
 
         #region Methods
 
-        public void AddRange(IEnumerable<NewsItem> items)
+        public void AddRange(IList<NewsItem> items)
         {
+            var sw = new Stopwatch();
+            sw.Start();
+            foreach (var item in items)
+            {
+                item.SimiliarItems = null;
+                item.IsHeadNewsItem = true;
+                item.IsChildNewsItem = false;
+            }
             foreach (var item in items)
             {
                 Add(item);
             }
+            foreach (var item in items.Where(t => t.SimiliarItems != null && t.IsHeadNewsItem).ToList())
+            {
+                var i = items.IndexOf(item);
+                foreach (var child in item.SimiliarItems)
+                {
+                    items.Remove(child);
+                    items.Insert(++i, child);
+                }
+            }
+            sw.Stop();
+            System.Diagnostics.Debug.WriteLine("Elapsed: {0}", sw.Elapsed);
         }
 
         public void AddRange(IEnumerable<string> items)
@@ -65,9 +85,15 @@ namespace NewsFactory.Foundation.Common
                 if (sim > SIMILIARITY_THRESHOLD)
                 {
                     if (existingItem.Key.SimiliarItems == null)
+                    {
                         existingItem.Key.SimiliarItems = new ObservableCollection<NewsItem>();
+                    }
+
                     existingItem.Key.SimiliarItems.Add(item);
                     item.SimiliarItems = existingItem.Key.SimiliarItems;
+                    item.IsHeadNewsItem = false;
+                    item.IsChildNewsItem = true;
+                    break;
                 }
             }
 
@@ -98,31 +124,6 @@ namespace NewsFactory.Foundation.Common
         public HashSet<int> WordToVector(IEnumerable<string> words)
         {
             return new HashSet<int>(words.Where(t => _words.ContainsKey(t)).Select(t => _words[t].Index));
-        }
-
-        public void DiscoverSimiliarItems(NewsItem newsItem)
-        {
-            if (newsItem.SimiliarItems != null)
-                return;
-
-            //var r = 
-            //    _newsItemsVectors
-            //    .Where(t => t.Key != newsItem)
-            //    .Select(t => new Tuple<NewsItem, double>(t.Key, GetSimiliarity(t.Key, newsItem)))
-            //    .Where(t => t.Item2 >= 0.6)
-            //    .OrderByDescending(t => t.Item2)
-            //    .ToList();
-            //newsItem.SimiliarNewsItemsCount = r.Count;
-            //newsItem.SimiliarItems = new ObservableCollection<NewsItem>(r.Select(t => t.Item1));
-
-            //foreach (var item in r)
-            //{
-            //    if (item.Item1.SimiliarItems != null)
-            //        throw new NotSupportedException();
-
-            //    item.Item1.SimiliarItems = newsItem.SimiliarItems;
-            //    item.Item1.SimiliarNewsItemsCount = r.Count;
-            //}
         }
 
         IEnumerable<string> ToWords(string line)

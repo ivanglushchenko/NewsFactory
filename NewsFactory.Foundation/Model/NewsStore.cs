@@ -287,6 +287,11 @@ namespace NewsFactory.Foundation.Model
             }
         }
 
+        public void RefreshAllIcons()
+        {
+            _favIconsQueue.AddRange(_feedsStore.NewsFeeds.ToList());
+        }
+
         private async Task OnGetFavIcon(List<NewsFeed> feeds)
         {
             var feed = feeds.Single();
@@ -364,6 +369,9 @@ namespace NewsFactory.Foundation.Model
             {
                 if (item.MarkAsRead())
                     readItems.Add(item.Url.ToString());
+
+                if (item.IsHeadNewsItem && item.SimiliarItems != null)
+                    MarkAsRead(item.SimiliarItems);
             }
             if (readItems.Count > 0)
                 _readItemsQueue.AddRange(readItems);

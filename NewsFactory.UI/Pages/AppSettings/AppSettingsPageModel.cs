@@ -21,6 +21,7 @@ namespace NewsFactory.UI.Pages.AppSettings
         public AppSettingsPageModel()
         {
             ResetAllFeedsCommand = new DelegateCommand(ResetAllFeeds);
+            RefreshAllIconsCommand = new DelegateCommand(RefreshAllIcons);
         }
 
         #endregion .ctors
@@ -48,6 +49,27 @@ namespace NewsFactory.UI.Pages.AppSettings
         private DelegateCommand p_ResetAllFeedsCommand;
         partial void OnResetAllFeedsCommandChanged();
 
+        /// <summary>
+        /// Gets/sets RefreshAllIconsCommand.
+        /// </summary>
+        public DelegateCommand RefreshAllIconsCommand
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_RefreshAllIconsCommand; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_RefreshAllIconsCommand != value)
+                {
+                    p_RefreshAllIconsCommand = value;
+                    OnPropertyChanged("RefreshAllIconsCommand");
+                    OnRefreshAllIconsCommandChanged();
+                }
+            }
+        }
+        private DelegateCommand p_RefreshAllIconsCommand;
+        partial void OnRefreshAllIconsCommandChanged();
+
         #endregion Properties
 
         #region Methods
@@ -66,6 +88,11 @@ namespace NewsFactory.UI.Pages.AppSettings
             {
                 item.FeedInfo.LastPub = DateTime.MinValue;
             }
+        }
+
+        void RefreshAllIcons()
+        {
+            DataService.NewsStore.RefreshAllIcons();
         }
 
         #endregion Methods

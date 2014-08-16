@@ -392,22 +392,6 @@ namespace NewsFactory.Foundation.Model
         private List<Paragraph> p_DescriptionXamlUpdated;
         partial void OnDescriptionXamlUpdatedChanged();
 
-        [IgnoreDataMember]
-        public int SimiliarNewsItemsCount
-        {
-            get { return p_SimiliarNewsItemsCount; }
-            set
-            {
-                if (p_SimiliarNewsItemsCount != value)
-                {
-                    p_SimiliarNewsItemsCount = value;
-                    OnPropertyChanged("SimiliarNewsItemsCount");
-                }
-            }
-        }
-        [IgnoreDataMember]
-        int p_SimiliarNewsItemsCount;
-
         /// <summary>
         /// Gets/sets SimiliarItems.
         /// </summary>
@@ -449,8 +433,29 @@ namespace NewsFactory.Foundation.Model
                 }
             }
         }
-        private bool p_IsHeadNewsItem;
+        private bool p_IsHeadNewsItem = true;
         partial void OnIsHeadNewsItemChanged();
+
+        /// <summary>
+        /// Gets/sets IsChildNewsItem.
+        /// </summary>
+        public bool IsChildNewsItem
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return p_IsChildNewsItem; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (p_IsChildNewsItem != value)
+                {
+                    p_IsChildNewsItem = value;
+                    OnPropertyChanged("IsChildNewsItem");
+                    OnIsChildNewsItemChanged();
+                }
+            }
+        }
+        private bool p_IsChildNewsItem;
+        partial void OnIsChildNewsItemChanged();
 
         #endregion Properties
 

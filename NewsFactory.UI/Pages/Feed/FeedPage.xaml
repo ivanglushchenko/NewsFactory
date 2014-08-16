@@ -24,9 +24,10 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="TabNavigation" Value="Local"/>
             <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Margin" Value="0,0,18,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -52,17 +53,14 @@
                                 <VisualStateGroup x:Name="SelectionStates">
                                     <VisualState x:Name="Unselecting">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HintGlyphBorder"/>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Unselected">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HintGlyphBorder"/>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="UnselectedPointerOver">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HintGlyphBorder"/>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="contentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
                                             </ObjectAnimationUsingKeyFrames>
@@ -70,15 +68,11 @@
                                     </VisualState>
                                     <VisualState x:Name="UnselectedSwiping">
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0" To="0.5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectingGlyph"/>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HintGlyphBorder"/>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Selecting">
                                         <Storyboard>
                                             <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectionBackground"/>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectingGlyph"/>
-                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HintGlyphBorder"/>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="contentPresenter">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
                                             </ObjectAnimationUsingKeyFrames>
@@ -112,24 +106,14 @@
                             </VisualStateManager.VisualStateGroups>
 
                             <Grid x:Name="ReorderHintContent" Background="Transparent">
-                                <Path x:Name="SelectingGlyph" Data="F1 M133.1,17.9 L137.2,13.2 L144.6,19.6 L156.4,5.8 L161.2,9.9 L145.6,28.4 z" Fill="{StaticResource ListViewItemCheckSelectingThemeBrush}" FlowDirection="LeftToRight" HorizontalAlignment="Right" Height="13" Margin="0,9.5,9.5,0" Opacity="0" Stretch="Fill" VerticalAlignment="Top" Width="15"/>
-                                <Border x:Name="HintGlyphBorder" HorizontalAlignment="Right" Height="40" Margin="4" Opacity="0" VerticalAlignment="Top" Width="40">
-                                    <Path x:Name="HintGlyph" Data="F1 M133.1,17.9 L137.2,13.2 L144.6,19.6 L156.4,5.8 L161.2,9.9 L145.6,28.4 z" Fill="{StaticResource ListViewItemCheckHintThemeBrush}" FlowDirection="LeftToRight" HorizontalAlignment="Right" Height="13" Margin="0,5.5,5.5,0" Opacity="0" Stretch="Fill" VerticalAlignment="Top" Width="15"/>
-                                </Border>
                                 <Border x:Name="ContentContainer">
                                     <Grid x:Name="InnerDragContent">
-                                        <Rectangle x:Name="PointerOverBorder" Fill="{StaticResource ListViewItemPointerOverBackgroundThemeBrush}" IsHitTestVisible="False" Margin="1" Opacity="0"/>
-                                        <Rectangle x:Name="FocusVisual" IsHitTestVisible="False" Opacity="0" Stroke="{StaticResource ListViewItemFocusBorderThemeBrush}" StrokeThickness="2"/>
                                         <Rectangle x:Name="SelectionBackground" Fill="{StaticResource MainBrushDark}" Margin="0" Opacity="0"/>
                                         <Border x:Name="ContentBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="4,0,0,0">
                                             <Grid>
                                                 <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                                <TextBlock x:Name="PlaceholderTextBlock" Foreground="{x:Null}" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" Opacity="0" Text="Xg"/>
-                                                <Rectangle x:Name="PlaceholderRect" Fill="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" IsHitTestVisible="False" Visibility="Collapsed"/>
-                                                <Rectangle x:Name="MultiArrangeOverlayBackground" Fill="{StaticResource ListViewItemDragBackgroundThemeBrush}" IsHitTestVisible="False" Opacity="0"/>
                                             </Grid>
                                         </Border>
-                                        <TextBlock x:Name="MultiArrangeOverlayText" Foreground="{StaticResource ListViewItemDragForegroundThemeBrush}" FontSize="26.667" FontFamily="{StaticResource ContentControlThemeFontFamily}" IsHitTestVisible="False" Margin="18,9,0,0" Opacity="0" TextWrapping="Wrap" Text="{Binding TemplateSettings.DragItemsCount, RelativeSource={RelativeSource Mode=TemplatedParent}}" TextTrimming="WordEllipsis"/>
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -144,57 +128,55 @@
         </Style>
 
         <DataTemplate x:Key="DT_ListItem">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="8" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid Visibility="{Binding IsHeadNewsItem, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,4,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Margin="2,0,0,0">
-                    <Image Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,0">
+                    <StackPanel Margin="2,0,0,0">
+                        <Image Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,0">
+                            <Image.Source>
+                                <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="{Binding Published, Converter={StaticResource FormatConverter}, ConverterParameter=MM/dd}" FontSize="10"/>
+                    </StackPanel>
+
+                    <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding Title}"  FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,16" TextTrimming="WordEllipsis" />
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="12"/>
+                            <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" FontSize="12" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,14,2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <Ellipse Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Ellipse Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsClassifiedAsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsClassifiedAsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <StackPanel x:Name="spSim" Margin="0,1" Visibility="{Binding IsChildNewsItem, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Horizontal" Height="15">
+                    <TextBlock FontSize="11" Text="Similiar: " Margin="37,0,8,0" VerticalAlignment="Center"/>
+                    <Image Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,8,0">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
                         </Image.Source>
                     </Image>
-                    <TextBlock Text="{Binding Published, Converter={StaticResource FormatConverter}, ConverterParameter=MM/dd}" FontSize="10"/>
+                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,0" TextTrimming="WordEllipsis" FontSize="11"/>
+                    <TextBlock Text="," Margin="0,0,4,0" FontSize="11" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" VerticalAlignment="Center" FontSize="11" />
                 </StackPanel>
 
-                <Grid Grid.Column="2" HorizontalAlignment="Stretch">
-                    <TextBlock Text="{Binding Title}"  FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,16" TextTrimming="WordEllipsis" />
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                        <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="12"/>
-                        <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" FontSize="12" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,0,14,2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding SimiliarNewsItemsCount}"/>
-                        <Ellipse Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Ellipse Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Green" StrokeThickness="1" Fill="Green" Visibility="{Binding IsClassifiedAsLike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Rectangle Margin="2,0,0,0" Width="9" Height="9" Stroke="Red" StrokeThickness="1" Fill="Red" Visibility="{Binding IsClassifiedAsDislike, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </StackPanel>
-                </Grid>
-
-                <ItemsControl Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding SimiliarItems}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="+" Margin="9,0,10,0" VerticalAlignment="Center"/>
-                                <Image Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
-                                    <Image.Source>
-                                        <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
-                                    </Image.Source>
-                                </Image>
-                                <TextBlock Text="{Binding Title}"  FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,0" TextTrimming="WordEllipsis" VerticalAlignment="Center" FontSize="10"/>
-                            </StackPanel>                            
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <Border BorderThickness="0,0,0,1" BorderBrush="#d0d0d0" Margin="-11,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
             </Grid>
         </DataTemplate>
 
@@ -259,13 +241,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="87"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="87"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="primaryColumn" Width="3*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
+        <Border Background="#323232" Grid.RowSpan="3" />
+        
         <StackPanel x:Name="spClockAndStatus" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="2" Orientation="Horizontal" Height="87">
             <Viewbox HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2" MaxHeight="63" Margin="0,1,10,5">
                 <Image Margin="0,0,0,0" Width="0" Height="0" ImageOpened="Image_ImageOpened_1">
@@ -306,7 +290,7 @@
                 Click="GoBack"
                 IsEnabled="{Binding DefaultViewModel.CanGoBack, ElementName=pageRoot}"
                 VerticalAlignment="Center"
-                Margin="40,0,0,0"
+                Margin="0,0,0,0"
                 Style="{StaticResource BackButtonStyle}"
                 />
             <StackPanel Orientation="Horizontal" Grid.Column="1">
@@ -320,8 +304,6 @@
             </StackPanel>
         </Grid>
 
-
-        <!---->
         <!-- Vertical scrolling item list -->
         <ListView
             x:Name="itemListView"
@@ -330,7 +312,7 @@
             TabIndex="1"
             Grid.Row="1"
             Margin="0,0,0,0"
-            Padding="45,0,0,30"
+            Padding="0,0,0,0"
             HorizontalContentAlignment="Stretch"
             ItemsSource="{Binding Items}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -377,157 +359,21 @@
             </ScrollViewer>            
         </Grid>
 
-        <RepeatButton Style="{StaticResource ShowPrevButtonStyle}" Command="{Binding GoToPrevItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="220" />
-        <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="220" />
+        <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
         <ProgressBar Margin="0,0,0,0" Grid.ColumnSpan="2" IsIndeterminate="True" Height="10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Visibility="{Binding IsBusy, Mode=TwoWay, Converter={StaticResource TrueToVisibilityConverter}}"/>
         
         <VisualStateManager.VisualStateGroups>
-
             <!-- Visual states reflect the application's view state -->
             <VisualStateGroup x:Name="ApplicationViewStates">
                 <VisualState x:Name="FullScreenLandscapeOrWide">
                     <Storyboard>
-                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Yellow"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedBackButtonStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="VerticalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Top"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="abBottom" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC1" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC1" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC1" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC1" Storyboard.TargetProperty="VerticalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Top"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC1" Storyboard.TargetProperty="FontSize">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="22"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC2" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC2" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC2" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC2" Storyboard.TargetProperty="VerticalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Top"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC2" Storyboard.TargetProperty="FontSize">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="22"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC3" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC3" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC3" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC3" Storyboard.TargetProperty="VerticalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Top"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtC3" Storyboard.TargetProperty="FontSize">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="22"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="primaryColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="320"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="spClockAndStatus" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="ItemTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <DataTemplate>
-                                        <Grid Margin="0,10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="8" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <StackPanel Margin="2,0,0,0" VerticalAlignment="Center">
-                                                <Image Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                                    <Image.Source>
-                                                        <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
-                                                    </Image.Source>
-                                                </Image>
-                                                <TextBlock Text="{Binding Published, Converter={StaticResource FormatConverter}, ConverterParameter=MM/dd}" FontSize="10"/>
-                                            </StackPanel>
-
-                                            <Grid Grid.Column="2" HorizontalAlignment="Stretch">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="2"/>
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Text="{Binding Title}"  FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" Margin="0,0,0,0" TextWrapping="Wrap" />
-                                                <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                                    <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="12"/>
-                                                    <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" FontSize="12" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="20,0,0,0"/>
-                        </ObjectAnimationUsingKeyFrames>-->
                     </Storyboard>
                 </VisualState>
 
                 <!-- Filled uses a simpler list format in a narrower column -->
                 <VisualState x:Name="FilledOrNarrow">
                     <Storyboard>
-                        <!--
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="YellowGreen"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="primaryColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="420"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="ItemTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Standard80ItemTemplate}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="60,0,66,0"/>
-                        </ObjectAnimationUsingKeyFrames>-->
                     </Storyboard>
                 </VisualState>
 
@@ -628,13 +474,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="45,0,0,30"/>
                         </ObjectAnimationUsingKeyFrames>
-                        
-                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="100,0,90,60"/>
-                        </ObjectAnimationUsingKeyFrames>-->
                     </Storyboard>
                 </VisualState>
 
@@ -647,34 +486,6 @@
                  -->
                 <VisualState x:Name="FullScreenPortrait_Detail">
                     <Storyboard>
-                        <!--
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Red"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PortraitBackButtonStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="primaryColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="(Grid.Row)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="(Grid.RowSpan)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="(Grid.Column)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetailGrid" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,0,60"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="100,0,90,0"/>
-                        </ObjectAnimationUsingKeyFrames>-->
                     </Storyboard>
                 </VisualState>
 
@@ -792,49 +603,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Pink"/>
                         </ObjectAnimationUsingKeyFrames>
-                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedBackButtonStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="primaryColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemListView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="(Grid.Row)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="(Grid.RowSpan)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="titlePanel" Storyboard.TargetProperty="(Grid.Column)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetailTitlePanel" Storyboard.TargetProperty="(Grid.Row)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetailTitlePanel" Storyboard.TargetProperty="(Grid.Column)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetail" Storyboard.TargetProperty="Padding">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="20,0,20,0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemDetailGrid" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,0,60"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemTitle" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TitleTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemTitle" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemSubtitle" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CaptionTextStyle}"/>
-                        </ObjectAnimationUsingKeyFrames>-->
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
