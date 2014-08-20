@@ -162,6 +162,7 @@
     </Compile>
     <Compile Include="Pages\Feed\FeedPageModel.cs" />
     <Compile Include="Pages\Feed\LastUpdatedConverter.cs" />
+    <Compile Include="Pages\Feed\NewItemForegroundConverter.cs" />
     <Compile Include="Pages\ImportFeeds\FeedModel.cs" />
     <Compile Include="Pages\ImportFeeds\ImportFeedsView.xaml.cs">
       <DependentUpon>ImportFeedsView.xaml</DependentUpon>

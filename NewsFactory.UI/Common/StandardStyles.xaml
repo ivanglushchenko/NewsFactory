@@ -673,16 +673,16 @@
                 <ControlTemplate TargetType="ButtonBase">
                     <Grid x:Name="RootGrid" Background="Transparent">
 
-                        <Path Name="backgroundGrid" Stroke="LightGray" StrokeThickness="1" Fill="#60CCCCFF">
+                        <Path Name="backgroundGrid" Stroke="LightGray" StrokeThickness="1" Fill="#60CCCCCC">
                             <Path.Data>
                                 <GeometryGroup>
                                     <PathGeometry>
                                         <PathGeometry.Figures>
                                             <PathFigureCollection>
-                                                <PathFigure IsClosed="true" StartPoint="40,0">
+                                                <PathFigure IsClosed="true" StartPoint="50,0">
                                                     <PathFigure.Segments>
                                                         <PathSegmentCollection>
-                                                            <ArcSegment Point="40,400" Size="10,30" />
+                                                            <ArcSegment Point="50,500" Size="10,40" />
                                                         </PathSegmentCollection>
                                                     </PathFigure.Segments>
                                                 </PathFigure>
@@ -1997,14 +1997,15 @@
         <Setter Property="AutomationProperties.AutomationId" Value="BackButton"/>
         <Setter Property="AutomationProperties.Name" Value="Back"/>
         <Setter Property="AutomationProperties.ItemType" Value="Navigation Button"/>
+        <Setter Property="Foreground" Value="{StaticResource BackButtonBackgroundThemeBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="RootGrid">
                         <Grid Margin="-1,-16,0,0">
                             <TextBlock x:Name="BackgroundGlyph" Text="&#xE0A8;" Foreground="{StaticResource BackButtonBackgroundThemeBrush}"/>
-                            <TextBlock x:Name="NormalGlyph" Text="{StaticResource BackButtonGlyph}" Foreground="{StaticResource BackButtonForegroundThemeBrush}"/>
-                            <TextBlock x:Name="ArrowGlyph" Text="&#xE0A6;" Foreground="{StaticResource BackButtonPressedForegroundThemeBrush}" Opacity="0"/>
+                            <TextBlock x:Name="NormalGlyph" Text="{StaticResource BackButtonGlyph}" Foreground="{TemplateBinding Foreground}"/>
+                            <TextBlock x:Name="ArrowGlyph" Text="&#xE0A6;" Foreground="{TemplateBinding Foreground}" Opacity="0"/>
                         </Grid>
                         <Rectangle
                             x:Name="FocusVisualWhite"
