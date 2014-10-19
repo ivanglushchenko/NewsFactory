@@ -69,7 +69,8 @@ namespace NewsFactory.UI.Pages.Feed
 
         #region Fields
 
-        private DispatcherTimer _timer;
+        DispatcherTimer _timer;
+        NewsItem _previousSelectedItem;
 
         #endregion Fields
 
@@ -596,6 +597,8 @@ namespace NewsFactory.UI.Pages.Feed
             //var wordIndex = new WordIndex();
             //wordIndex.AddRange(Items);
 
+            //AssignRenderingModes();
+
             try
             {
                 IsPinned = SecondaryTile.Exists(feed.Id);
@@ -681,10 +684,29 @@ namespace NewsFactory.UI.Pages.Feed
 
         partial void OnSelectedItemChanged()
         {
-            if (SelectedItem != null && SelectedItem.IsNew)
+            if (_previousSelectedItem != null)
             {
-                DataService.NewsStore.MarkAsRead(SelectedItem);
+                _previousSelectedItem.RenderingMode = ItemRenderingMode.NotSelectedOld;
             }
+
+            if (SelectedItem != null)
+            {
+                if (SelectedItem.IsNew)
+                    DataService.NewsStore.MarkAsRead(SelectedItem);
+                SelectedItem.RenderingMode = ItemRenderingMode.Selected;
+            }
+
+            //if (_previousSelectedItem != null)
+            //{
+            //    if (_previousSelectedItem.IsNew)
+            //        DataService.NewsStore.MarkAsRead(_previousSelectedItem);
+            //    _previousSelectedItem.RenderingMode = ItemRenderingMode.NotSelectedOld;
+            //}
+
+            _previousSelectedItem = SelectedItem;
+
+            //if (SelectedItem != null)
+            //    SelectedItem.RenderingMode = ItemRenderingMode.Selected;
         }
 
         private async void RefreshFeed()

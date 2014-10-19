@@ -10,13 +10,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:c="using:NewsFactory.Foundation.Controls"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Page.Resources>
         <local2:FeedItemFontWeightConverter x:Key="FeedItemFontWeightConverter" />
         <local2:NewItemForegroundConverter x:Key="NewItemForegroundConverter"/>
         <local2:LastUpdatedConverter x:Key="LastUpdatedConverter" />
+        <local2:IdentityConverter x:Key="IdentityConverter" />
 
+        <!--#E86100"  EC5800-->
+        <SolidColorBrush x:Key="OrangeSelection" Color="#FB7213" />
+        
         <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
@@ -28,6 +36,7 @@
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -47,6 +56,14 @@
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
                                             <DoubleAnimation Duration="0" To="{StaticResource ListViewItemDisabledThemeOpacity}" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="contentPresenter"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="New">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectionBackground"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="contentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Yellow"/>
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -108,8 +125,7 @@
                             <Grid x:Name="ReorderHintContent" Background="Transparent">
                                 <Border x:Name="ContentContainer">
                                     <Grid x:Name="InnerDragContent">
-                                        <!--Fill="{StaticResource MainBrushDark}"-->
-                                        <Rectangle x:Name="SelectionBackground" Fill="Black" Margin="0" Opacity="0"/>
+                                        <Rectangle x:Name="SelectionBackground" Fill="{StaticResource OrangeSelection}" Margin="0" Opacity="0"/>
                                         <Border x:Name="ContentBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="4,0,0,0">
                                             <Grid>
                                                 <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -130,7 +146,7 @@
 
         <DataTemplate x:Key="DT_ListItem">
             <Grid HorizontalAlignment="Stretch">
-                <Grid Visibility="{Binding IsHeadNewsItem, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,7,0,7">
+                <Grid Visibility="{Binding IsHeadNewsItem, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,8,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="8" />
@@ -147,15 +163,16 @@
                                 <BitmapImage UriSource="{Binding Feed.FeedInfo.FavIconUrl}" />
                             </Image.Source>
                         </Image>
-                        <TextBlock Text="{Binding Published, Converter={StaticResource FormatConverter}, ConverterParameter=MM/dd}" FontSize="10"/>
+                        <TextBlock Text="{Binding Published, Converter={StaticResource FormatConverter}, ConverterParameter=MM/dd}" FontSize="10" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}, ConverterParameter=a}"/>
                     </StackPanel>
 
                     <Grid Grid.Column="2" HorizontalAlignment="Stretch">
-                        <!--FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}"-->
-                        <TextBlock Text="{Binding Title}" Margin="0,0,0,16" TextTrimming="WordEllipsis" Foreground="{Binding IsNew, Converter={StaticResource NewItemForegroundConverter}}"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                            <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="11" Foreground="{Binding IsNew, Converter={StaticResource NewItemForegroundConverter}}"/>
-                            <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" FontSize="11" Foreground="{Binding IsNew, Converter={StaticResource NewItemForegroundConverter}}"/>
+                        <!-- FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" -->
+                        <!-- Foreground="{Binding IsNew, Converter={StaticResource NewItemForegroundConverter}}" -->
+                        <TextBlock Text="{Binding Title}" Margin="0,0,0,16" TextTrimming="WordEllipsis" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}}" />
+                        <StackPanel Orientation="Horizontal" Margin="0,21,0,0">
+                            <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="11" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}, ConverterParameter=a}"/>
+                            <TextBlock Text="{Binding Published, Converter={StaticResource LastUpdatedConverter}}" FontSize="11" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}, ConverterParameter=a}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0,0,14,2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
@@ -253,21 +270,23 @@
         <Border Background="#323232" Grid.RowSpan="3" />
                 
         <!-- Back button and page title -->
-        <Grid x:Name="titlePanel" Grid.ColumnSpan="2" VerticalAlignment="Center">
+        <Grid x:Name="titlePanel" Grid.ColumnSpan="1" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="48"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding DefaultViewModel.CanGoBack, ElementName=pageRoot}" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource BackButtonStyle}" Foreground="{StaticResource MainBrush}" />
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <TextBlock x:Name="pageTitle" Text="{Binding Feed.FeedInfo.Title}" Style="{StaticResource PageHeaderTextStyle}" Foreground="{StaticResource MainBrush}" Padding="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
+            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding DefaultViewModel.CanGoBack, ElementName=pageRoot}" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource BackButtonStyle}" Foreground="{StaticResource OrangeSelection}" />
+            <Viewbox Grid.Column="1" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock x:Name="pageTitle" Text="{Binding Feed.FeedInfo.Title}" Style="{StaticResource PageHeaderTextStyle}" Foreground="{StaticResource OrangeSelection}" Padding="0" Margin="10,0,0,0" VerticalAlignment="Center"/>
 
-                <StackPanel Orientation="Horizontal" Margin="10,2,0,4" Visibility="{Binding Feed.NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
-                    <TextBlock x:Name="txtC1" Text="(" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource MainBrush}"/>
-                    <TextBlock x:Name="txtC2" Text="{Binding Feed.NewItemsCount}" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource MainBrush}"/>
-                    <TextBlock x:Name="txtC3" Text=")" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource MainBrush}"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,2,0,4" Visibility="{Binding Feed.NewItemsCount, Converter={StaticResource NotCP2Visibility}, ConverterParameter=0}">
+                        <TextBlock x:Name="txtC1" Text="(" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource OrangeSelection}"/>
+                        <TextBlock x:Name="txtC2" Text="{Binding Feed.NewItemsCount}" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource OrangeSelection}"/>
+                        <TextBlock x:Name="txtC3" Text=")" Style="{StaticResource PageHeaderTextStyle}" FontSize="44" Margin="0" Padding="0" VerticalAlignment="Center" Foreground="{StaticResource OrangeSelection}"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Viewbox>
         </Grid>
 
         <!-- Vertical scrolling item list -->
@@ -304,9 +323,9 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <HyperlinkButton Grid.Row="0" Margin="20,14,0,0" Padding="0" Style="{StaticResource SubheaderHyperlinkStyle}" Click="OnUrlClick">
-                    <TextBlock Foreground="{StaticResource MainBrushDark}" Text="{Binding ElementName=itemListView, Path=SelectedItem.Title}" TextWrapping="Wrap" Style="{StaticResource PageHeaderTextStyle}" FontSize="36"/>
+                    <TextBlock Foreground="#a530d6" Text="{Binding ElementName=itemListView, Path=SelectedItem.Title}" TextWrapping="Wrap" Style="{StaticResource PageHeaderTextStyle}" FontSize="36" />
                 </HyperlinkButton>
-                <Button Margin="0,13,-30,0" Grid.Column="1" HorizontalAlignment="Right" Foreground="{StaticResource MainBrushDark}" Style="{StaticResource GoAppBarButtonStyle}" Click="OnOpen" AutomationProperties.Name="" />
+                <Button Margin="0,13,-27,0" Grid.Column="1" HorizontalAlignment="Right" Foreground="Black" Style="{StaticResource GoAppBarButtonStyle}" Click="OnOpen" AutomationProperties.Name="" />
             </Grid>
 
             <!-- Details for selected item -->
@@ -322,7 +341,7 @@
                     <RichTextBlock Margin="0,30,0,0" x:Name="rtbView" FontSize="16"/>
                     <WebView Margin="0,0,0,0" x:Name="webView" Visibility="Collapsed"/>
                 </Grid>
-            </ScrollViewer>            
+            </ScrollViewer>
         </Grid>
 
         <RepeatButton Style="{StaticResource ShowNextButtonStyle}" Command="{Binding GoToNextItemCommand}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>

@@ -679,10 +679,10 @@
                                     <PathGeometry>
                                         <PathGeometry.Figures>
                                             <PathFigureCollection>
-                                                <PathFigure IsClosed="true" StartPoint="50,0">
+                                                <PathFigure IsClosed="true" StartPoint="30,0">
                                                     <PathFigure.Segments>
                                                         <PathSegmentCollection>
-                                                            <ArcSegment Point="50,500" Size="10,40" />
+                                                            <ArcSegment Point="30,500" Size="10,50" />
                                                         </PathSegmentCollection>
                                                     </PathFigure.Segments>
                                                 </PathFigure>

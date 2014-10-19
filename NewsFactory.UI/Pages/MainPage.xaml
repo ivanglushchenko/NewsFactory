@@ -20,18 +20,18 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <AppBar Background="#60ffffff" x:Name="abBottom">
+        <AppBar Background="#404040" x:Name="abBottom">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding RefreshCommand}" Click="OnCloseAppBar"/>
-                    <Button Style="{StaticResource BulletsAppBarButtonStyle}" AutomationProperties.Name="Mark all as Read"  Command="{Binding MarkAllAsReadCommand}" Click="OnCloseAppBar" />
-                    <Button Style="{StaticResource DiscardAppBarButtonStyle}" Command="{Binding DeleteAllNewsItemsCommand}" Click="OnCloseAppBar" AutomationProperties.Name="Delete all news"/>
+                    <Button Foreground="White" Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding RefreshCommand}" Click="OnCloseAppBar"/>
+                    <Button Foreground="White" Style="{StaticResource BulletsAppBarButtonStyle}" AutomationProperties.Name="Mark all as Read"  Command="{Binding MarkAllAsReadCommand}" Click="OnCloseAppBar" />
+                    <Button Foreground="White" Style="{StaticResource DiscardAppBarButtonStyle}" Command="{Binding DeleteAllNewsItemsCommand}" Click="OnCloseAppBar" AutomationProperties.Name="Delete all news"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource MoreAppBarButtonStyle}" AutomationProperties.Name="More..." Click="OnMore"/>
-                    <Button Style="{StaticResource AddAppBarButtonStyle}" AutomationProperties.Name="Add feeds..." Click="Button_Click_1"/>
-                    <Button Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from OPML file" Command="{Binding ImportFeedsCommand}" Click="OnCloseAppBar"/>
+                    <Button Foreground="White" Style="{StaticResource MoreAppBarButtonStyle}" AutomationProperties.Name="More..." Click="OnMore"/>
+                    <Button Foreground="White" Style="{StaticResource AddAppBarButtonStyle}" AutomationProperties.Name="Add feeds..." Click="Button_Click_1"/>
+                    <Button Foreground="White" Style="{StaticResource ImportAppBarButtonStyle}" AutomationProperties.Name="Import from OPML file" Command="{Binding ImportFeedsCommand}" Click="OnCloseAppBar"/>
                 </StackPanel>
             </Grid>
         </AppBar>

@@ -457,6 +457,29 @@ namespace NewsFactory.Foundation.Model
         private bool p_IsChildNewsItem;
         partial void OnIsChildNewsItemChanged();
 
+        /// <summary>
+        /// Gets/sets RenderingMode.
+        /// </summary>
+        [IgnoreDataMember]
+        public ItemRenderingMode RenderingMode
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _RenderingMode; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_RenderingMode != value)
+                {
+                    _RenderingMode = value;
+                    OnPropertyChanged("RenderingMode");
+                    OnRenderingModeChanged();
+                }
+            }
+        }
+        [IgnoreDataMember]
+        ItemRenderingMode _RenderingMode;
+        partial void OnRenderingModeChanged();
+
         #endregion Properties
 
         #region Methods
@@ -514,6 +537,8 @@ namespace NewsFactory.Foundation.Model
             IsFavorite = Is(ItemStatus.Favorite);
             IsClassifiedAsLike = Is(ItemStatus.ClassifiedAsLike);
             IsClassifiedAsDislike = Is(ItemStatus.ClassifiedAsDislike);
+
+            RenderingMode = IsNew ? ItemRenderingMode.NotSelectedNew : ItemRenderingMode.NotSelectedOld;
         }
 
         public bool MarkAsRead()
@@ -529,6 +554,26 @@ namespace NewsFactory.Foundation.Model
             return false;
         }
 
+        public bool MarkAsUnread()
+        {
+            if (!IsNew)
+            {
+                IsNew = true;
+                Feed.NewItemsCount++;
+                Feed.Store.All.NewItemsCount++;
+                Feed.Store.Unread.NewItemsCount++;
+                return true;
+            }
+            return false;
+        }
+
         #endregion Methods
+    }
+
+    public enum ItemRenderingMode
+    {
+        Selected,
+        NotSelectedNew,
+        NotSelectedOld
     }
 }

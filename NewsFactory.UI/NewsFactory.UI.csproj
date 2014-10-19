@@ -161,6 +161,7 @@
       <DependentUpon>FeedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Feed\FeedPageModel.cs" />
+    <Compile Include="Pages\Feed\IdentityConverter.cs" />
     <Compile Include="Pages\Feed\LastUpdatedConverter.cs" />
     <Compile Include="Pages\Feed\NewItemForegroundConverter.cs" />
     <Compile Include="Pages\ImportFeeds\FeedModel.cs" />
@@ -278,6 +279,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Interactions">
+      <HintPath>..\packages\_CUSTOM\Microsoft.Xaml.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Interactivity">
+      <HintPath>..\packages\_CUSTOM\Microsoft.Xaml.Interactivity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
