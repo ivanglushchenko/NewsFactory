@@ -319,7 +319,8 @@ namespace NewsFactory.Foundation.Utils
             var width = node.Attributes["width"] != null ? node.Attributes["width"].Value : (node.Attributes["data-src-width"] != null ? node.Attributes["data-src-width"].Value : null);
             var height = node.Attributes["height"] != null ? node.Attributes["height"].Value : (node.Attributes["data-src-height"] != null ? node.Attributes["data-src-height"].Value : null);
             var bi = new BitmapImage();
-            bi.UriSource = ToUrl(src);
+            if (src.Length < 1000)
+                bi.UriSource = ToUrl(src);
             var img = new Image() { Source = bi, Stretch = Stretch.None, Tag = src };
             if (ToDouble(width) != null)
                 img.Width = ToDouble(width).Value;
