@@ -464,7 +464,12 @@ namespace NewsFactory.Foundation.Model
         public ItemRenderingMode RenderingMode
         {
             [System.Diagnostics.DebuggerStepThrough]
-            get { return _RenderingMode; }
+            get 
+            { 
+                if (_RenderingMode == ItemRenderingMode.Undefined)
+                    RenderingMode = IsNew ? ItemRenderingMode.NotSelectedNew : ItemRenderingMode.NotSelectedOld;
+                return _RenderingMode;
+            }
             [System.Diagnostics.DebuggerStepThrough]
             set
             {
@@ -572,6 +577,7 @@ namespace NewsFactory.Foundation.Model
 
     public enum ItemRenderingMode
     {
+        Undefined,
         Selected,
         NotSelectedNew,
         NotSelectedOld

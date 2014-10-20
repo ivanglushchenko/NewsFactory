@@ -84,7 +84,7 @@ namespace NewsFactory.UI.Pages.Feed
             [System.Diagnostics.DebuggerStepThrough]
             get { return p_Feed; }
             [System.Diagnostics.DebuggerStepThrough]
-            private set
+            set
             {
                 if (p_Feed != value)
                 {
@@ -94,7 +94,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private NewsFeed p_Feed;
+        NewsFeed p_Feed;
         partial void OnFeedChanged();
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private ObservableCollection<NewsItem> p_Items;
+        ObservableCollection<NewsItem> p_Items;
         partial void OnItemsChanged();
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private NewsItem p_SelectedItem;
+        NewsItem p_SelectedItem;
         partial void OnSelectedItemChanged();
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_DeleteFeedCommand;
+        DelegateCommand p_DeleteFeedCommand;
         partial void OnDeleteFeedCommandChanged();
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_RefreshFeedCommand;
+        DelegateCommand p_RefreshFeedCommand;
         partial void OnRefreshFeedCommandChanged();
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_MarkAllAsReadCommand;
+        DelegateCommand p_MarkAllAsReadCommand;
         partial void OnMarkAllAsReadCommandChanged();
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_DeleteAllCommand;
+        DelegateCommand p_DeleteAllCommand;
         partial void OnDeleteAllCommandChanged();
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_OpenArticleCommand;
+        DelegateCommand p_OpenArticleCommand;
         partial void OnOpenArticleCommandChanged();
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_LikeCommand;
+        DelegateCommand p_LikeCommand;
         partial void OnLikeCommandChanged();
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_DislikeCommand;
+        DelegateCommand p_DislikeCommand;
         partial void OnDislikeCommandChanged();
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_ReadLaterCommand;
+        DelegateCommand p_ReadLaterCommand;
         partial void OnReadLaterCommandChanged();
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_MarkAsFavoriteCommand;
+        DelegateCommand p_MarkAsFavoriteCommand;
         partial void OnMarkAsFavoriteCommandChanged();
 
         public bool UseWebView
@@ -354,7 +354,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DateTime p_Now;
+        DateTime p_Now;
         partial void OnNowChanged();
 
         /// <summary>
@@ -375,7 +375,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_GoToNextItemCommand;
+        DelegateCommand p_GoToNextItemCommand;
         partial void OnGoToNextItemCommandChanged();
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_GoToPrevItemCommand;
+        DelegateCommand p_GoToPrevItemCommand;
         partial void OnGoToPrevItemCommandChanged();
 
         /// <summary>
@@ -417,7 +417,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_CopyNewsItemUrlToClipboardCommand;
+        DelegateCommand p_CopyNewsItemUrlToClipboardCommand;
         partial void OnCopyNewsItemUrlToClipboardCommandChanged();
 
         /// <summary>
@@ -438,7 +438,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_CopyNewsFeedUrlToClipboardCommand;
+        DelegateCommand p_CopyNewsFeedUrlToClipboardCommand;
         partial void OnCopyNewsFeedUrlToClipboardCommandChanged();
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private bool p_IsReadLaterFeed;
+        bool p_IsReadLaterFeed;
         partial void OnIsReadLaterFeedChanged();
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private bool p_IsFavoritesFeed;
+        bool p_IsFavoritesFeed;
         partial void OnIsFavoritesFeedChanged();
 
         /// <summary>
@@ -501,7 +501,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand p_UnmarkAsFavoriteCommand;
+        DelegateCommand p_UnmarkAsFavoriteCommand;
         partial void OnUnmarkAsFavoriteCommandChanged();
 
         /// <summary>
@@ -522,7 +522,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private bool p_IsPinned;
+        bool p_IsPinned;
         partial void OnIsPinnedChanged();
 
         /// <summary>
@@ -543,7 +543,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand<Rect> p_PinCommand;
+        DelegateCommand<Rect> p_PinCommand;
         partial void OnPinCommandChanged();
 
         /// <summary>
@@ -564,7 +564,7 @@ namespace NewsFactory.UI.Pages.Feed
                 }
             }
         }
-        private DelegateCommand<Rect> p_UnpinCommand;
+        DelegateCommand<Rect> p_UnpinCommand;
         partial void OnUnpinCommandChanged();
 
         #endregion Properties
@@ -596,8 +596,6 @@ namespace NewsFactory.UI.Pages.Feed
 
             //var wordIndex = new WordIndex();
             //wordIndex.AddRange(Items);
-
-            //AssignRenderingModes();
 
             try
             {
@@ -646,7 +644,7 @@ namespace NewsFactory.UI.Pages.Feed
             await DataService.NewsStore.SaveFeed(Feed);
         }
 
-        private void Initialize(Action completed)
+        void Initialize(Action completed)
         {
             if (DataService.FeedsStore == null || DataService.NewsStore == null)
             {
@@ -670,7 +668,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private async void DeleteFeed()
+        async void DeleteFeed()
         {
             if (await MsgService.Ask(string.Format("The '{0}' feed is going to be deleted. Continue?", Feed.FeedInfo.Title), Buttons.YesNoCancel) == Buttons.Yes)
             {
@@ -709,19 +707,19 @@ namespace NewsFactory.UI.Pages.Feed
             //    SelectedItem.RenderingMode = ItemRenderingMode.Selected;
         }
 
-        private async void RefreshFeed()
+        async void RefreshFeed()
         {
             IsBusy = true;
             await DataService.NewsStore.UpdateOne(Feed.FeedInfo);
             IsBusy = false;
         }
 
-        private void MarkAllAsRead()
+        void MarkAllAsRead()
         {
             DataService.NewsStore.MarkAsRead(Feed);
         }
 
-        private async void DeleteAllNews()
+        async void DeleteAllNews()
         {
             if (IsFavoritesFeed)
             {
@@ -743,13 +741,13 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private async void OpenArticle()
+        async void OpenArticle()
         {
             if (SelectedItem != null)
                 await Launcher.LaunchUriAsync(SelectedItem.Url);
         }
 
-        private void Like()
+        void Like()
         {
             if (SelectedItem == null) return;
 
@@ -760,7 +758,7 @@ namespace NewsFactory.UI.Pages.Feed
             DataService.NewsStore.MarkAsLike(SelectedItem);
         }
 
-        private void Dislike()
+        void Dislike()
         {
             if (SelectedItem == null) return;
 
@@ -771,14 +769,14 @@ namespace NewsFactory.UI.Pages.Feed
             DataService.NewsStore.MarkAsDislike(SelectedItem);
         }
 
-        private void ReadLater()
+        void ReadLater()
         {
             if (SelectedItem == null) return;
 
             SelectedItem.IsReadLater = true;
         }
 
-        private void MarkAsFavorite()
+        void MarkAsFavorite()
         {
             if (SelectedItem == null) return;
 
@@ -790,7 +788,7 @@ namespace NewsFactory.UI.Pages.Feed
             await DataService.Invoke(Windows.UI.Core.CoreDispatcherPriority.Low, () => Now = DateTime.Now);
         }
 
-        private void GoToPrevItem()
+        void GoToPrevItem()
         {
             if (SelectedItem == null) return; 
             
@@ -804,7 +802,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private void GoToNextItem()
+        void GoToNextItem()
         {
             if (SelectedItem == null) return;
 
@@ -819,19 +817,19 @@ namespace NewsFactory.UI.Pages.Feed
         }
 
 
-        private void CopyNewsItemUrlToClipboard()
+        void CopyNewsItemUrlToClipboard()
         {
             if (SelectedItem == null) return;
 
             GeneralHelper.CopyToClipboard(SelectedItem.Url.ToString());
         }
 
-        private void CopyNewsFeedUrlToClipboard()
+        void CopyNewsFeedUrlToClipboard()
         {
             GeneralHelper.CopyToClipboard(Feed.FeedInfo.Url.ToString());
         }
 
-        private void UnmarkAsFavorite()
+        void UnmarkAsFavorite()
         {
             if (SelectedItem == null) return;
 
@@ -843,7 +841,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private void NewsStore_ItemsReceived(List<NewsItem> newItems)
+        void NewsStore_ItemsReceived(List<NewsItem> newItems)
         {
             if (newItems == null) return;
 
@@ -856,7 +854,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private async void Pin(Rect rect)
+        async void Pin(Rect rect)
         {
             var tileActivationArguments = Feed.FeedInfo.Url.ToString();
             var logo = new Uri("ms-appx:///Assets/Logo.png", UriKind.Absolute);
@@ -878,7 +876,7 @@ namespace NewsFactory.UI.Pages.Feed
             }
         }
 
-        private async void Unpin(Rect rect)
+        async void Unpin(Rect rect)
         {
             var secondaryTile = new SecondaryTile(Feed.Id);
             await secondaryTile.RequestDeleteForSelectionAsync(rect);
