@@ -237,16 +237,22 @@ namespace NewsFactory.UI.Pages
                 var links = XamlConverter.GetTagAttributeBySpecificAttribute(page, "link", "rel", "alternate", "href");
                 if (links != null)
                 {
+                    var parsedUrl = new Uri(url);
+                    var linkPrefix = parsedUrl.LocalPath;
+                    if (!linkPrefix.EndsWith("/"))
+                        linkPrefix = linkPrefix + "/";
                     return links.Select(l =>
                         {
                             if (l != null && l.StartsWith("/"))
                             {
+                                if (l.StartsWith(linkPrefix))
+                                    return (url.EndsWith("/") ? url : url + "/") + l.Substring(linkPrefix.Length);
                                 return url.EndsWith("/") ? (url + l.Substring(1)) : (url + l);
                             }
                             return l;
-                        }).ToList();
+                        }).Where(t2 => t2 != null).OrderBy(t2 => t2.Contains("rss") || t2.Contains("atom") || t2.Contains("feed") ? 0 : t2.Length).Take(3).ToList();
                 }
-                return links;
+                return null;
             }
             catch
             {
@@ -288,6 +294,19 @@ namespace NewsFactory.UI.Pages
         {
             base.OnIsBusyChanged();
             AddCommand.RaiseCanExecuteChanged();
+        }
+
+        string GetHost(string url)
+        {
+            try
+            {
+                var u = new Uri(url);
+                return u.Host;
+            }
+            catch
+            {
+            }
+            return null;
         }
 
         #endregion Methods
