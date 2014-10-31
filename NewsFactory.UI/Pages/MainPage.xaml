@@ -155,7 +155,7 @@
                         <Border BorderThickness="1" BorderBrush="{StaticResource TileBorder}" Background="{StaticResource TileBackground}">
                             <Grid Width="340" Height="70">
 
-                                <!--<Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="10" Background="{Binding FeedInfo.Category, Converter={StaticResource CategoryColorConverter}}"/>-->
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="4" Background="{Binding FeedInfo.Category, Converter={StaticResource CategoryColorConverter}}"/>
 
                                 <Image Margin="10,0,0,0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left">
                                     <Image.Source>

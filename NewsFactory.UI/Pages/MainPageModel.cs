@@ -4,6 +4,7 @@ using NewsFactory.Foundation.Model;
 using NewsFactory.Foundation.Services;
 using NewsFactory.Foundation.Utils;
 using NewsFactory.UI.Pages.About;
+using NewsFactory.UI.Pages.Analysis;
 using NewsFactory.UI.Pages.AppSettings;
 using NewsFactory.UI.Pages.ArrangeFeeds;
 using NewsFactory.UI.Pages.Feed;
@@ -524,10 +525,19 @@ namespace NewsFactory.UI.Pages
 
         private void SetGroups()
         {
+            var categories = new ObservableCollection<NewsFeed>() { DataService.FeedsStore.Unread, DataService.FeedsStore.All };
+            if (Settings.ShowReadLaterGroup)
+                categories.Add(DataService.FeedsStore.ReadLater);
+            if (Settings.ShowBookmarksGroup)
+                categories.Add(DataService.FeedsStore.Favorites);
+            if (Settings.ShowAnalyzeGroup)
+                categories.Add(DataService.FeedsStore.Analysis);
             if (Settings.SupportsClassification)
-                Categories = new ObservableCollection<NewsFeed>() { DataService.FeedsStore.Unread, DataService.FeedsStore.All, DataService.FeedsStore.ReadLater, DataService.FeedsStore.Favorites, DataService.FeedsStore.Likes, DataService.FeedsStore.Dislikes };
-            else
-                Categories = new ObservableCollection<NewsFeed>() { DataService.FeedsStore.Unread, DataService.FeedsStore.All, DataService.FeedsStore.ReadLater, DataService.FeedsStore.Favorites };
+            {
+                categories.Add(DataService.FeedsStore.Likes);
+                categories.Add(DataService.FeedsStore.Dislikes);
+            }
+            Categories = categories;
             NewsFeeds = DataService.FeedsStore.NewsFeeds;
 
             DataService.FeedsStore.NewsFeeds.CollectionChanged += NewsFeeds_CollectionChanged;
@@ -549,7 +559,6 @@ namespace NewsFactory.UI.Pages
         private async void ImportFeeds()
         {
             var picker = new FileOpenPicker();
-            //picker.FileTypeFilter.Add(".xml");
             picker.FileTypeFilter.Add(".opml");
             var file = await picker.PickSingleFileAsync();
             if (file != null)
@@ -563,7 +572,10 @@ namespace NewsFactory.UI.Pages
 
         private void GoToFeed(NewsFeed feed)
         {
-            NavigationService.NavigateTo<FeedPage>(feed);
+            if (feed == DataService.FeedsStore.Analysis)
+                NavigationService.NavigateTo(typeof(AnalysisPage), feed);
+            else
+                NavigationService.NavigateTo(typeof(FeedPage), feed);
         }
 
         private async void Refresh()

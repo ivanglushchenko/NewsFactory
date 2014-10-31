@@ -22,7 +22,6 @@
         <local2:LastUpdatedConverter x:Key="LastUpdatedConverter" />
         <local2:IdentityConverter x:Key="IdentityConverter" />
 
-        <!--#E86100"  EC5800-->
         <SolidColorBrush x:Key="OrangeSelection" Color="#FB7213" />
         
         <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -167,8 +166,6 @@
                     </StackPanel>
 
                     <Grid Grid.Column="2" HorizontalAlignment="Stretch">
-                        <!-- FontWeight="{Binding IsNew, Converter={StaticResource FeedItemFontWeightConverter}}" -->
-                        <!-- Foreground="{Binding IsNew, Converter={StaticResource NewItemForegroundConverter}}" -->
                         <TextBlock Text="{Binding Title}" Margin="0,0,0,16" TextTrimming="WordEllipsis" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}}" />
                         <StackPanel Orientation="Horizontal" Margin="0,21,0,0">
                             <TextBlock Text="{Binding Feed.FeedInfo.Title}" FontSize="11" Foreground="{Binding RenderingMode, Converter={StaticResource NewItemForegroundConverter}, ConverterParameter=a}"/>
@@ -248,8 +245,8 @@
                     <Button Style="{StaticResource LikeAppBarButtonStyle}" Command="{Binding LikeCommand}" Click="CloseAppBar" Visibility="{Binding Settings.SupportsClassification, Converter={StaticResource TrueToVisibilityConverter}}" />
                     <Button Style="{StaticResource DislikeAppBarButtonStyle}" Command="{Binding DislikeCommand}" Click="CloseAppBar" Visibility="{Binding Settings.SupportsClassification, Converter={StaticResource TrueToVisibilityConverter}}" />
                     <Button Style="{StaticResource FlagAppBarButtonStyle}" Command="{Binding ReadLaterCommand}" AutomationProperties.Name="Read it later" Click="CloseAppBar" Visibility="{Binding IsReadLaterFeed, Converter={StaticResource FalseToVisibilityConverter}}" />
-                    <Button Style="{StaticResource FavoriteAppBarButtonStyle}" Command="{Binding MarkAsFavoriteCommand}" Click="CloseAppBar" AutomationProperties.Name="Add to Bookmarks" Visibility="{Binding IsFavoritesFeed, Converter={StaticResource FalseToVisibilityConverter}}" />
-                    <Button Style="{StaticResource UnfavoriteAppBarButtonStyle}" Command="{Binding UnmarkAsFavoriteCommand}" Click="CloseAppBar" AutomationProperties.Name="Remove from Bookmarks" Visibility="{Binding IsFavoritesFeed, Converter={StaticResource TrueToVisibilityConverter}}" />
+                    <Button Style="{StaticResource FavoriteAppBarButtonStyle}" Command="{Binding MarkAsFavoriteCommand}" Click="CloseAppBar" AutomationProperties.Name="Add to Bookmarks" Visibility="{Binding ShowMarkAsFavoriteCommand, Converter={StaticResource TrueToVisibilityConverter}}" />
+                    <Button Style="{StaticResource UnfavoriteAppBarButtonStyle}" Command="{Binding UnmarkAsFavoriteCommand}" Click="CloseAppBar" AutomationProperties.Name="Remove from Bookmarks" Visibility="{Binding ShowUnmarkAsFavoriteCommand, Converter={StaticResource TrueToVisibilityConverter}}" />
                     <Button Style="{StaticResource GoAppBarButtonStyle}" Click="OnOpen" AutomationProperties.Name="View full article" />
                 </StackPanel>
             </Grid>

@@ -54,7 +54,70 @@ namespace NewsFactory.Foundation.Model
         }
         private bool p_SupportsClassification;
         partial void OnSupportsClassificationChanged();
-        
+
+        /// <summary>
+        /// Gets/sets ShowReadLaterGroup.
+        /// </summary>
+        public bool ShowReadLaterGroup
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ShowReadLaterGroup; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ShowReadLaterGroup != value)
+                {
+                    _ShowReadLaterGroup = value;
+                    OnPropertyChanged("ShowReadLaterGroup");
+                    OnShowReadLaterGroupChanged();
+                }
+            }
+        }
+        bool _ShowReadLaterGroup;
+        partial void OnShowReadLaterGroupChanged();
+
+        /// <summary>
+        /// Gets/sets ShowBookmarksGroup.
+        /// </summary>
+        public bool ShowBookmarksGroup
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ShowBookmarksGroup; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ShowBookmarksGroup != value)
+                {
+                    _ShowBookmarksGroup = value;
+                    OnPropertyChanged("ShowBookmarksGroup");
+                    OnShowBookmarksGroupChanged();
+                }
+            }
+        }
+        bool _ShowBookmarksGroup = true;
+        partial void OnShowBookmarksGroupChanged();
+
+        /// <summary>
+        /// Gets/sets ShowAnalyzeGroup.
+        /// </summary>
+        public bool ShowAnalyzeGroup
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ShowAnalyzeGroup; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ShowAnalyzeGroup != value)
+                {
+                    _ShowAnalyzeGroup = value;
+                    OnPropertyChanged("ShowAnalyzeGroup");
+                    OnShowAnalyzeGroupChanged();
+                }
+            }
+        }
+        bool _ShowAnalyzeGroup = true;
+        partial void OnShowAnalyzeGroupChanged();
+
         /// <summary>
         /// Gets/sets UseWebView.
         /// </summary>
@@ -75,27 +138,6 @@ namespace NewsFactory.Foundation.Model
         }
         private bool p_UseWebView;
         partial void OnUseWebViewChanged();
-
-        /// <summary>
-        /// Gets/sets ShowOnlyNewItemsInAllItemsFeed.
-        /// </summary>
-        public bool ShowOnlyNewItemsInAllItemsFeed
-        {
-            [System.Diagnostics.DebuggerStepThrough]
-            get { return p_ShowOnlyNewItemsInAllItemsFeed; }
-            [System.Diagnostics.DebuggerStepThrough]
-            set
-            {
-                if (p_ShowOnlyNewItemsInAllItemsFeed != value)
-                {
-                    p_ShowOnlyNewItemsInAllItemsFeed = value;
-                    OnPropertyChanged("ShowOnlyNewItemsInAllItemsFeed");
-                    OnShowOnlyNewItemsInAllItemsFeedChanged();
-                }
-            }
-        }
-        private bool p_ShowOnlyNewItemsInAllItemsFeed;
-        partial void OnShowOnlyNewItemsInAllItemsFeedChanged();
 
         /// <summary>
         /// Gets/sets LastUpdated.

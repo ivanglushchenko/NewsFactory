@@ -44,7 +44,7 @@ namespace NewsFactory.Foundation.Model
                 },
                 this,
                 folder,
-                (s, i) => (s != null && s.ShowOnlyNewItemsInAllItemsFeed) ? i.IsNew : true);
+                (s, i) => true);
             Unread = new NewsFeed(
                 new FeedInfo()
                 {
@@ -95,6 +95,16 @@ namespace NewsFactory.Foundation.Model
                 this,
                 folder,
                 (s, i) => i.IsDislike);
+            Analysis = new NewsFeed(
+                new FeedInfo()
+                {
+                    Title = "Analysis",
+                    Description = "Cluster all the things!",
+                    FavIconUrl = new Uri("ms-appx:///Assets/rss.png", UriKind.Absolute)
+                },
+                this,
+                folder,
+                (s, i) => false);
         }
 
         #endregion .ctors
@@ -120,6 +130,7 @@ namespace NewsFactory.Foundation.Model
         public NewsFeed ReadLater { get; private set; }
         public NewsFeed Likes { get; private set; }
         public NewsFeed Dislikes { get; private set; }
+        public NewsFeed Analysis { get; private set; }
 
         public ObservableCollection<NewsFeed> NewsFeeds { get; private set; }
         public Dictionary<Uri, NewsFeed> NewsFeedsMap { get; private set; }

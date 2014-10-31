@@ -28,12 +28,12 @@ namespace NewsFactory.Foundation.Services
             }
         }
 
-        public void NavigateTo<T>(object arg)
+        public void NavigateTo(Type viewerType, object arg)
         {
             var rootFrame = Window.Current.Content as Frame;
             if (rootFrame != null)
             {
-                rootFrame.Navigate(typeof(T), arg);
+                rootFrame.Navigate(viewerType, arg);
             }
         }
 

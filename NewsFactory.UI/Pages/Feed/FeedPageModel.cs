@@ -463,25 +463,46 @@ namespace NewsFactory.UI.Pages.Feed
         partial void OnIsReadLaterFeedChanged();
 
         /// <summary>
-        /// Gets/sets IsFavoritesFeed.
+        /// Gets/sets ShowMarkAsFavoriteCommand.
         /// </summary>
-        public bool IsFavoritesFeed
+        public bool ShowMarkAsFavoriteCommand
         {
             [System.Diagnostics.DebuggerStepThrough]
-            get { return p_IsFavoritesFeed; }
+            get { return _ShowMarkAsFavoriteCommand; }
             [System.Diagnostics.DebuggerStepThrough]
             set
             {
-                if (p_IsFavoritesFeed != value)
+                if (_ShowMarkAsFavoriteCommand != value)
                 {
-                    p_IsFavoritesFeed = value;
-                    OnPropertyChanged("IsFavoritesFeed");
-                    OnIsFavoritesFeedChanged();
+                    _ShowMarkAsFavoriteCommand = value;
+                    OnPropertyChanged("ShowMarkAsFavoriteCommand");
+                    OnShowMarkAsFavoriteCommandChanged();
                 }
             }
         }
-        bool p_IsFavoritesFeed;
-        partial void OnIsFavoritesFeedChanged();
+        bool _ShowMarkAsFavoriteCommand;
+        partial void OnShowMarkAsFavoriteCommandChanged();
+
+        /// <summary>
+        /// Gets/sets ShowUnmarkAsFavoriteCommand.
+        /// </summary>
+        public bool ShowUnmarkAsFavoriteCommand
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ShowUnmarkAsFavoriteCommand; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ShowUnmarkAsFavoriteCommand != value)
+                {
+                    _ShowUnmarkAsFavoriteCommand = value;
+                    OnPropertyChanged("ShowUnmarkAsFavoriteCommand");
+                    OnShowUnmarkAsFavoriteCommandChanged();
+                }
+            }
+        }
+        bool _ShowUnmarkAsFavoriteCommand;
+        partial void OnShowUnmarkAsFavoriteCommandChanged();
 
         /// <summary>
         /// Gets/sets UnmarkAsFavoriteCommand.
@@ -587,15 +608,13 @@ namespace NewsFactory.UI.Pages.Feed
         public void SetFeed(NewsFeed feed)
         {
             Feed = feed;
-            
-            IsReadLaterFeed = feed == DataService.FeedsStore.ReadLater;
-            IsFavoritesFeed = feed == DataService.FeedsStore.Favorites;
+
+            IsReadLaterFeed = !Settings.ShowReadLaterGroup || feed == DataService.FeedsStore.ReadLater;
+            ShowMarkAsFavoriteCommand = Settings.ShowBookmarksGroup && feed != DataService.FeedsStore.Favorites;
+            ShowUnmarkAsFavoriteCommand = Settings.ShowBookmarksGroup && feed == DataService.FeedsStore.Favorites;
 
             Items = DataService.NewsStore.GetItems(feed);
             SelectedItem = Items.FirstOrDefault();
-
-            //var wordIndex = new WordIndex();
-            //wordIndex.AddRange(Items);
 
             try
             {
@@ -721,12 +740,12 @@ namespace NewsFactory.UI.Pages.Feed
 
         async void DeleteAllNews()
         {
-            if (IsFavoritesFeed)
+            if (Feed == DataService.FeedsStore.Favorites)
             {
                 DataService.NewsStore.RemoveAllFavorites();
                 Items.Clear();
             }
-            else if (IsReadLaterFeed)
+            else if (Feed == DataService.FeedsStore.ReadLater)
             {
                 DataService.NewsStore.RemoveAllReadLater();
                 Items.Clear();

@@ -43,9 +43,31 @@
             </Grid>
 
             <StackPanel Grid.Row="1" Margin="36">
-                <ToggleSwitch Margin="0,0,0,0" Header="Show full articles in embeeded web browser instead of showing summaries" IsOn="{Binding Settings.UseWebView, Mode=TwoWay}" />
+                <ToggleSwitch Margin="0,0,0,0" IsOn="{Binding Settings.UseWebView, Mode=TwoWay}">
+                    <ToggleSwitch.OnContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Show full articles in an embeeded web browser</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OnContentTemplate>
+                    <ToggleSwitch.OffContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Show article summaries in an internal reader</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OffContentTemplate>
+                </ToggleSwitch>
                 
-                <ToggleSwitch Margin="0,20,0,0" Header="Delete old news" IsOn="{Binding Settings.DeleteOldNews, Mode=TwoWay}" />
+                <ToggleSwitch Margin="0,10,0,0" IsOn="{Binding Settings.DeleteOldNews, Mode=TwoWay}">
+                    <ToggleSwitch.OnContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Delete old news</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OnContentTemplate>
+                    <ToggleSwitch.OffContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Never delete anything</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OffContentTemplate>
+                </ToggleSwitch>
                 
                 <StackPanel Orientation="Horizontal" Margin="9,0,0,0">
                     <TextBlock Text="Delete news older than" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
@@ -53,26 +75,64 @@
                 </StackPanel>
                 <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="10" Value="{Binding Settings.OldNewsDayThreshold, Mode=TwoWay, Converter={StaticResource DayValueConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" IsEnabled="{Binding Settings.DeleteOldNews, Mode=TwoWay}"/>
 
-
-                <StackPanel Orientation="Horizontal" Margin="9,20,0,0">
+                <StackPanel Orientation="Horizontal" Margin="9,00,0,0">
                     <TextBlock Text="Automatically update feeds" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                     <TextBlock Text="{Binding Settings.UpdateInterval, Converter={StaticResource RefreshIntervalCaptionConverter}}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal" Margin="4,0,0,0"/>
                 </StackPanel>
                 <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="10" Value="{Binding Settings.UpdateInterval, Mode=TwoWay, Converter={StaticResource RefreshIntervalConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" />
 
-                <StackPanel Orientation="Horizontal" Margin="9,20,0,0">
+                <StackPanel Orientation="Horizontal" Margin="9,00,0,0">
                     <TextBlock Text="Automatically update feed's live tiles" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                     <TextBlock Text="{Binding Settings.SecondaryTileUpdateInterval, Converter={StaticResource LiveTileRefreshIntervalCaptionConverter}}" Style="{StaticResource TitleTextStyle}" FontWeight="Normal" Margin="4,0,0,0"/>
                 </StackPanel>
                 <Slider Margin="9,0,0,0" TickFrequency="2" StepFrequency="2" Minimum="0" Maximum="12" Value="{Binding Settings.SecondaryTileUpdateInterval, Mode=TwoWay, Converter={StaticResource LiveTileRefreshIntervalConverter}}" Width="300" IsThumbToolTipEnabled="False" HorizontalAlignment="Left" />
 
-                <TextBlock Margin="9,20,0,0" Text="If you deleted all news and would like to see old items again, please reset the feeds" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
+                <TextBlock Margin="9,00,0,0" Text="If you deleted all news and would like to see old items again:" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                 <Button Margin="5,2,0,0" Content="Reset all feeds" Command="{Binding ResetAllFeedsCommand}" />
 
-                <TextBlock Margin="9,20,0,0" Text="You can refresh all feed's icons in one click" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
+                <TextBlock Margin="9,10,0,0" Text="You can refresh all feed's icons in one click" TextWrapping="Wrap" Style="{StaticResource TitleTextStyle}" FontWeight="Normal"/>
                 <Button Margin="5,2,0,0" Content="Refresh all icons" Command="{Binding RefreshAllIconsCommand}"/>
 
-                <ToggleSwitch Margin="0,20,0,0" Header="Classify news" IsOn="{Binding Settings.SupportsClassification, Mode=TwoWay}" Visibility="Collapsed" />
+                <ToggleSwitch Margin="0,10,0,0" IsOn="{Binding Settings.ShowReadLaterGroup, Mode=TwoWay}">
+                    <ToggleSwitch.OnContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Show &quot;Read it later&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OnContentTemplate>
+                    <ToggleSwitch.OffContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Do not show &quot;Read it later&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OffContentTemplate>
+                </ToggleSwitch>
+
+                <ToggleSwitch Margin="0,0,0,0" IsOn="{Binding Settings.ShowBookmarksGroup, Mode=TwoWay}">
+                    <ToggleSwitch.OnContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Show &quot;Bookmarks&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OnContentTemplate>
+                    <ToggleSwitch.OffContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Do not show &quot;Bookmarks&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OffContentTemplate>
+                </ToggleSwitch>
+
+                <ToggleSwitch Margin="0,0,0,0" IsOn="{Binding Settings.ShowAnalyzeGroup, Mode=TwoWay}">
+                    <ToggleSwitch.OnContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Show &quot;Analyze&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OnContentTemplate>
+                    <ToggleSwitch.OffContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="350">Do not show &quot;Analyze&quot; group at the main page</TextBlock>
+                        </DataTemplate>
+                    </ToggleSwitch.OffContentTemplate>
+                </ToggleSwitch>
+
+                <ToggleSwitch Margin="0,10,0,0" Header="Classify news" IsOn="{Binding Settings.SupportsClassification, Mode=TwoWay}" Visibility="Visible" />
             </StackPanel>
 
             <VisualStateManager.VisualStateGroups>

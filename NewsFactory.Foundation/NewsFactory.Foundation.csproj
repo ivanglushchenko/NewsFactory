@@ -156,6 +156,7 @@
     <Compile Include="Utils\IOHelper.cs" />
     <Compile Include="Utils\SerializerHelper.cs" />
     <Compile Include="Utils\StringHelper.cs" />
+    <Compile Include="Utils\Tokenizer.cs" />
     <Compile Include="Utils\UriHelper.cs" />
     <Compile Include="Utils\XamlConverter.cs" />
   </ItemGroup>

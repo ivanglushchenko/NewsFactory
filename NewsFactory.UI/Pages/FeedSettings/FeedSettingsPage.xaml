@@ -66,8 +66,8 @@
                     <TextBlock Text="Delete the feed" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
                     <Button Content="Delete" Margin="0,0,0,0" Command="{Binding DeleteFeedCommand}" />
 
-                    <!--<TextBlock Text="Category" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
-                    <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding Feed.FeedInfo.Category, Mode=TwoWay}" Margin="0,5,0,0" />-->
+                    <TextBlock Text="Category" Margin="0,20,0,0" Style="{StaticResource ItemTextStyle}"/>
+                    <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding Feed.FeedInfo.Category, Mode=TwoWay}" Margin="0,5,0,0" />
                 </StackPanel>
             </Grid>
             
