@@ -125,6 +125,7 @@
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\NullToVisibilityConverter.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
@@ -140,6 +141,7 @@
       <DependentUpon>AnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Analysis\AnalysisPageModel.cs" />
+    <Compile Include="Pages\Analysis\DocumentCluster.cs" />
     <Compile Include="Pages\AppBarStylePage.xaml.cs">
       <DependentUpon>AppBarStylePage.xaml</DependentUpon>
     </Compile>

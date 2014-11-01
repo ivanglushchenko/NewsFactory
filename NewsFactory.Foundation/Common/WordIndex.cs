@@ -40,6 +40,15 @@ namespace NewsFactory.Foundation.Common
             get { return _words; }
         }
 
+        public Dictionary<NewsItem, double[]> UniformVectors
+        {
+            get { return _newsItemsUniformVectors; }
+        }
+
+        public int WordCountThreshold { get; set; }
+
+        public int DocumentCountThreshold { get; set; }
+
         #endregion Properties
 
         #region Methods
@@ -81,11 +90,16 @@ namespace NewsFactory.Foundation.Common
 
         public void PrepareWordIndex(int wordCountThreshold, int documentCountThreshold)
         {
-            _activeWords =
-                _words
-                .Where(t => t.Value.WordCount >= wordCountThreshold && t.Value.DocumentCount >= documentCountThreshold)
-                .Select(t => t.Value.Index)
-                .ToArray();
+            if (_activeWords == null || wordCountThreshold != WordCountThreshold || documentCountThreshold != DocumentCountThreshold)
+            {
+                WordCountThreshold = wordCountThreshold;
+                DocumentCountThreshold = documentCountThreshold;
+                _activeWords =
+                    _words
+                    .Where(t => t.Value.WordCount >= wordCountThreshold && t.Value.DocumentCount >= documentCountThreshold)
+                    .Select(t => t.Value.Index)
+                    .ToArray();
+            }
         }
 
         public void AssignUniformVector(NewsItem item)
@@ -97,113 +111,6 @@ namespace NewsFactory.Foundation.Common
                 uniformVector[i] = vector.ContainsKey(_activeWords[i]) ? vector[_activeWords[i]] : 0.0;
             }
             _newsItemsUniformVectors.Add(item, uniformVector);
-        }
-
-        public void Cluster(int clustersCount)
-        {
-            var items = _newsItemsUniformVectors.Keys.ToList();
-            var clusters = SelectRandomSeeds(clustersCount).Select(i => _newsItemsUniformVectors[items[i]]).ToArray();
-            var assignments = new int[items.Count];
-            var iterations = 0;
-            while (iterations < 10)
-            {
-                var reassignments = 0;
-                // Eval cluster assignments
-                for (var i = 0; i < items.Count; i++)
-                {
-                    var newAssignment = ArgMin(clusters.Select(c => GetDistance(c, _newsItemsUniformVectors[items[i]])));
-                    if (assignments[i] != newAssignment)
-                    {
-                        assignments[i] = newAssignment;
-                        reassignments++;
-                    }
-                }
-                if (reassignments == 0)
-                    break;
-                // Recalc clusters
-                foreach (var cluster in clusters)
-                {
-                    for (int i = 0; i < cluster.Length; i++)
-                    {
-                        cluster[i] = 0;
-                    }
-                }
-                for (int i = 0; i < items.Count; i++)
-                {
-                    AddVectors(clusters[assignments[i]], _newsItemsUniformVectors[items[i]]);
-                }
-                for (int i = 0; i < clustersCount; i++)
-                {
-                    var ac = (double)assignments.Count(t => t == i);
-                    for (int j = 0; j < clusters[i].Length; j++)
-                    {
-                        clusters[i][j] /= ac;
-                    }
-                }
-
-                iterations++;
-            }
-        }
-
-        double GetDistance(double[] v1, double[] v2)
-        {
-            var sum = 0.0;
-            for (int i = 0; i < v1.Length; i++)
-            {
-                sum += (v1[i] - v2[i]) * (v1[i] - v2[i]);
-            }
-            return Math.Sqrt(sum);
-        }
-
-        void AddVectors(double[] v1, double[] v2)
-        {
-            for (int i = 0; i < v1.Length; i++)
-            {
-                v1[i] += v2[i];
-            }
-        }
-
-        IEnumerable<int> SelectRandomSeeds(int clustersCount)
-        {
-            var rnd = new Random();
-            var seeds = new HashSet<int>();
-            while (seeds.Count < clustersCount)
-            {
-                var i = rnd.Next(_newsItemsUniformVectors.Count);
-                if (!seeds.Contains(i))
-                    seeds.Add(i);
-            }
-            return seeds;
-        }
-
-        int ArgMin<T>(IEnumerable<T> list) where T : IComparable<T>
-        {
-            var minValue = default(T);
-            var minIndex = -1;
-            var currentIndex = 0;
-
-            foreach (var item in list)
-            {
-                if (currentIndex == 0)
-                {
-                    minValue = item;
-                    minIndex = 0;
-                }
-                else
-                {
-                    if (minValue.CompareTo(item) > 0)
-                    {
-                        minValue = item;
-                        minIndex = currentIndex;
-                    }
-                }
-                currentIndex++;
-            }
-
-            if (minIndex < 0)
-                throw new ArgumentException("list");
-
-            return minIndex;
         }
 
         public IEnumerable<string> Add(NewsItem item)

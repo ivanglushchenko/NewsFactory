@@ -151,6 +151,7 @@
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\MsgService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Utils\Clustering.cs" />
     <Compile Include="Utils\GeneralHelper.cs" />
     <Compile Include="Utils\HttpHelper.cs" />
     <Compile Include="Utils\IOHelper.cs" />

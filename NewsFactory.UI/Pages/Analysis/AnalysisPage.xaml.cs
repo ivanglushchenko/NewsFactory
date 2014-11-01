@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Hub Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=321224
 
@@ -50,8 +51,34 @@ namespace NewsFactory.UI.Pages.Analysis
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
+
+            ResetPoints();
+            ((AnalysisPageModel)DataContext).PropertyChanged += AnalysisPage_PropertyChanged;
         }
 
+        void AnalysisPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Points")
+            {
+                ResetPoints();
+            }
+        }
+
+        void ResetPoints()
+        {
+            //canvas.Children.Clear();
+            //if (((AnalysisPageModel)DataContext).Points != null)
+            //{
+            //    foreach (var item in ((AnalysisPageModel)DataContext).Points)
+            //    {
+            //        var test = new Ellipse() { Fill = item.Color, Width = item.Size, Height = item.Size };
+            //        //var test = new TextBlock() { Text = item.Name, Foreground = item.Color };
+            //        canvas.Children.Add(test);
+            //        Canvas.SetTop(test, item.Top * canvas.ActualHeight);
+            //        Canvas.SetLeft(test, item.Left * canvas.ActualWidth);
+            //    }
+            //}
+        }
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also

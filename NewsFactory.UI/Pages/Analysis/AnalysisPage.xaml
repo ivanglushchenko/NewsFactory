@@ -12,6 +12,7 @@
 
     <Page.Resources>
         <SolidColorBrush x:Key="OrangeSelection" Color="#FB7213" />
+        <common:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
     </Page.Resources>
 
     <!--
@@ -43,10 +44,25 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="10">
-            <StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Visibility="{Binding Status, Converter={StaticResource NullToVisibilityConverter}}" Margin="0,0,0,10">
                 <TextBlock Text="{Binding Status}" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource PageSubheaderTextStyle}" VerticalAlignment="Top"></TextBlock>
-                <ProgressBar  Maximum="{Binding ProgressMax}" Value="{Binding ProgressCurrent}" VerticalAlignment="Top" Height="5" />
+                <ProgressBar Maximum="{Binding ProgressMax}" Value="{Binding ProgressCurrent}" VerticalAlignment="Top" Height="5" />
             </StackPanel>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox ItemsSource="{Binding Clusters}" SelectedItem="{Binding SelectedCluster, Mode=TwoWay}"/>
+
+                <ListBox Grid.Column="1" ItemsSource="{Binding SelectedCluster.NewsItems}" BorderThickness="0,2,2,2"/>
+            </Grid>
         </Grid>
     </Grid>
 </common:LayoutAwarePage>
