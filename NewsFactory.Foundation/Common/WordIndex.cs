@@ -21,6 +21,7 @@ namespace NewsFactory.Foundation.Common
         static readonly string[] _separators = new string[] { Environment.NewLine, " ", ",", ".", "?" };
         static readonly HashSet<string> _stopwords = new HashSet<string>(new string[] { "the", "a", "an", "to", "of", "in", "is", "it", "and", "on", "for", "with", "at", "this", "that" });
         readonly Dictionary<string, WordInfo> _words = new Dictionary<string, WordInfo>();
+        readonly List<NewsItem> _newsItems = new List<NewsItem>();
         readonly Dictionary<NewsItem, Dictionary<int, double>> _newsItemsVectors = new Dictionary<NewsItem, Dictionary<int, double>>();
         readonly Dictionary<NewsItem, double[]> _newsItemsUniformVectors = new Dictionary<NewsItem, double[]>();
 
@@ -85,10 +86,12 @@ namespace NewsFactory.Foundation.Common
                 .ToDictionary(
                     t => _words[t.Key].Index,
                     t => (double)t.Value / vectorLength);
+
+            _newsItems.Add(item);
             _newsItemsVectors.Add(item, normalizedVector);
         }
 
-        public void PrepareWordIndex(int wordCountThreshold, int documentCountThreshold)
+        public async Task PrepareWordIndex(int wordCountThreshold, int documentCountThreshold, Func<Task> increaseProgress)
         {
             if (_activeWords == null || wordCountThreshold != WordCountThreshold || documentCountThreshold != DocumentCountThreshold)
             {
@@ -99,6 +102,12 @@ namespace NewsFactory.Foundation.Common
                     .Where(t => t.Value.WordCount >= wordCountThreshold && t.Value.DocumentCount >= documentCountThreshold)
                     .Select(t => t.Value.Index)
                     .ToArray();
+
+                foreach (var item in _newsItems)
+                {
+                    AssignUniformVector(item);
+                    await increaseProgress();
+                }
             }
         }
 

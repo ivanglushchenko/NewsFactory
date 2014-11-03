@@ -20,8 +20,8 @@ namespace NewsFactory.UI.Pages.Analysis
 
         public AnalysisPageModel()
         {
-            Task.Factory.StartNew(AnalyzeNews);
-            //Task.Factory.StartNew(TestClustering);
+            Task.Factory.StartNew(ClusterNews);
+            ReclusterCommand = new DelegateCommand(() => Task.Factory.StartNew(ClusterNews), () => Status == null);
         }
 
         #endregion .ctors
@@ -119,6 +119,27 @@ namespace NewsFactory.UI.Pages.Analysis
         partial void OnPointsChanged();
 
         /// <summary>
+        /// Gets/sets ClustersCount.
+        /// </summary>
+        public int ClustersCount
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ClustersCount; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ClustersCount != value)
+                {
+                    _ClustersCount = value;
+                    OnPropertyChanged("ClustersCount");
+                    OnClustersCountChanged();
+                }
+            }
+        }
+        int _ClustersCount = 2;
+        partial void OnClustersCountChanged();
+
+        /// <summary>
         /// Gets/sets Clusters.
         /// </summary>
         public List<DocumentCluster> Clusters
@@ -160,63 +181,64 @@ namespace NewsFactory.UI.Pages.Analysis
         DocumentCluster _SelectedCluster;
         partial void OnSelectedClusterChanged();
 
+        /// <summary>
+        /// Gets/sets ReclusterCommand.
+        /// </summary>
+        public DelegateCommand ReclusterCommand
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _ReclusterCommand; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (_ReclusterCommand != value)
+                {
+                    _ReclusterCommand = value;
+                    OnPropertyChanged("ReclusterCommand");
+                    OnReclusterCommandChanged();
+                }
+            }
+        }
+        DelegateCommand _ReclusterCommand;
+        partial void OnReclusterCommandChanged();
+
         #endregion Properties
         
         #region Methods
 
-        async void AnalyzeNews()
+        async void ClusterNews()
         {
+            var clustersCount = ClustersCount;
             var items = DataService.NewsStore.GetItems(DataService.FeedsStore.All).ToList();
 
             if (_wordIndex == null)
             {
                 _wordIndex = new WordIndex();
 
-                await Invoke(() =>
-                {
-                    ProgressCurrent = 0;
-                    ProgressMax = items.Count;
-                    Status = "Building a dictionary...";
-                });
+                await ResetProgress(items.Count, "Building a dictionary...");
 
                 foreach (var item in items)
                 {
                     _wordIndex.BuildDictionary(item);
-                    await Invoke(() => ProgressCurrent = ProgressCurrent + 1);
+                    await IncreaseProgress();
                 }
             }
 
-            _wordIndex.PrepareWordIndex(2, 2);
+            await ResetProgress(items.Count, "Calculating document vectors...");
 
-            await Invoke(() =>
-            {
-                ProgressCurrent = 0;
-                ProgressMax = items.Count;
-                Status = "Calculating document vectors...";
-            });
-
-            foreach (var item in items)
-            {
-                _wordIndex.AssignUniformVector(item);
-                await Invoke(() => ProgressCurrent = ProgressCurrent + 1);
-            }
+            await _wordIndex.PrepareWordIndex(2, 2, IncreaseProgress);
 
             var iterationCount = 10;
-            await Invoke(() =>
-            {
-                ProgressCurrent = 0;
-                ProgressMax = iterationCount;
-                Status = "Clustering...";
-            });
+            await ResetProgress(iterationCount, "Clustering...");
 
             var vectors = items.Select(t => _wordIndex.UniformVectors[t]).ToList();
-            var clusters = Clustering.SelectSeedClusters(2, vectors);
+            var clusters = Clustering.SelectSeedClusters(clustersCount, vectors);
             var assignments = default(int[]);
 
             for (int i = 0; i < iterationCount; i++)
             {
                 assignments = Clustering.Cluster(clusters, vectors);
-                await Invoke(() => ProgressCurrent = ProgressCurrent + 1);
+                await IncreaseProgress();
             }
 
             var results =
@@ -232,7 +254,24 @@ namespace NewsFactory.UI.Pages.Analysis
                     Status = null;
                     Clusters = results;
                     SelectedCluster = Clusters.FirstOrDefault();
+                    ReclusterCommand.RaiseCanExecuteChanged();
                 });
+        }
+
+        Task ResetProgress(int max, string status)
+        {
+            return DataService.Invoke(CoreDispatcherPriority.Low, new DispatchedHandler(() =>
+                {
+                    ProgressCurrent = 0;
+                    ProgressMax = max;
+                    Status = status;
+                    ReclusterCommand.RaiseCanExecuteChanged();
+                }));
+        }
+
+        Task IncreaseProgress()
+        {
+            return DataService.Invoke(CoreDispatcherPriority.Low, new DispatchedHandler(() => ProgressCurrent++));
         }
 
         async Task Invoke(Action action)

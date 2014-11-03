@@ -43,12 +43,19 @@
             </Viewbox>
         </Grid>
 
+        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+            <TextBlock Style="{StaticResource PageSubheaderTextStyle}" VerticalAlignment="Center" Margin="0">Clusters:</TextBlock>
+            <TextBlock Style="{StaticResource PageSubheaderTextStyle}" VerticalAlignment="Center" Margin="5,0,0,0" Text="{Binding ClustersCount}"/>
+            <Slider Margin="9,30,0,0" TickFrequency="1" StepFrequency="1" Minimum="2" Maximum="10" Width="250" VerticalAlignment="Center" Value="{Binding ClustersCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Margin="0,16,0,0" Style="{StaticResource RefreshAppBarButtonStyle}" AutomationProperties.Name="" Command="{Binding ReclusterCommand}" />
+        </StackPanel>
+        
         <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Visibility="{Binding Status, Converter={StaticResource NullToVisibilityConverter}}" Margin="0,0,0,10">
+            <StackPanel Visibility="{Binding Status, Converter={StaticResource NullToVisibilityConverter}}" Margin="0,0,0,30">
                 <TextBlock Text="{Binding Status}" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource PageSubheaderTextStyle}" VerticalAlignment="Top"></TextBlock>
                 <ProgressBar Maximum="{Binding ProgressMax}" Value="{Binding ProgressCurrent}" VerticalAlignment="Top" Height="5" />
             </StackPanel>
@@ -59,7 +66,16 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox ItemsSource="{Binding Clusters}" SelectedItem="{Binding SelectedCluster, Mode=TwoWay}"/>
+                <ListBox ItemsSource="{Binding Clusters}" SelectedItem="{Binding SelectedCluster, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Cluster: "/>
+                                <TextBlock Text="{Binding NewsItems.Count}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
                 <ListBox Grid.Column="1" ItemsSource="{Binding SelectedCluster.NewsItems}" BorderThickness="0,2,2,2"/>
             </Grid>
